@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 
 /**
- * The main class for the Mario World game.
+ * The main class for the Mario World game..
  *
  */
 public class Application {
