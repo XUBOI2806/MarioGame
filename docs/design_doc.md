@@ -3,6 +3,12 @@
 
 
 ##Req 5
+
+Toad and the Player will make a trade, 
+which will be a new behaviour. This behaviour will need to be checked if this action 
+is able to be executed. If so, the player will check if they have enough money and if 
+Toad has the available Item
+
 An interact behaviour and action must be implemented first so that 
 the player is able to interact with toad. Additionally, a new behaviour class will allow toad 
 to have a possible trade action with 
