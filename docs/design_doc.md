@@ -71,7 +71,7 @@ behaviours will follow the same principles.
 ##Req 6
 ###Toad's Monologue
 Similar to the behaviour in Req 5, Toad and the interact behaviour and action will be implemented. 
-However, a new behaviour class will allow the player to have a possible speak action with toad. 
+However, a new behaviour class will allow the player to have a possible speak action with Toad. 
 The behaviour class will determine whether the speak action can be completed or not and which statements can be 
 printed or not depending on the character's status and if he is holding a wrench. The addition of the trade behaviour also
 follow the Dependency Inversion Principle as it follows the same concepts within the behaviour interface.
@@ -80,7 +80,7 @@ follow the Dependency Inversion Principle as it follows the same concepts within
 ###Reset Game
 The reset manager will be activated once the button r is pressed. To erase the coins and enemies,
 the locations of these items and enemies will be located, then they’ll be erased from the 
-location. These actions will be executed through existing function is classes such as GameMap and Location class.
+location. These actions will be executed through existing function classes such as GameMap and Location class.
 The trees will follow the same concept, however, it’ll have a 50% chance of not turning 
 back into dirt. The player's status will also be reset back to none and the player's health will return to maximum.
 As it utilises the existing functions, The resettable interface follows the open-closed principle as it allows itself 
