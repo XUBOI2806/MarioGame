@@ -2,14 +2,17 @@
 ##Req 1
 The interaction between sprout, sapling and mature to enrich the world requires the implementation of growth and wither
 allows for a spawn cycle to enrich the world, the spawn cycle enables for random generation of sprouts throughout a
-duration of approximately 40 iterations. The pick up action implementation enables the player to receive the dropitem
-action from sapling which ultimately offers the player the chance to increase their balance.
+duration of approximately 40 iterations. This spawn system adheres to single-responsibility principle as its only task
+is to spawn and only spawn goomba.The introduction fo coin class which is obtained from a drop from the sapling
+which ultimately offers the player the chance to increase their balance.
+
 
 ##Req 2
 The implementation of jump option provides the players a chance to jump onto a higher ground, the display enabled for a
-message to be imprinted for users to see whether or not they are successful with their respective jumps. The falldamage
-action will determine fall damage based of what tree/wall that you failed to jump, further implementation of
-consumeAction facilitates for the usage of super mushroom will guaranteed chance of a successful jump.
+message to be imprinted for users to see whether or not they are successful with their respective jumps. This is an 
+example of open-closed principle as we add further extension e.g high jump but the overall concept of jumping should not
+be modified.The falldamage action will determine fall damage based of what tree/wall that you failed to jump, further
+implementation of consumeAction facilitates for the usage of super mushroom will guaranteed chance of a successful jump.
 
 ##Req 3
 ###Goomba:
