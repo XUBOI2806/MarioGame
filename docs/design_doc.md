@@ -48,7 +48,9 @@ the enum status TALL and JumpCapable allowing the Actor to jump over high ground
 A PowerStar is an expirable Item therefore implements ExpireAble, which makes it disappear within 10
 turns of it being spawned. Eating a PowerStar will grant the user the STAR status. This gives the user
 HighGroundCapable, which makes the Actor able to walk on high ground and turn them into coins.
-The Actor also gains ImmuneCapable, making any incoming damage zero. 
+The Actor also gains ImmuneCapable, making any incoming damage zero. The Actor will also kill enemies
+instantly so it has a OneHitCapable. These powerups have been
+separated to follow the Interface Segregation Principle 
 
 ##Req 5
 An interact behaviour and action must be implemented first so that 
