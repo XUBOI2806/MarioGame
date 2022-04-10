@@ -51,31 +51,32 @@ HighGroundCapable, which makes the Actor able to walk on high ground and turn th
 The Actor also gains ImmuneCapable, making any incoming damage zero. 
 
 ##Req 5
-
-Toad and the Player will make a trade, 
-which will be a new behaviour. This behaviour will need to be checked if this action 
-is able to be executed. If so, the player will check if they have enough money and if 
-Toad has the available Item
-
+###Trading with Toad
+Toad will be an actor that can not move from the middle of the map, holding unlimited amount of items to trade with.
 An interact behaviour and action must be implemented first so that 
-the player is able to interact with toad. Additionally, a new behaviour class will allow toad 
-to have a possible trade action with 
-the player. The behaviour class will determine whether the trade can be complete or not. 
-Depending on the value of the player's wallet, the specific item wanted could be transacted 
-through checking the capabilities class. If the value is not enough in the wallet, 
-the transaction will be canceled and a sentence will be printed stating that the player does 
-not have the required amount of coins.
+the player is able to interact with Toad. A trade behaviour will need to be checked if the trade transaction
+is able to be executed. Depending on the value of the player's wallet, the specific item wanted could be transacted.
+If the behaviour says that the trade can be executed, then the trade action will be processed through.
+Or else, the transaction will be canceled and a sentence will be printed stating that the player does 
+not have the required amount of coins. Coins may also be spawned from Saplings and destroyed high grounds 
+so the dropitem class must be implemented for this action to occur. The interact behaviour and the trade behaviour also
+both follow the Dependency Inversion Principle by implementing the behaviour interface as the addition of other 
+behaviours will follow the same principles.
 
 ##Req 6
-Similar to the behaviour in req 5, the interact behaviour and action will be implemented. 
+###Toad's Monologue
+Similar to the behaviour in Req 5, Toad and the interact behaviour and action will be implemented. 
 However, a new behaviour class will allow the player to have a possible speak action with toad. 
-The behaviour class will determine whether the  speak action can be complete or not. 
-Before printing the random statement, the capabilities class will check which statements can be 
-printed or not. The capabilities will check through their players items and status change from 
-consuming the super mushroom.
+The behaviour class will determine whether the speak action can be completed or not and which statements can be 
+printed or not depending on the character's status and if he is holding a wrench. The addition of the trade behaviour also
+follow the Dependency Inversion Principle as it follows the same concepts within the behaviour interface.
 
 ##Req 7
+###Reset Game
 The reset manager will be activated once the button r is pressed. To erase the coins and enemies,
-the locations of these items and enemies will be located and then they’ll be erased from the 
-location. The trees will follow the same concept, however, it’ll have a 50% chance of not turning 
-back into dirt. The player's status will also be reset back to none.
+the locations of these items and enemies will be located, then they’ll be erased from the 
+location. These actions will be executed through existing function is classes such as GameMap and Location class.
+The trees will follow the same concept, however, it’ll have a 50% chance of not turning 
+back into dirt. The player's status will also be reset back to none and the player's health will return to maximum.
+As it utilises the existing functions, The resettable interface follows the open-closed principle as it allows itself 
+to be open for extension without modifications.
