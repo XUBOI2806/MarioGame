@@ -13,7 +13,7 @@ import java.util.Set;
  * circumstances, etc.  Consider Capabilities an all-purpose mechanism for enabling game capabilities, statuses, etc.
  * 
  * Don't be too literal about the name. You can keep all sorts of things in here.
- * PURPLE, FLAT, HOUSE_RAVENCLAW, TEAM_HERBIVORE, etc.  
+ * PURPLE, FLAT, HOUSE_RAVENCLAW, TEAM_HERBIVORE, etc.
  * 
  * Any Enum type can be used to represent a Capability, so these classes can and should be defined in the game client.
  */
