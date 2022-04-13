@@ -7,21 +7,19 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Class representing the Player.
+ * Toad
  */
 public class Toad extends Actor  {
+    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
-    private final Menu menu = new Menu();
 
-    /**
-     * Constructor.
-     *
-     * @param name        Name to call the player in the UI
-     * @param displayChar Character to represent the player in the UI
-     */
-    public Toad(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public Toad() {
+        super("Toad", 'o', 0);
+        this.behaviours.put(10, new WanderBehaviour());
         this.addCapability(Status.FRIENDLY);
     }
 
