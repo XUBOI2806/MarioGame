@@ -8,9 +8,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.Goomba;
+import game.actors.Player;
+import game.actors.Toad;
 
 /**
- * The main class for the Mario World game..
+ * The main class for the Mario World game.
  *
  */
 public class Application {
@@ -30,9 +33,9 @@ public class Application {
 				"................................................#...............................",
 				".................+................................#.............................",
 				".................................................##.............................",
-				"................................................##..............................",
-				".........+..............................+#____####.................+............",
-				".......................................+#_____###++.............................",
+				".......................................###......##..............................",
+				".........+.............................#.#____####.................+............",
+				".......................................###____###++.............................",
 				".......................................+#______###..............................",
 				"........................................+#_____###..............................",
 				"........................+........................##.............+...............",
@@ -48,7 +51,9 @@ public class Application {
 			Actor mario = new Player("Player", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
-			// FIXME: the Goomba should be generated from the Tree
+			gameMap.at(40, 9).addActor(new Toad());
+
+		// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());
 
 			world.run();

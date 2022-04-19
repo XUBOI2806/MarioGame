@@ -1,16 +1,10 @@
-package game;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.weapons.Weapon;
 
-/**
- * Special Action for attacking other Actors.
- */
-public class InteractAction extends Action {
+public class TradeAction extends Action {
 
     /**
      * Create a class of toad
@@ -22,19 +16,18 @@ public class InteractAction extends Action {
      *
      * @param target the Actor to attack
      */
-    public InteractAction(Actor target) {
+    public TradeAction(Actor target) {
         this.target = target;
     }
 
+
     @Override
     public String execute(Actor actor, GameMap map) {
-
-
+        return null;
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks " + target + " at " + direction;
+        return actor + " has successfully traded with " + target;
     }
 }
-
