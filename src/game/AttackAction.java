@@ -58,9 +58,16 @@ public class AttackAction extends Action {
 				dropActions.add(item.getDropAction(actor));
 			for (Action drop : dropActions)
 				drop.execute(target, map);
-			// remove actor
-			map.removeActor(target);
-			result += System.lineSeparator() + target + " is killed.";
+			// remove actor or activate dormant state
+			if(target.hasCapability(Status.DORMANT_ABLE)){
+				target.removeCapability(Status.DORMANT_ABLE);
+				target.addCapability(Status.DORMANT);
+			}
+			else{
+				map.removeActor(target);
+				result += System.lineSeparator() + target + " is killed.";
+			}
+
 		}
 
 		return result;

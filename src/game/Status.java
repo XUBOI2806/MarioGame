@@ -9,4 +9,8 @@ public enum Status {
     TALL, // use this status to tell that current instance has "grown".
     FRIENDLY, // use this status to be untargettable by anyone
     INVINCIBLE, //use this status to tell that current instance has consumed a "star"
+    WRENCH, // use this status to tell that current instance can destroy a Koopa in dormant state
+    DORMANT, // use this status to tell that current instance is in dormant state and cannot move or be hit
+    DORMANT_ABLE, // use this status to tell that when instance goes unconscious, change into DORMANT
+    FLOOR, // use this status to tell that current instance can walk on floors
 }
