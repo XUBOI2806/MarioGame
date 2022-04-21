@@ -5,9 +5,12 @@ import edu.monash.fit2099.engine.items.Item;
 public class Coin extends Item {
     private int value;
 
-    public Coin(String name, char displayChar, boolean portable, int value) {
-        super(name, displayChar, portable);
+    public Coin(int value) {
+        super("Coin", '$', Boolean.parseBoolean("True"));
         this.value = value;
     }
 
+    public int getValue() {
+        return this.value;
+    }
 }
