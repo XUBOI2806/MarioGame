@@ -14,7 +14,6 @@ public class SpeakAction extends Action {
      * Create a class of toad
      */
     protected Actor target;
-    protected Coin coin;
 
     /**
      * Random number generator
