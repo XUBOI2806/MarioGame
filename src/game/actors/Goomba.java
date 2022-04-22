@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.behaviours.Behaviour;
 
@@ -25,6 +27,7 @@ public class Goomba extends Actor {
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 20);
+		this.behaviours.put(8,new AttackBehaviour());
 		this.behaviours.put(10, new WanderBehaviour());
 	}
 
@@ -43,6 +46,7 @@ public class Goomba extends Actor {
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			actions.add(new AttackAction(this,direction));
+			this.behaviours.put(9,new FollowBehaviour(otherActor));	// Once the Goomba is next to the Player, start the FollowBehaviour
 		}
 		return actions;
 	}

@@ -20,5 +20,5 @@ public class Wrench extends WeaponItem implements Purchasable{
     @Override
     public int price() {
         return 200;
-
+    }
 }

@@ -63,6 +63,7 @@ public class AttackAction extends Action {
 			if(target.hasCapability(Status.DORMANT_ABLE)){
 				target.removeCapability(Status.DORMANT_ABLE);
 				target.addCapability(Status.DORMANT);
+				result += System.lineSeparator() + target + " is now dormant.";
 			}
 			else{
 				map.removeActor(target);

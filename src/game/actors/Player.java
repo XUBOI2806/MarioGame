@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.WalletManager;
 import game.items.Coin;
+import game.items.Wrench;
 
 /**
  * Class representing the Player.
@@ -16,7 +17,7 @@ import game.items.Coin;
 public class Player extends Actor  {
 
 	private final Menu menu = new Menu();
-
+	private GameMap map;
 
 	/**
 	 * Constructor.
@@ -25,10 +26,11 @@ public class Player extends Actor  {
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
+	public Player(String name, char displayChar, int hitPoints, GameMap map) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
+		this.map = map;
 	}
 
 	@Override
@@ -38,6 +40,7 @@ public class Player extends Actor  {
 			return lastAction.getNextAction();
 
 		// return/print the console menu
+		display.println("Mario: " + this.printHp() + " at ("+ this.map.locationOf(this).x() + "," + this.map.locationOf(this).y() +")");
 		return menu.showMenu(this, actions, display);
 	}
 

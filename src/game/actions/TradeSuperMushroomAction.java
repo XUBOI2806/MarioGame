@@ -35,5 +35,6 @@ public class TradeSuperMushroomAction extends Action {
                 return actor + " buys " + item + (item);
             }
         }
+        return "ADD SOMETHING HERE PLZ";
     }
 }

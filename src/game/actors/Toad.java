@@ -50,7 +50,7 @@ public class Toad extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList list = super.allowableActions(otherActor, direction, map);
-        list.add(new TradeAction(this));
+//        list.add(new TradeAction(this));
         list.add(new SpeakAction(this));
         return list;
     }
