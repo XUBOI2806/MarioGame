@@ -17,8 +17,11 @@ public class Coin extends Item {
         return this.value;
     }
 
+
     public PickUpItemAction getPickUpAction(Actor actor) {
-        WalletManager.addBalance()
+        WalletManager.getInstance().addBalance(this.getValue());
         return super.getPickUpAction(actor);
+        // actor.removeItemFromInventory(this);
     }
+
 }

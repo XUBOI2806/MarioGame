@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.WalletManager;
+import game.items.PowerStar;
+import game.items.Wrench;
 
 public class TradeWrenchAction extends Action {
 
@@ -14,7 +17,14 @@ public class TradeWrenchAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (target.getInventory().contains());
+        if (WalletManager.getInstance().getBalance()>=200){
+            WalletManager.getInstance().deductBalance(200);
+            actor.addItemToInventory(new Wrench());
+            return this.menuDescription(actor);
+        }
+        else{
+            return "Insufficient funds";
+        }
     }
 
     @Override

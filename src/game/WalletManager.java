@@ -22,8 +22,8 @@ public class WalletManager {
         return instance;
     }
 
-    public void addBalance(Coin coin){
-        this.balance += coin.getValue();
+    public void addBalance(int value){
+        this.balance += value;
     }
 
     public int getBalance() {

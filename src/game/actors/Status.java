@@ -13,4 +13,5 @@ public enum Status {
     DORMANT, // use this status to tell that current instance is in dormant state and cannot move or be hit
     DORMANT_ABLE, // use this status to tell that when instance goes unconscious, change into DORMANT
     FLOOR, // use this status to tell that current instance can walk on floors
+    PURCHASABLE, // use this status to tell if an item is purchasable or not
 }
