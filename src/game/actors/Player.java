@@ -13,7 +13,7 @@ import game.items.Coin;
 /**
  * Class representing the Player.
  */
-public class Player extends Actor  {
+public class 	Player extends Actor  {
 
 	private final Menu menu = new Menu();
 	private WalletManager walletManager= new WalletManager();
