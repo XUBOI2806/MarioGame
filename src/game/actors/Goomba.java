@@ -16,12 +16,14 @@ import game.behaviours.Behaviour;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
 /**
  * A little fungus guy.
  */
 public class Goomba extends Actor {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
+	private final Random random = new Random();
 	/**
 	 * Constructor.
 	 */
@@ -57,6 +59,7 @@ public class Goomba extends Actor {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		this.remove(map);	// 10% chance of removing the actor
 		for(Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
@@ -72,5 +75,10 @@ public class Goomba extends Actor {
 		return new IntrinsicWeapon(10,"kicks");
 	}
 
-
+	private void remove(GameMap map){
+		if(random.nextInt(9) < 1){
+			this.behaviours.clear();
+			map.removeActor(this);
+		}
+	}
 }
