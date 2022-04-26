@@ -17,7 +17,6 @@ import game.items.Wrench;
 public class Player extends Actor  {
 
 	private final Menu menu = new Menu();
-	private GameMap map;
 
 	/**
 	 * Constructor.
@@ -30,7 +29,6 @@ public class Player extends Actor  {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
-		this.map = map;
 	}
 
 	@Override
@@ -40,7 +38,7 @@ public class Player extends Actor  {
 			return lastAction.getNextAction();
 
 		// return/print the console menu
-		display.println("Mario: " + this.printHp() + " at ("+ this.map.locationOf(this).x() + "," + this.map.locationOf(this).y() +")");
+		display.println("Mario: " + this.printHp() + " at ("+ map.locationOf(this).x() + "," + map.locationOf(this).y() +")");
 		return menu.showMenu(this, actions, display);
 	}
 
