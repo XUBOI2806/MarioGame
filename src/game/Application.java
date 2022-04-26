@@ -12,6 +12,7 @@ import game.actors.Goomba;
 import game.actors.Koopa;
 import game.actors.Player;
 import game.actors.Toad;
+import game.items.Coin;
 
 /**
  * The main class for the Mario World game.
@@ -53,6 +54,8 @@ public class Application {
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			gameMap.at(40, 9).addActor(new Toad());
+
+			gameMap.at(45, 10).addItem(new Coin(20));
 
 		// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());
