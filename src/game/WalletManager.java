@@ -22,15 +22,15 @@ public class WalletManager {
         return instance;
     }
 
-    public void addBalance(int value){
+    public void addBalance(Actor actor, int value){
         this.balance += value;
     }
 
-    public int getBalance() {
+    public int getBalance(Actor actor) {
         return this.balance;
     }
 
-    public void deductBalance(int value){
+    public void deductBalance(Actor actor, int value){
         if (this.balance>=value){
             this.balance -= value;
         }

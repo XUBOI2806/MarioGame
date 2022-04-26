@@ -18,6 +18,7 @@ public class Player extends Actor  {
 
 	private final Menu menu = new Menu();
 	private GameMap map;
+	private WalletManager walletManager;
 
 	/**
 	 * Constructor.
@@ -41,6 +42,7 @@ public class Player extends Actor  {
 
 		// return/print the console menu
 		display.println("Mario: " + this.printHp() + " at ("+ this.map.locationOf(this).x() + "," + this.map.locationOf(this).y() +")");
+		display.println("Wallet: $" + walletManager.getInstance().getBalance(this));
 		return menu.showMenu(this, actions, display);
 	}
 

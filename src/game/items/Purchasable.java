@@ -1,5 +1,7 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
+
 public interface Purchasable {
 
     /**
@@ -7,5 +9,5 @@ public interface Purchasable {
      *
      * @return the price, in coin currency
      */
-    int price();
+    void add_item(Actor actor);
 }

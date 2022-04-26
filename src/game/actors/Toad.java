@@ -7,10 +7,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.SpeakAction;
+import game.actions.TradeAction;
 import game.behaviours.WanderBehaviour;
 import game.behaviours.Behaviour;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
+import game.items.Utils;
 import game.items.Wrench;
 
 import java.util.HashMap;
@@ -50,7 +52,9 @@ public class Toad extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList list = super.allowableActions(otherActor, direction, map);
-//        list.add(new TradeAction(this));
+        list.add(new TradeAction(new PowerStar(), Utils.POWER_STAR_PRICE));
+        list.add(new TradeAction(new Wrench(), Utils.WRENCH_PRICE));
+        list.add(new TradeAction(new SuperMushroom(), Utils.SUPER_MUSHROOM_PRICE));
         list.add(new SpeakAction(this));
         return list;
     }

@@ -19,9 +19,8 @@ public class Coin extends Item {
 
 
     public PickUpItemAction getPickUpAction(Actor actor) {
-        WalletManager.getInstance().addBalance(this.getValue());
-        return super.getPickUpAction(actor);
-        // actor.removeItemFromInventory(this);
+        WalletManager.getInstance().addBalance(actor, this.getValue());
+        return new PickUpCoinAction(this);
     }
 
 }

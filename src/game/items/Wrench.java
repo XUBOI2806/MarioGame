@@ -18,7 +18,7 @@ public class Wrench extends WeaponItem implements Purchasable{
     }
 
     @Override
-    public int price() {
-        return 200;
+    public void add_item(Actor actor) {
+
     }
 }
