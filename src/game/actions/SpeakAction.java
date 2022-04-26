@@ -3,7 +3,6 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.Coin;
 import game.items.Wrench;
 
 import java.util.Random;
@@ -33,7 +32,8 @@ public class SpeakAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         int i = rand.nextInt(4);
-        String statement = null;
+        i+=1;
+        String statement = "";
         switch(i) {
             case 1:
                 if (actor.getInventory().contains(new Wrench())){
@@ -58,7 +58,7 @@ public class SpeakAction extends Action {
                 statement = "Being imprisoned in these walls can drive a fungus crazy :(";
                 break;
         }
-        return statement;
+        return "Toad: \"" + statement + "\"";
     }
 
     @Override

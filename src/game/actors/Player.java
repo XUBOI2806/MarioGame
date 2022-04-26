@@ -9,8 +9,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.WalletManager;
 import game.items.Coin;
-import game.items.PowerStar;
-import game.items.SuperMushroom;
 import game.items.Wrench;
 
 /**
@@ -19,6 +17,8 @@ import game.items.Wrench;
 public class Player extends Actor  {
 
 	private final Menu menu = new Menu();
+	private GameMap map;
+	private WalletManager walletManager;
 
 	/**
 	 * Constructor.
@@ -31,8 +31,7 @@ public class Player extends Actor  {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
-		this.addItemToInventory(new SuperMushroom());
-		this.addItemToInventory(new PowerStar());
+		this.map = map;
 	}
 
 	@Override
@@ -42,7 +41,8 @@ public class Player extends Actor  {
 			return lastAction.getNextAction();
 
 		// return/print the console menu
-		display.println("Mario: " + this.printHp() + " at ("+ map.locationOf(this).x() + "," + map.locationOf(this).y() +")");
+		display.println("Mario: " + this.printHp() + " at ("+ this.map.locationOf(this).x() + "," + this.map.locationOf(this).y() +")");
+		display.println("Wallet: $" + walletManager.getInstance().getBalance(this));
 		return menu.showMenu(this, actions, display);
 	}
 

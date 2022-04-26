@@ -19,8 +19,7 @@ public class SuperMushroom extends Item implements Purchasable, ConsumeAble{
     }
 
     @Override
-    public int price() {
-        return 400;
+    public void add_item(Actor actor) {
     }
 
     public int increaseHP() {
