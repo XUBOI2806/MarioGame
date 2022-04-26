@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.WalletManager;
 import game.items.Coin;
+import game.items.PowerStar;
+import game.items.SuperMushroom;
 import game.items.Wrench;
 
 /**
@@ -29,6 +31,8 @@ public class Player extends Actor  {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
+		this.addItemToInventory(new SuperMushroom());
+		this.addItemToInventory(new PowerStar());
 	}
 
 	@Override

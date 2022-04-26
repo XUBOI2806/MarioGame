@@ -7,21 +7,20 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.ConsumeAble;
 
 public class ConsumeItemAction extends Action {
-    private Item item;
+    private ConsumeAble consumeAble;
 
-    public ConsumeItemAction(Item item) {
-        this.item = item;
+    public ConsumeItemAction(ConsumeAble consumeAble) {
+        this.consumeAble = consumeAble;
     }
 
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.removeItemFromInventory(item);
-        return menuDescription(actor);
+        return consumeAble.consumedBy(actor);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + "eats the " + item;
+        return actor + " eats the " + consumeAble;
     }
 }
