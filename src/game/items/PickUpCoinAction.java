@@ -27,7 +27,7 @@ public class PickUpCoinAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        WalletManager.getInstance().addBalance(actor, coin.getValue());
+        WalletManager.getInstance(actor).addBalance(actor, coin.getValue());
         map.locationOf(actor).removeItem(coin);
         return menuDescription(actor);
     }
