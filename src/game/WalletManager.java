@@ -1,23 +1,21 @@
 package game;
 
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.actors.Actor;
-import game.items.Coin;
-
-import java.security.PublicKey;
 
 public class WalletManager {
+    private Actor actor;
     private int balance;
 
     private static WalletManager instance;
 
-    private WalletManager() {
-        balance = 0;
+    private WalletManager(Actor actor) {
+        this.balance = 0;
+        this.actor = actor;
     }
 
-    public static WalletManager getInstance() {
+    public static WalletManager getInstance(Actor actor) {
         if (instance == null) {
-            instance = new WalletManager();
+            instance = new WalletManager(actor);
         }
         return instance;
     }

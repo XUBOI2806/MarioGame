@@ -18,10 +18,10 @@ public class TradeAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (WalletManager.getInstance().getBalance(actor)>=this.price){
-            WalletManager.getInstance().deductBalance(actor, this.price);
+        if (WalletManager.getInstance(actor).getBalance(actor)>=this.price){
+            WalletManager.getInstance(actor).deductBalance(actor, this.price);
             this.item.add_item(actor);
-            return "";
+            return actor + "successfully buys " + item;
         }
         else{
             return "Insufficient funds";
@@ -30,7 +30,7 @@ public class TradeAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys Power Star ($600)";
+        return actor + " buys " + item + " ($" + price + ")";
     }
 }
 

@@ -9,9 +9,12 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Goomba;
-import game.actors.Koopa;
 import game.actors.Player;
 import game.actors.Toad;
+import game.grounds.Dirt;
+import game.grounds.Floor;
+import game.grounds.Tree;
+import game.grounds.Wall;
 import game.items.Coin;
 
 /**
@@ -35,9 +38,9 @@ public class Application {
 				"................................................#...............................",
 				".................+................................#.............................",
 				".................................................##.............................",
-				".......................................###......##..............................",
-				".........+.............................#._____####.................+............",
-				".......................................###____###++.............................",
+				"................................................##..............................",
+				".........+..............................+#____####.................+............",
+				".......................................+#_____###++.............................",
 				".......................................+#______###..............................",
 				"........................................+#_____###..............................",
 				"........................+........................##.............+...............",
@@ -51,9 +54,9 @@ public class Application {
 			world.addGameMap(gameMap);
 
 			Actor mario = new Player("Player", 'm', 100,gameMap);
-			world.addPlayer(mario, gameMap.at(42, 10));
+			world.addPlayer(mario, gameMap.at(44, 10));
 
-			gameMap.at(40, 9).addActor(new Toad());
+			gameMap.at(44, 11).addActor(new Toad());
 
 			gameMap.at(45, 10).addItem(new Coin(20));
 
