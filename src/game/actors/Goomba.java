@@ -13,6 +13,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.behaviours.Behaviour;
+import game.reset.Resettable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.Random;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor {
+public class Goomba extends Actor implements Resettable {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 	private final Random random = new Random();
 	/**
@@ -31,6 +32,7 @@ public class Goomba extends Actor {
 		super("Goomba", 'g', 20);
 		this.behaviours.put(8,new AttackBehaviour());
 		this.behaviours.put(10, new WanderBehaviour());
+		registerInstance();
 	}
 
 	/**
@@ -65,6 +67,9 @@ public class Goomba extends Actor {
 			if (action != null)
 				return action;
 		}
+		if (this.hasCapability(Status.DEAD)) {
+			this.resetMaxHp(0);
+		}
 		return new DoNothingAction();
 	}
 
@@ -80,5 +85,10 @@ public class Goomba extends Actor {
 			this.behaviours.clear();
 			map.removeActor(this);
 		}
+	}
+
+	@Override
+	public void resetInstance() {
+		this.addCapability(Status.DEAD);
 	}
 }
