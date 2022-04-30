@@ -58,7 +58,7 @@ public class Application {
 
 			gameMap.at(44, 11).addActor(new Toad());
 
-			gameMap.at(45, 10).addItem(new Coin(20));
+			gameMap.at(45, 10).addItem(new Coin(1000));
 
 		// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());

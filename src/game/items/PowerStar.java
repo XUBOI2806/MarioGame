@@ -11,6 +11,7 @@ public class PowerStar extends Item implements Purchasable {
     }
 
     public void add_item(Actor actor){
+        actor.addItemToInventory(this);
     }
 
 }
