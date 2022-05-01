@@ -5,17 +5,15 @@ import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeItemAction;
 import game.actors.Status;
 
-public class PowerStar extends Item implements Purchasable, ConsumeAble{
+public class PowerStar extends Item implements Purchasable {
     int price;
 
     public PowerStar() {
         super("Power Star", '*', Boolean.parseBoolean("True"));
-        this.addAction(new ConsumeItemAction(this));
     }
 
-    @Override
-    public int price() {
-        return 600;
+    public void add_item(Actor actor){
+        actor.addItemToInventory(this);
     }
 
     @Override
@@ -26,3 +24,4 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble{
         return actor + " ate the power star";
     }
 }
+

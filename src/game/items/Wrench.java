@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actors.Status;
@@ -17,8 +18,13 @@ public class Wrench extends WeaponItem implements Purchasable{
         return super.getPickUpAction(actor);
     }
 
+    public DropItemAction getDropAction(Actor actor) {
+        actor.removeCapability(Status.WRENCH);
+        return super.getDropAction(actor);
+    }
+
     @Override
     public void add_item(Actor actor) {
-
+        actor.addItemToInventory(this);
     }
 }

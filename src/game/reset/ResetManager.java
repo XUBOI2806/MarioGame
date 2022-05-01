@@ -1,7 +1,6 @@
 package game.reset;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A global Singleton manager that does soft-reset on the instances.
@@ -15,7 +14,7 @@ public class ResetManager {
      * A list of resettable instances (any classes that implements Resettable,
      * such as Player implements Resettable will be stored in here)
      */
-    private List<Resettable> resettableList;
+    private ArrayList<Resettable> resettableList;
 
     /**
      * A singleton reset manager instance
@@ -45,6 +44,9 @@ public class ResetManager {
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
     public void run(){
+        for(Resettable reset : resettableList){
+            reset.resetInstance();
+        }
     }
 
     /**
@@ -52,6 +54,7 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void appendResetInstance(Resettable reset){
+        this.resettableList.add(reset);
     }
 
 
@@ -61,5 +64,6 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void cleanUp(Resettable resettable){
+        this.resettableList.remove(resettable);
     }
 }

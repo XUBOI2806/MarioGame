@@ -18,13 +18,13 @@ public class TradeAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (WalletManager.getInstance(actor).getBalance(actor)>=this.price){
-            WalletManager.getInstance(actor).deductBalance(actor, this.price);
+        if (WalletManager.getInstance().getBalance(actor)>=this.price){
+            WalletManager.getInstance().deductBalance(actor, this.price);
             this.item.add_item(actor);
-            return actor + "successfully buys " + item;
+            return actor + " obtained " + item;
         }
         else{
-            return "Insufficient funds";
+            return "Insufficient balance";
         }
     }
 

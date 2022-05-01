@@ -5,18 +5,17 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.Random;
 
-public class RemoveAction extends Action {
+public class RemoveActorAction extends Action {
     // Attributes
     protected Actor target;
     protected String direction;
     protected Random rand = new Random();
 
     // Constructor
-    public RemoveAction(Actor target, String direction) {
+    public RemoveActorAction(Actor target, String direction) {
         this.target = target;
         this.direction = direction;
     }

@@ -20,6 +20,7 @@ public class SuperMushroom extends Item implements Purchasable, ConsumeAble{
 
     @Override
     public void add_item(Actor actor) {
+        actor.addItemToInventory(this);
     }
 
     public int increaseHP() {
