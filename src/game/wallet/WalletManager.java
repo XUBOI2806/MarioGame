@@ -1,4 +1,4 @@
-package game;
+package game.wallet;
 
 import edu.monash.fit2099.engine.actors.Actor;
 

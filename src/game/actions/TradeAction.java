@@ -3,8 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.WalletManager;
-import game.items.PowerStar;
+import game.wallet.WalletManager;
 import game.items.Purchasable;
 
 public class TradeAction extends Action {

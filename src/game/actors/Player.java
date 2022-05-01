@@ -4,15 +4,11 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.WalletManager;
-import game.actions.AttackAction;
+import game.wallet.WalletManager;
 import game.actions.ResetAction;
-import game.items.Coin;
 import game.items.PowerStar;
-import game.items.Wrench;
 import game.reset.Resettable;
 
 /**
