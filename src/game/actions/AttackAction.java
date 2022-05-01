@@ -50,7 +50,21 @@ public class AttackAction extends Action {
 		}
 
 		int damage = weapon.damage();
+
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+
+		// If the defender has an invincible status no damage
+		if(target.hasCapability(Status.INVINCIBLE)){
+			damage = 0;
+			result = target + " is invincible and cannot be damaged";
+		}
+
+		// If the attacker has an invincible status 1 hit KO
+		if(actor.hasCapability(Status.INVINCIBLE)){
+			damage = 10000; // if actor has consumed super star then actor can one hit kill
+			result = actor + " one hit kills " + target;
+		}
+
 		target.hurt(damage);
 		if (!target.isConscious()) {
 			ActionList dropActions = new ActionList();

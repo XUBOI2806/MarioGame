@@ -11,6 +11,7 @@ import game.WalletManager;
 import game.actions.AttackAction;
 import game.actions.ResetAction;
 import game.items.Coin;
+import game.items.PowerStar;
 import game.items.Wrench;
 import game.reset.Resettable;
 
@@ -35,6 +36,7 @@ public class Player extends Actor implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
+		this.addItemToInventory(new PowerStar());
 		this.map = map;
 		registerInstance();
 	}
