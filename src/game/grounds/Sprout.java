@@ -6,7 +6,7 @@ public class Sprout extends Tree {
     private int counter;
 
     public Sprout() {
-        super("+");
+        super('+');
         {
             @Override
             public void tick (Location location)

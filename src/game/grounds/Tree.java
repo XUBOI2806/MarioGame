@@ -16,17 +16,17 @@ public class Tree extends Ground implements Resettable {
 
     /**
      * Constructor.
-     *
+     * @param c
      */
-    public Tree() {
-        super('+');
+    public Tree(char c) {
+        super(c);
     }
 
     @Override
-    public void tick(Location location){
-        if (this.hasCapability(Status.RESET)){
+    public void tick(Location location) {
+        if (this.hasCapability(Status.RESET)) {
             int i = rand.nextInt(2);
-            if (i == 1){
+            if (i == 1) {
                 location.setGround(new Dirt());
             }
             ResetManager.getInstance().cleanUp(this);
@@ -36,7 +36,9 @@ public class Tree extends Ground implements Resettable {
 
     @Override
     public void resetInstance() {
-        this.addCapability(Status.RESET);}
+        this.addCapability(Status.RESET);
+    }
+}
 
 
 
