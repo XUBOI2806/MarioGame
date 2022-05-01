@@ -3,6 +3,7 @@ package game.grounds;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Status;
+import game.reset.ResetManager;
 import game.reset.Resettable;
 
 import java.util.Random;
@@ -28,6 +29,7 @@ public class Tree extends Ground implements Resettable {
             if (i == 1){
                 location.setGround(new Dirt());
             }
+            ResetManager.getInstance().cleanUp(this);
         }
     }
 

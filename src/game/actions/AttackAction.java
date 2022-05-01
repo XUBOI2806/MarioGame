@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actors.Status;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 
 /**
  * Special Action for attacking other Actors.
@@ -81,6 +83,7 @@ public class AttackAction extends Action {
 			}
 			else{
 				map.removeActor(target);
+				ResetManager.getInstance().cleanUp((Resettable) target);
 				result += System.lineSeparator() + target + " is killed.";
 			}
 

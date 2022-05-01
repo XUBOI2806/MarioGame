@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.WalletManager;
+import game.reset.ResetManager;
 
 /**
  * Action to allow items to be picked up.
@@ -29,7 +30,9 @@ public class PickUpCoinAction extends Action {
     public String execute(Actor actor, GameMap map) {
         WalletManager.getInstance().addBalance(actor, coin.getValue());
         map.locationOf(actor).removeItem(coin);
+        ResetManager.getInstance().cleanUp(coin);
         return menuDescription(actor);
+
     }
 
     /**

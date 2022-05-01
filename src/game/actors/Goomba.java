@@ -13,6 +13,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.behaviours.Behaviour;
+import game.reset.ResetManager;
 import game.reset.Resettable;
 
 import java.util.HashMap;
@@ -64,6 +65,7 @@ public class Goomba extends Actor implements Resettable {
 		if (this.hasCapability(Status.RESET)) {
 			this.behaviours.clear();
 			map.removeActor(this);
+			ResetManager.getInstance().cleanUp(this);
 		}
 
 		this.remove(map);	// 10% chance of removing the actor
