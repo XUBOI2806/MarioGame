@@ -3,12 +3,8 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.WalletManager;
-import game.actors.Goomba;
-import game.actors.Koopa;
-import game.items.Purchasable;
+import game.actors.Status;
 import game.reset.ResetManager;
-import game.reset.Resettable;
 
 public class ResetAction extends Action {
 
@@ -18,6 +14,7 @@ public class ResetAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         ResetManager.getInstance().run();
+        actor.removeCapability(Status.RESET);
         return "Game has been reset";
     }
 
