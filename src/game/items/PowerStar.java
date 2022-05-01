@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeItemAction;
 import game.actors.Status;
 
-public class PowerStar extends Item implements Purchasable {
+public class PowerStar extends Item implements Purchasable, ConsumeAble {
     int price;
 
     public PowerStar() {
