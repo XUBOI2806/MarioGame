@@ -12,7 +12,6 @@ import game.reset.Resettable;
 
 public class ResetAction extends Action {
 
-
     public ResetAction() {
     }
 

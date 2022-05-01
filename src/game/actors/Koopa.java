@@ -53,6 +53,11 @@ public class Koopa extends Actor implements Resettable {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (this.hasCapability(Status.RESET)) {
+            this.behaviours.clear();
+            map.removeActor(this);
+        }
+
         if (!this.hasCapability(Status.DORMANT)) {
             for (Behaviour Behaviour : behaviours.values()) {
                 Action action = Behaviour.getAction(this, map);
@@ -60,9 +65,7 @@ public class Koopa extends Actor implements Resettable {
                     return action;
             }
         }
-        if (this.hasCapability(Status.DEAD)) {
-            this.resetMaxHp(0);
-            }
+
         return new DoNothingAction();
     }
 
@@ -82,7 +85,7 @@ public class Koopa extends Actor implements Resettable {
 
     @Override
     public void resetInstance() {
-        this.addCapability(Status.DEAD);
+        this.addCapability(Status.RESET);
     }
 
 }

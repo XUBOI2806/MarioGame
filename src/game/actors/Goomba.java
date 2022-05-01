@@ -61,15 +61,20 @@ public class Goomba extends Actor implements Resettable {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		if (this.hasCapability(Status.RESET)) {
+			this.behaviours.clear();
+			map.removeActor(this);
+		}
+
 		this.remove(map);	// 10% chance of removing the actor
+
 		for(Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
 		}
-		if (this.hasCapability(Status.DEAD)) {
-			this.resetMaxHp(0);
-		}
+
+
 		return new DoNothingAction();
 	}
 
@@ -89,6 +94,6 @@ public class Goomba extends Actor implements Resettable {
 
 	@Override
 	public void resetInstance() {
-		this.addCapability(Status.DEAD);
+		this.addCapability(Status.RESET);
 	}
 }

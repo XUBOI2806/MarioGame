@@ -5,8 +5,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Status;
 import game.reset.Resettable;
 
-import java.util.ArrayList;
-
 
 public class Coin extends Item implements Resettable {
     private int value;
@@ -24,12 +22,12 @@ public class Coin extends Item implements Resettable {
 
     @Override
     public void resetInstance() {
-        this.addCapability(Status.REMOVE);
+        this.addCapability(Status.RESET);
     }
 
     @Override
     public void tick(Location currentLocation) {
-        if (this.hasCapability(Status.REMOVE)) {
+        if (this.hasCapability(Status.RESET)) {
             currentLocation.removeItem(this);
         }
     }

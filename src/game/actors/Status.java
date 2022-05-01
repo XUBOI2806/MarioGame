@@ -13,6 +13,5 @@ public enum Status {
     DORMANT, // use this status to tell that current instance is in dormant state and cannot move or be hit
     DORMANT_ABLE, // use this status to tell that when instance goes unconscious, change into DORMANT
     FLOOR, // use this status to tell that current instance can walk on floors
-    DEAD, REMOVE, CONVERT, // use this status to tell when an actor is dead
-
+    RESET, // use this status to tell when an actor is dead
 }

@@ -1,6 +1,5 @@
 package game.grounds;
 
-import edu.monash.fit2099.demo.conwayslife.ConwayLocation;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Status;
@@ -9,8 +8,6 @@ import game.reset.Resettable;
 import java.util.Random;
 
 public class Tree extends Ground implements Resettable {
-    private int age;
-
     /**
      * Random number generator
      */
@@ -26,7 +23,7 @@ public class Tree extends Ground implements Resettable {
 
     @Override
     public void tick(Location location){
-        if (this.hasCapability(Status.CONVERT)){
+        if (this.hasCapability(Status.RESET)){
             int i = rand.nextInt(2);
             if (i == 1){
                 location.setGround(new Dirt());
@@ -37,6 +34,6 @@ public class Tree extends Ground implements Resettable {
 
     @Override
     public void resetInstance() {
-        this.addCapability(Status.CONVERT);
+        this.addCapability(Status.RESET);
     }
 }
