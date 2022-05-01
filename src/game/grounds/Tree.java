@@ -36,6 +36,113 @@ public class Tree extends Ground implements Resettable {
 
     @Override
     public void resetInstance() {
-        this.addCapability(Status.RESET);
+        this.addCapability(Status.RESET);}
+
+    public class Tree extends Ground
+    {
+        private int counter;
+
+        public Tree()
+        {
+            super('T');
+        }
+
+        @Override
+        public void tick(Location location)
+        {
+            counter += 1;
+        }
     }
-}
+
+    public class Sprout extends Tree
+    {
+        private int counter;
+
+        public Sprout() {
+            super("+");
+            {
+
+                @Override
+                public void tick (Location location)
+                {
+                    counter += 1;
+                    if (counter % 10 == 0 && !location.containsAnActor()) ;
+                    {
+                        location.addTree(new Sapling());
+                    }
+
+                    if (counter % 1 == 0 && !location.containsAnActor()) ;
+                    {
+                        if (Math.random() <= 0.1) ;
+                        {
+                            location.addActor(new Goomba());
+                        }
+                    }
+                }
+
+            }
+
+            public class Sapling extends Tree {
+                private int counter;
+
+                public Sapling() {
+                    super("t");
+                }
+
+                @Override
+                public void tick(Location location) {
+                    counter += 1;
+                    if (counter % 10 == 0 && !location.containsAnActor()) ;
+                    {
+
+                        location.addTree(new Mature());
+                    }
+
+                    if (counter % 1 == 0 && !location.containsAnActor()) ;
+                    {
+                        if (Math.random() <= 0.1) ;
+                        {
+                            location.addItem(new Coin()); // note value is $20 dont forget to set that
+                        }
+                    }
+                }
+
+            }
+
+            public class Mature extends Tree {
+                private int counter;
+
+                public Mature() {
+                    super("T");
+                    {
+
+                        @Override
+                        public void tick (Location location)
+                        {
+                            counter += 1;
+                            if (counter % 5 == 0 && !location.containsAnActor()) ;
+                            {
+                                //surrounding location given if dirt(fertile)
+                                if (############################)
+                                {
+                                    location.addTree(new Sprout());
+                                }
+                            }
+
+                            if (counter % 1 == 0 && !location.containsAnActor()) ;
+                            {
+                                if (Math.random() <= 0.15) ;
+                                {
+                                    location.addActor(new Koopa());
+                                }
+                                if (Math.random() <= 0.20) ;
+                                {
+                                    map.removeTree(this); // not sure if right command to remove tree ehhh
+                                    location.addGround(new Dirt()); // idk addGround is valid cos of class func
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
