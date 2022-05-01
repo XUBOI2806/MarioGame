@@ -22,8 +22,6 @@ public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	private GameMap map;
-	private WalletManager walletManager;
-	private boolean runExcecuted = false;
 
 	/**
 	 * Constructor.
@@ -36,6 +34,7 @@ public class Player extends Actor implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
+		this.addCapability(Status.RESET);
 		this.addItemToInventory(new PowerStar());
 		this.map = map;
 		registerInstance();
@@ -46,13 +45,12 @@ public class Player extends Actor implements Resettable {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-		if (!runExcecuted) {
+		if (this.hasCapability(Status.RESET)) {
 			actions.add(new ResetAction());
-			runExcecuted = true;
 		}
 		// return/print the console menu
 		display.println("Mario: " + this.printHp() + " at ("+ this.map.locationOf(this).x() + "," + this.map.locationOf(this).y() +")");
-		display.println("Wallet: $" + walletManager.getInstance().getBalance(this));
+		display.println("Wallet: $" + WalletManager.getInstance().getBalance(this));
 		return menu.showMenu(this, actions, display);
 	}
 
