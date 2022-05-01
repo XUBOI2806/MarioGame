@@ -28,7 +28,6 @@ public class Koopa extends Actor implements Resettable {
     //Constructor
     public Koopa() {
         super("Koopa", 'K', 100);
-        this.behaviours.put(8, new AttackBehaviour());
         this.behaviours.put(10, new WanderBehaviour());
         this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.DORMANT_ABLE);
@@ -44,6 +43,7 @@ public class Koopa extends Actor implements Resettable {
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && this.isConscious()) {
             actions.add(new AttackAction(this, direction));
+            this.behaviours.put(8, new AttackBehaviour(otherActor));
             this.behaviours.put(9, new FollowBehaviour(otherActor));
         } else if (otherActor.hasCapability(Status.WRENCH)) {
             actions.add(new RemoveActorAction(this, direction));

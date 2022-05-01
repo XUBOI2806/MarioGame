@@ -10,11 +10,17 @@ import game.actors.Status;
 
 public class AttackBehaviour implements Behaviour {
 
+    private Actor target;
+
     // TODO: develop and use it to attack the player automatically.
+    public AttackBehaviour(Actor target) {
+        this.target = target;
+    }
+
     @Override
     public Action getAction(Actor actor, GameMap map) {
+        Location targetLocation = map.locationOf(this.target);
         for(Exit exit: map.locationOf(actor).getExits()){
-            Location targetLocation = exit.getDestination();
             if(targetLocation.containsAnActor() && targetLocation.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
                 Actor target = targetLocation.getActor();
                 return new AttackAction(target,exit.getName());
