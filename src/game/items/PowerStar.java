@@ -6,15 +6,21 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeItemAction;
 import game.actors.Status;
+import edu.monash.fit2099.engine.displays.Display;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PowerStar extends Item implements Purchasable, ConsumeAble {
     private int age = 0;
+    private int turns_left;
+    private ConsumeItemAction consume;
 
     public PowerStar() {
         super("Power Star", '*', Boolean.parseBoolean("True"));
+        this.consume = new ConsumeItemAction(this);
+        this.addAction(consume);
+        this.turns_left = 11;
     }
 
     public void add_item(Actor actor){
@@ -25,23 +31,27 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     public String consumedBy(Actor actor) {
         actor.heal(1000);
         actor.addCapability(Status.INVINCIBLE);
-        actor.removeItemFromInventory(this);
+        this.removeAction(consume);
+        this.togglePortability();
         return actor + " ate the power star";
-    }
-
-    public List<Action> getAllowableActions() {
-        ArrayList<Action> actions = new ArrayList<>();
-        actions.add(new ConsumeItemAction(this));
-        return actions;
     }
 
     @Override
     public void tick(Location currentLocation, Actor actor) {
         super.tick(currentLocation, actor);
         age++;
-        if (age == 10) {
+        if(actor.hasCapability(Status.INVINCIBLE)){
+            this.turns_left--;
+        }
+        if (age == 10 & !actor.hasCapability(Status.INVINCIBLE)) {
             actor.removeItemFromInventory(this);
         }
+
+        if(turns_left == 0){
+            actor.removeItemFromInventory(this);
+            actor.removeCapability(Status.INVINCIBLE);
+        }
+
     }
 
     @Override

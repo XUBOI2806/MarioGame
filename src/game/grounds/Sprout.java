@@ -6,7 +6,7 @@ public class Sprout extends Tree {
     private int counter;
 
     public Sprout() {
-        super('+'); //Represent sprout with a +
+        super.setDisplayChar('+'); //Represent sprout with a +
     }
     @Override
     public void tick(Location location){ //Keep tracks of each turn

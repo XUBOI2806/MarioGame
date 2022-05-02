@@ -4,12 +4,17 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.wallet.WalletManager;
+import game.actions.AttackAction;
 import game.actions.ResetAction;
+import game.items.Coin;
 import game.items.PowerStar;
+import game.items.Wrench;
 import game.reset.Resettable;
+import game.wallet.WalletManager;
 
 /**
  * Class representing the Player.
@@ -18,6 +23,7 @@ public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	private GameMap map;
+	private WalletManager walletManager;
 
 	/**
 	 * Constructor.
@@ -44,9 +50,13 @@ public class Player extends Actor implements Resettable {
 		if (this.hasCapability(Status.RESET)) {
 			actions.add(new ResetAction());
 		}
+
 		// return/print the console menu
 		display.println("Mario: " + this.printHp() + " at ("+ this.map.locationOf(this).x() + "," + this.map.locationOf(this).y() +")");
 		display.println("Wallet: $" + WalletManager.getInstance().getBalance(this));
+		if (this.hasCapability(Status.INVINCIBLE)){
+			display.println("Mario is INVINCIBLE");
+		}
 		return menu.showMenu(this, actions, display);
 	}
 

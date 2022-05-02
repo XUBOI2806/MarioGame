@@ -7,7 +7,7 @@ public class Sapling extends Tree {
     private int counter;
 
     public Sapling() {
-        super('t');
+        super.setDisplayChar('t');
     }
 
     @Override
