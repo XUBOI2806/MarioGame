@@ -14,7 +14,6 @@ public class RemoveActorAction extends Action {
     // Attributes
     protected Actor target;
     protected String direction;
-    protected Random rand = new Random();
 
     // Constructor
     public RemoveActorAction(Actor target, String direction) {

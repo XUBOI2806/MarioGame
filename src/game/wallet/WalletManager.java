@@ -44,7 +44,7 @@ public class WalletManager {
     public void deductBalance(Actor actor, int value){
         this.check(actor);
         int balance = this.balances.get(actor);
-        if (balance>=value){
+        if (balance >= value){
             balance -= value;
             this.balances.put(actor, balance);
         }
