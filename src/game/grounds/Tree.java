@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Status;
 import game.reset.ResetManager;
 import game.reset.Resettable;
-
 import java.util.Random;
 
 public class Tree extends Ground implements Resettable {
@@ -16,10 +15,9 @@ public class Tree extends Ground implements Resettable {
 
     /**
      * Constructor.
-     * @param c
      */
-    public Tree(char c) {
-        super(c);
+    public Tree(char displayChar) {
+        super(displayChar);
     }
 
     @Override
