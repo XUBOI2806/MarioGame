@@ -77,6 +77,10 @@ public class AttackAction extends Action {
 		}
 
 		target.hurt(damage);
+
+		if(target.hasCapability(Status.TALL)){
+			target.removeCapability(Status.TALL);
+		}
 		if (!target.isConscious()) {
 			ActionList dropActions = new ActionList();
 			// drop all items

@@ -50,8 +50,10 @@ public class Goomba extends Actor implements Resettable {
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			actions.add(new AttackAction(this,direction));
-			this.behaviours.put(8,new AttackBehaviour(otherActor));
-			this.behaviours.put(9,new FollowBehaviour(otherActor));	// Once the Goomba is next to the Player, start the FollowBehaviour
+			if(!behaviours.containsKey(8) && !behaviours.containsKey(9)) {
+				this.behaviours.put(8, new AttackBehaviour(otherActor));
+				this.behaviours.put(9, new FollowBehaviour(otherActor));
+			}
 		}
 		return actions;
 	}
