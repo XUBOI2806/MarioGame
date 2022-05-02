@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeItemAction;
 import game.actors.Status;
 import edu.monash.fit2099.engine.displays.Display;
+import game.grounds.Dirt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     private int age = 0;
     private int turns_left;
     private ConsumeItemAction consume;
+    private boolean consumed;
 
     public PowerStar() {
         super("Power Star", '*', Boolean.parseBoolean("True"));
@@ -32,6 +34,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         actor.heal(1000);
         actor.addCapability(Status.INVINCIBLE);
         this.removeAction(consume);
+        this.consumed = true;
         this.togglePortability();
         return actor + " ate the power star";
     }
@@ -41,6 +44,10 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         super.tick(currentLocation, actor);
         age++;
         if(actor.hasCapability(Status.INVINCIBLE)){
+            if(currentLocation.getGround().getDisplayChar() == '+' || currentLocation.getGround().getDisplayChar() == '#'){
+                currentLocation.setGround(new Dirt());
+                currentLocation.addItem(new Coin(5));
+            }
             this.turns_left--;
         }
         if (age == 10 & !actor.hasCapability(Status.INVINCIBLE)) {
@@ -61,6 +68,15 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         if (age == 10) {
             currentLocation.removeItem(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        if(this.consumed == false){
+            int turnsLeft = 10 - this.age;
+            return super.toString() + " (" + turnsLeft + " turns left)";
+        }
+        return super.toString();
     }
 }
 

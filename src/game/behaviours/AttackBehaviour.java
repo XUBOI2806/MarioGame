@@ -8,15 +8,29 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
 import game.actors.Status;
 
+/**
+ * A behaviour that decides an AttackAction for a hostile player when within the range of the exits
+ */
 public class AttackBehaviour implements Behaviour {
 
     private Actor target;
 
     // TODO: develop and use it to attack the player automatically.
+
+    /**
+     * Constructor for AttackBehaviour
+     * @param target the actor to attack
+     */
     public AttackBehaviour(Actor target) {
         this.target = target;
     }
 
+    /**
+     *
+     * @param actor the Actor acting
+     * @param map the GameMap containing the Actor
+     * @return
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location targetLocation = map.locationOf(this.target);
