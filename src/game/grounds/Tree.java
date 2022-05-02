@@ -16,8 +16,8 @@ public class Tree extends Ground implements Resettable {
     /**
      * Constructor.
      */
-    public Tree(char displayChar) {
-        super(displayChar);
+    public Tree() {
+        super('+');
     }
 
     @Override
