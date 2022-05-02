@@ -29,7 +29,7 @@ public class Toad extends Actor {
      *
      */
     public Toad() {
-        super("Toad", 'o', 0);
+        super("Toad", 'O', 0);
         this.behaviours.put(10, new WanderBehaviour());
         this.addItemToInventory(new PowerStar());
         this.addItemToInventory(new SuperMushroom());

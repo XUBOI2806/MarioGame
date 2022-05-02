@@ -12,9 +12,6 @@ import game.grounds.Dirt;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Power Star item that can be consumed
- */
 public class PowerStar extends Item implements Purchasable, ConsumeAble {
     private int age = 0;
     private int turns_left;
@@ -28,7 +25,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         super("Power Star", '*', Boolean.parseBoolean("True"));
         this.consume = new ConsumeItemAction(this);
         this.addAction(consume);
-        this.turns_left = 11;
+        this.turns_left = Utils.INVICIBLE_TURNS_LEFT;
     }
 
     /**
@@ -46,7 +43,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
      */
     @Override
     public String consumedBy(Actor actor) {
-        actor.heal(1000);
+        actor.heal(Utils.POWER_STAR_HP_INCREASE);
         actor.addCapability(Status.INVINCIBLE);
         this.removeAction(consume);
         this.consumed = true;
@@ -66,11 +63,11 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         if(actor.hasCapability(Status.INVINCIBLE)){
             if(currentLocation.getGround().getDisplayChar() == '+' || currentLocation.getGround().getDisplayChar() == '#'){
                 currentLocation.setGround(new Dirt());
-                currentLocation.addItem(new Coin(5));
+                currentLocation.addItem(new Coin(Utils.DESTROYED_GROUND_VALUE));
             }
             this.turns_left--;
         }
-        if (age == 10 & !actor.hasCapability(Status.INVINCIBLE)) {
+        if (age == Utils.POWER_STAR_EXPIRY_AGE & !actor.hasCapability(Status.INVINCIBLE)) {
             actor.removeItemFromInventory(this);
         }
 
@@ -89,7 +86,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     public void tick(Location currentLocation) {
         super.tick(currentLocation);
         age++;
-        if (age == 10) {
+        if (age == Utils.POWER_STAR_EXPIRY_AGE) {
             currentLocation.removeItem(this);
         }
     }
@@ -101,7 +98,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     @Override
     public String toString() {
         if(this.consumed == false){
-            int turnsLeft = 10 - this.age;
+            int turnsLeft = Utils.POWER_STAR_EXPIRY_AGE - this.age;
             return super.toString() + " (" + turnsLeft + " turns left)";
         }
         return super.toString();
