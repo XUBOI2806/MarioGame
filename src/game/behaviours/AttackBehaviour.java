@@ -29,7 +29,7 @@ public class AttackBehaviour implements Behaviour {
      *
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
-     * @return
+     * @return AttackAction if it finds a target, null if not
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {

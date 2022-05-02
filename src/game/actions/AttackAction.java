@@ -42,6 +42,13 @@ public class AttackAction extends Action {
 		this.direction = direction;
 	}
 
+	/**
+	 * execute determines the damage the actor will inflict on the target depending on weapon and statuses. Also takes
+	 * in account of missing probability.
+	 * @param actor The actor performing the action.
+	 * @param map The map the actor is on.
+	 * @return a string that describes the damage and if the enemy is conscious
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
@@ -51,6 +58,8 @@ public class AttackAction extends Action {
 			return actor + " misses " + target + ".";
 		}
 
+
+		// Returns the damage of the weapon actor is wielding (Intrinsic Weapon if not holding any)
 		int damage = weapon.damage();
 
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";

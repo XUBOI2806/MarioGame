@@ -26,6 +26,13 @@ public class FollowBehaviour implements Behaviour {
 		this.target = subject;
 	}
 
+	/**
+	 * getAction determines if the actor should follow a target. Actor should follow target whenever the target is
+	 * on the map and the actor can move
+	 * @param actor the Actor acting
+	 * @param map the GameMap containing the Actor
+	 * @return returns a MoveActorAction to move to the target when conditions are met, null if not
+	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		if(!map.contains(target) || !map.contains(actor))

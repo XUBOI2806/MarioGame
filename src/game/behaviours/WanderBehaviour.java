@@ -42,6 +42,12 @@ public class WanderBehaviour extends Action implements Behaviour {
 
 	}
 
+	/**
+	 * execute will print a description of the actor following the target
+	 * @param actor The actor performing the action.
+	 * @param map The map the actor is on.
+	 * @return a string with the description actor moves in direction
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		return menuDescription(actor);

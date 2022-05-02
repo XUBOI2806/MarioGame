@@ -36,8 +36,8 @@ public class Goomba extends Actor implements Resettable {
 	}
 
 	/**
-	 * At the moment, we only make it can be attacked by Player.
-	 * You can do something else with this method.
+	 * Decides the actions that another actor can perform. Also decides to put in specific behaviours when the other
+	 * actor is hostile.
 	 * @param otherActor the Actor that might perform an action.
 	 * @param direction  String representing the direction of the other Actor
 	 * @param map        current GameMap
@@ -80,8 +80,10 @@ public class Goomba extends Actor implements Resettable {
 		return new DoNothingAction();
 	}
 
-	// Code added on from here:
-
+	/**
+	 * Intrinsic weapon of damage 10 and the verb "kicks"
+	 * @return
+	 */
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(10,"kicks");

@@ -6,12 +6,17 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Status;
 
-public class Wall extends Ground {
+public class Wall extends Ground implements HighGround {
 
 	public Wall() {
 		super('#');
 	}
 
+	/**
+	 * Checks if an actor can enter, only actors that have INVINCIBLE status should be able to enter
+	 * @param actor the Actor to check
+	 * @return true if actor is invincible, else false
+	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		if (actor.hasCapability(Status.INVINCIBLE)) {
