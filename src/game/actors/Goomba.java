@@ -94,6 +94,9 @@ public class Goomba extends Actor implements Resettable {
 		}
 	}
 
+	/**
+	 * Allows any classes that use this interface to reset abilities, attributes, and/or items.
+	 */
 	@Override
 	public void resetInstance() {
 		this.addCapability(Status.RESET);

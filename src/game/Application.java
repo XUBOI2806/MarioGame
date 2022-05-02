@@ -17,6 +17,7 @@ import game.grounds.Floor;
 import game.grounds.Tree;
 import game.grounds.Wall;
 import game.items.Coin;
+import game.items.PowerStar;
 
 /**
  * The main class for the Mario World game.
@@ -54,12 +55,13 @@ public class Application {
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
-			Actor mario = new Player("Player", 'm', 100,gameMap);
+			Actor mario = new Player("Player", 'm', 100, gameMap);
 			world.addPlayer(mario, gameMap.at(44, 10));
 
 			gameMap.at(44, 11).addActor(new Toad());
 
 			gameMap.at(45, 10).addItem(new Coin(1000));
+			gameMap.at(1, 1).addItem(new PowerStar());
 
 		// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());

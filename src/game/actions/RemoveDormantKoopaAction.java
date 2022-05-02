@@ -8,22 +8,19 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
-import java.util.Random;
-
-public class RemoveActorAction extends Action {
+public class RemoveDormantKoopaAction extends Action {
     // Attributes
     protected Actor target;
     protected String direction;
 
     // Constructor
-    public RemoveActorAction(Actor target, String direction) {
+    public RemoveDormantKoopaAction(Actor target, String direction) {
         this.target = target;
         this.direction = direction;
     }
     // Methods
     @Override
     public String execute(Actor actor, GameMap map) {
-        String result = actor + " removes " + target;
 
         ActionList dropActions = new ActionList();
         // drop all items
@@ -34,13 +31,12 @@ public class RemoveActorAction extends Action {
         // remove actor
         map.removeActor(target);
         ResetManager.getInstance().cleanUp((Resettable) target);
-        result += System.lineSeparator() + target + " is killed.";
 
-        return result;
+        return menuDescription(actor);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " removes " + target + " at " + direction;
+        return actor + " destroys " + target + "(dormant)";
     }
 }

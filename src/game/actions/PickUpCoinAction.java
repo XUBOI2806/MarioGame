@@ -8,24 +8,32 @@ import game.wallet.WalletManager;
 import game.reset.ResetManager;
 
 /**
- * Action to allow items to be picked up.
+ * Action to allow Coins to be picked up.
  */
 public class PickUpCoinAction extends Action {
 
-    private Coin coin;
+    /**
+     * A coin class
+     */
+    private final Coin coin;
 
-
+    /**
+     * Constructor.
+     *
+     * @param coin  the coin to pick up
+     */
     public PickUpCoinAction(Coin coin) {
         this.coin = coin;
     }
 
     /**
-     * Add the item to the actor's inventory.
+     * Adds the value of the coin to the Actor's virtual wallet and removes the
+     * coin from the map.
      *
      * @see Action#execute(Actor, GameMap)
-     * @param actor The actor performing the action.
+     * @param actor The Actor performing the action.
      * @param map The map the actor is on.
-     * @return a suitable description to display in the UI
+     * @return a suitable description to display in the UI.
      */
     @Override
     public String execute(Actor actor, GameMap map) {

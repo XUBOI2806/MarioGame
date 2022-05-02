@@ -19,12 +19,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Toad
+ * Class representing Toad.
  */
 public class Toad extends Actor {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
-
+    /**
+     * Constructor.
+     *
+     */
     public Toad() {
         super("Toad", 'o', 0);
         this.behaviours.put(10, new WanderBehaviour());
@@ -35,8 +38,12 @@ public class Toad extends Actor {
 
     /**
      * Figure out what to do next.
-     *
      * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return the Action to be performed
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -48,6 +55,14 @@ public class Toad extends Actor {
         return new DoNothingAction();
     }
 
+    /**
+     * Returns a new collection of the Actions that the otherActor can do to the current Actor.
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return A collection of Actions.
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList list = super.allowableActions(otherActor, direction, map);

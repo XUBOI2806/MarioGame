@@ -21,6 +21,6 @@ public class ConsumeItemAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " eats the " + consumeAble;
+        return actor + " consumes " + consumeAble;
     }
 }

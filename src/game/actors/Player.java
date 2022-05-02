@@ -55,6 +55,9 @@ public class Player extends Actor implements Resettable {
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
 
+	/**
+	 * Allows any classes that use this interface to reset abilities, attributes, and/or items.
+	 */
 	@Override
 	public void resetInstance() {
 		this.resetMaxHp(this.getMaxHp());

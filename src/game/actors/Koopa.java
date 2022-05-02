@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
-import game.actions.RemoveActorAction;
+import game.actions.RemoveDormantKoopaAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -47,7 +47,7 @@ public class Koopa extends Actor implements Resettable {
             this.behaviours.put(8, new AttackBehaviour(otherActor));
             this.behaviours.put(9, new FollowBehaviour(otherActor));
         } else if (otherActor.hasCapability(Status.WRENCH)) {
-            actions.add(new RemoveActorAction(this, direction));
+            actions.add(new RemoveDormantKoopaAction(this, direction));
         }
         return actions;
     }
@@ -85,6 +85,9 @@ public class Koopa extends Actor implements Resettable {
         return new IntrinsicWeapon(30, "punches");
     }
 
+    /**
+     * Allows any classes that use this interface to reset abilities, attributes, and/or items.
+     */
     @Override
     public void resetInstance() {
         this.addCapability(Status.RESET);

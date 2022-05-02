@@ -18,20 +18,28 @@ public class Tree extends Ground implements Resettable {
      */
     public Tree() {
         super('+');
+        registerInstance();
     }
 
+    /**
+     * Inform the ground of the passage of time.
+     * This method is called once per turn.
+     * @param location The location of the tree.
+     */
     @Override
     public void tick(Location location) {
         if (this.hasCapability(Status.RESET)) {
             int i = rand.nextInt(2);
-            if (i == 1) {
+            if (i == 0) {
                 location.setGround(new Dirt());
             }
             ResetManager.getInstance().cleanUp(this);
         }
     }
 
-
+    /**
+     * Allows any classes that use this interface to reset abilities, attributes, and/or items.
+     */
     @Override
     public void resetInstance() {
         this.addCapability(Status.RESET);
