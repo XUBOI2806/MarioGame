@@ -68,6 +68,14 @@ so the dropitem class must be implemented for this action to occur. The interact
 both follow the Dependency Inversion Principle by implementing the behaviour interface as the addition of other 
 behaviours will follow the same principles.
 
+####Changes
+Instead of Toad holding the items, a new Purchasable Item, which will be implemented through an interface called Purchasable,
+will be instantly added when the actor successfully trades with Toad. A WalletManager, which keeps track of the actor's 
+balance will be checked if the transaction was successful or not. This WalletManager will be able to keep track of multiple
+actor's balances through a HashMap. No behaviour was actually needed to be implemented in this design as the allowableActions
+function could be used to ensure that Toad was the only one that could have the specific action targeted towards him. An Utils
+class was also implemented to hold the final price values of the items.
+
 ##Req 6
 ###Toad's Monologue
 Similar to the behaviour in Req 5, Toad and the interact behaviour and action will be implemented. 
@@ -75,6 +83,10 @@ However, a new behaviour class will allow the player to have a possible speak ac
 The behaviour class will determine whether the speak action can be completed or not and which statements can be 
 printed or not depending on the character's status and if he is holding a wrench. The addition of the trade behaviour also
 follow the Dependency Inversion Principle as it follows the same concepts within the behaviour interface.
+
+####Changes
+No behaviour was implemented as for the same reason in Req 5. To check if the player was holding a wrench, a status was 
+used for that. 
 
 ##Req 7
 ###Reset Game
@@ -85,3 +97,8 @@ The trees will follow the same concept, however, it’ll have a 50% chance of no
 back into dirt. The player's status will also be reset back to none and the player's health will return to maximum.
 As it utilises the existing functions, The resettable interface follows the open-closed principle as it allows itself 
 to be open for extension without modifications.
+
+####Changes
+The actions to erase the items and enemies will be instead done in the specific classes itself. An enum will check if the
+class will be effected by the reset by adding the enum as soon as the reset manager has been run. The cleanup function
+will also ensure that any actors or items that have been already removed from the map won't be effected by the reset.

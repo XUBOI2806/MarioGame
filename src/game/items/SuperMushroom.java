@@ -13,7 +13,7 @@ public class SuperMushroom extends Item implements Purchasable, ConsumeAble{
     int maxHPIncrease;
     public SuperMushroom() {
         super("Super Mushroom", '^', Boolean.parseBoolean("True"));
-        this.maxHPIncrease = 50;
+        this.maxHPIncrease = Utils.SUPER_MUSHROOM_HP_INCREASE;
     }
 
     @Override
