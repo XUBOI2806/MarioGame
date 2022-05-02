@@ -2,6 +2,8 @@ package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.PickUpCoinAction;
+import game.actions.SpeakAction;
 import game.actors.Status;
 import game.reset.ResetManager;
 import game.reset.Resettable;

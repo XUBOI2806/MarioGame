@@ -1,8 +1,9 @@
-package game.items;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.Coin;
 import game.wallet.WalletManager;
 import game.reset.ResetManager;
 
@@ -47,5 +48,3 @@ public class PickUpCoinAction extends Action {
         return actor + " picks up the Coin ($" + coin.getValue() + ")";
     }
 }
-
-
