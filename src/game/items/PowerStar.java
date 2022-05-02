@@ -46,7 +46,6 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         actor.heal(Utils.POWER_STAR_HP_INCREASE);
         actor.addCapability(Status.INVINCIBLE);
         this.removeAction(consume);
-        this.displayExpiry = true;
         this.togglePortability();
         return actor + " ate the power star";
     }
