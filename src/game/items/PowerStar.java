@@ -1,21 +1,16 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.ConsumeItemAction;
+import game.actions.ConsumeAction;
 import game.actors.Status;
-import edu.monash.fit2099.engine.displays.Display;
 import game.grounds.Dirt;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PowerStar extends Item implements Purchasable, ConsumeAble {
     private int age = 0;
     private int turns_left;
-    private ConsumeItemAction consume;
+    private ConsumeAction consume;
     private boolean displayExpiry;
 
     /**
@@ -23,7 +18,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
      */
     public PowerStar() {
         super("Power Star", '*', Boolean.parseBoolean("True"));
-        this.consume = new ConsumeItemAction(this);
+        this.consume = new ConsumeAction(this);
         this.addAction(consume);
         this.turns_left = Utils.INVICIBLE_TURNS_LEFT;
     }

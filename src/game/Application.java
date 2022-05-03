@@ -12,10 +12,7 @@ import game.actors.Goomba;
 import game.actors.Koopa;
 import game.actors.Player;
 import game.actors.Toad;
-import game.grounds.Dirt;
-import game.grounds.Floor;
-import game.grounds.Tree;
-import game.grounds.Wall;
+import game.grounds.*;
 import game.items.Coin;
 import game.items.PowerStar;
 
@@ -29,7 +26,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new HealingFountain());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -59,6 +56,8 @@ public class Application {
 			world.addPlayer(mario, gameMap.at(44, 10));
 
 			gameMap.at(44, 11).addActor(new Toad());
+
+			gameMap.at(44,14).setGround(new HealingFountain());
 
 			world.run();
 
