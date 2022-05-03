@@ -8,7 +8,7 @@ import game.reset.ResetManager;
 import game.reset.Resettable;
 import java.util.Random;
 
-public class Tree extends Ground implements Resettable, HighGround {
+public class Tree extends Ground implements Resettable {
     /**
      * Random number generator
      */
