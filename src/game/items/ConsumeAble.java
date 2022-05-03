@@ -8,4 +8,5 @@ import game.actions.ConsumeItemAction;
 public interface ConsumeAble {
 
     String consumedBy(Actor actor);
+
 }
