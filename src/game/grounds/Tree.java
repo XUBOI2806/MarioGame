@@ -25,6 +25,7 @@ public class Tree extends Ground implements Resettable, HighGround {
     /**
      * Inform the ground of the passage of time.
      * This method is called once per turn.
+     * This method also randomly spawns sprout given that the ground if floor every turn
      * @param location The location of the tree.
      */
     @Override
@@ -35,6 +36,14 @@ public class Tree extends Ground implements Resettable, HighGround {
                 location.setGround(new Dirt());
             }
             ResetManager.getInstance().cleanUp(this);
+        }
+
+        if(location.getGround().hasCapability(Dirt.State.FERTILE) && !location.containsAnActor())
+        {
+            int j = rand.nextInt(2);
+            if(j == 1){
+                location.setGround(new Sprout());
+            }
         }
     }
 
@@ -48,7 +57,7 @@ public class Tree extends Ground implements Resettable, HighGround {
 
     @Override
     public boolean canActorEnter(Actor actor) {
-        if (actor.hasCapability(Status.INVINCIBLE)) {
+        if(actor.hasCapability(Status.INVINCIBLE)) {
             return true;
         }
         return false;
