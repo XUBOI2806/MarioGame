@@ -8,10 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Goomba;
-import game.actors.Koopa;
-import game.actors.Player;
-import game.actors.Toad;
+import game.actors.*;
 import game.grounds.*;
 import game.items.Coin;
 import game.items.PowerStar;
@@ -26,7 +23,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new HealingFountain());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new HealingFountain(), new FireGround());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -36,7 +33,7 @@ public class Application {
 				"...............................................#................................",
 				"................................................#...............................",
 				".................+................................#.............................",
-				".................................................##.............................",
+				"..........................................L......##.............................",
 				"................................................##..............................",
 				".........+..............................+#____####.................+............",
 				".......................................+#_____###++.............................",
@@ -59,6 +56,8 @@ public class Application {
 
 			gameMap.at(44,14).setGround(new HealingFountain());
 
+			gameMap.at(44,13).addActor(new FlyingKoopa());
+			mario.addItemToInventory(new PowerStar());
 			world.run();
 
 	}

@@ -56,10 +56,6 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         super.tick(currentLocation, actor);
         age++;
         if(actor.hasCapability(Status.INVINCIBLE)){
-            if(currentLocation.getGround().getDisplayChar() == '+' || currentLocation.getGround().getDisplayChar() == '#'){
-                currentLocation.setGround(new Dirt());
-                currentLocation.addItem(new Coin(Utils.DESTROYED_GROUND_VALUE));
-            }
             this.turns_left--;
         }
         if (age == Utils.POWER_STAR_EXPIRY_AGE & !actor.hasCapability(Status.INVINCIBLE)) {
