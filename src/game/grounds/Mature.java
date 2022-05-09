@@ -16,6 +16,7 @@ public class Mature extends Tree {
     public Mature() {
         super.setDisplayChar('T'); // Represent Mature as T
         counter = 0; // Counter is set to 0
+        this.addCapability(State.MATURE);
     }
 
     /**
@@ -29,7 +30,7 @@ public class Mature extends Tree {
 
         if(counter%5 == 0 && !location.containsAnActor()){ //Every 5 turns and no actor
             for(int i = 0; i < location.getExits().toArray().length;i++){ //Iterates over possible exits
-                if(location.getExits().get(i).getDestination().getGround().hasCapability(Dirt.State.FERTILE)){ //checks if location is fertile
+                if(location.getExits().get(i).getDestination().getGround().hasCapability(State.FERTILE)){ //checks if location is fertile
                     location.getExits().get(i).getDestination().setGround(new Sprout()); //Grow new sprout if all conditions
                                                                                         //are met
                     break; // we only to spawn one sprout at a time every 5 times

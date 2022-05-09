@@ -6,10 +6,11 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Status;
 
-public class Wall extends Ground implements HighGround {
+public class Wall extends Ground{
 
 	public Wall() {
 		super('#');
+		this.addCapability(State.WALL);
 	}
 
 	/**

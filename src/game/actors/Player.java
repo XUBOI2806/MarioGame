@@ -14,7 +14,9 @@ import game.items.Coin;
 import game.items.PowerStar;
 import game.items.Wrench;
 import game.reset.Resettable;
+import game.actions.JumpAction;
 import game.wallet.WalletManager;
+
 
 /**
  * Class representing the Player.

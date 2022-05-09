@@ -8,9 +8,11 @@ public class Sprout extends Tree {
      */
     private int counter;
 
+
     public Sprout() {
         counter = 0;
         super.setDisplayChar('+'); //Represent sprout with a +
+        this.hasCapability(State.SPROUT);
     }
 
     /**

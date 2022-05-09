@@ -8,11 +8,17 @@ public class Sapling extends Tree {
      */
     private int counter;
 
+    public final int fallDamage = 20;
+
+    public final int successRate = 80;
+
+
     /**
      * Constructor
      */
     public Sapling() {
         super.setDisplayChar('t');
+        this.addCapability(State.SAPLING);
         counter = 0;
     }
 

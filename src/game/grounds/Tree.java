@@ -8,7 +8,9 @@ import game.reset.ResetManager;
 import game.reset.Resettable;
 import java.util.Random;
 
-public class Tree extends Ground implements Resettable, HighGround {
+
+public class Tree extends Ground implements Resettable{
+
     /**
      * Random number generator
      */
@@ -38,9 +40,9 @@ public class Tree extends Ground implements Resettable, HighGround {
             ResetManager.getInstance().cleanUp(this);
         }
 
-        if(location.getGround().hasCapability(Dirt.State.FERTILE) && !location.containsAnActor())
+        if(location.getGround().hasCapability(State.FERTILE) && !location.containsAnActor())
         {
-            int j = rand.nextInt(2);
+            int j = rand.nextInt(7);
             if(j == 1){
                 location.setGround(new Sprout());
             }
@@ -54,6 +56,7 @@ public class Tree extends Ground implements Resettable, HighGround {
     public void resetInstance() {
         this.addCapability(Status.RESET);
     }
+
 
     @Override
     public boolean canActorEnter(Actor actor) {
