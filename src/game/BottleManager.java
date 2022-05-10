@@ -49,7 +49,7 @@ public class BottleManager {
      */
     public void check(Actor actor){
         if (!this.waterStack.containsKey(actor)){
-            actor.hasCapability(Status.HASBOTTLE);
+            actor.hasCapability(Status.HAS_BOTTLE);
             this.waterStack.put(actor,new Stack<>());
         }
     }

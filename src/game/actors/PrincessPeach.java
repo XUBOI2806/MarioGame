@@ -21,7 +21,7 @@ public class PrincessPeach extends Actor{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
-        if(otherActor.hasCapability(Status.PEACH)){
+        if(otherActor.hasCapability(Status.HAS_PEACH_KEY)){
             actions.add(new SpeakAction(this));
         }
         return actions;
