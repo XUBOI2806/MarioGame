@@ -15,4 +15,5 @@ public enum Status {
     RESET, // use this status to tell what can be soft reset by the ResetManager
     FIRE, // use this status to tell if an actor can set ground on fire after attack
     FLY, // use this status to tell if an actor can fly over high grounds
+    PEACH, // use this status to tell if an actor has a PeachKey
 }

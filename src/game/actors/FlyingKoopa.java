@@ -8,4 +8,5 @@ public class FlyingKoopa extends Koopa{
         this.resetMaxHp(150);
         this.addCapability(Status.FLY);
     }
+
 }
