@@ -1,17 +1,21 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Location;
-import game.grounds.Fountains;
+import game.actions.FillBottleAction;
+import game.actors.Status;
+import game.grounds.Fountain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 
 /**
  * Class representing the item Bottle.
  */
-public class Bottle extends Item{
+public class Bottle extends Item implements ObtainAble{
 
     private final Stack <String> stack= new Stack<>();
 
@@ -21,19 +25,23 @@ public class Bottle extends Item{
      */
     public Bottle() {
         super("Bottle", 'B', Boolean.parseBoolean("False"));
+        this.addCapability(Status.HASBOTTLE);
     }
 
     /**
      *
      */
-    public void getWater(Actor actor, Fountains fountain) {
-        this.stack.push(fountain.getWater());
+    @Override
+    public List<Action> getAllowableActions() {
+        ArrayList<Action> actions = new ArrayList<>();
+        actions.add(new FillBottleAction());
     }
 
-    public void useBottle(Actor actor) {
-        String water = this.stack.pop();
-    }
 
+    @Override
+    public String obtainedBy(Actor actor) {
+        return actor + "obtained bottle";
+    }
 
 
 }

@@ -2,7 +2,7 @@ package game.grounds;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
-public class HealingFountain extends Fountains{
+public class HealingFountain extends Fountain {
     /**
      * Constructor.
      *
@@ -13,9 +13,9 @@ public class HealingFountain extends Fountains{
     }
 
     @Override
-    public String getWater() {
+    public void getWater() {
         super.getWater();
-        return "Healing Water";
+
     }
 
     @Override

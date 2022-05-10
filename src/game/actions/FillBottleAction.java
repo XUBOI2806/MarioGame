@@ -3,18 +3,24 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.MagicalWater;
+import edu.monash.fit2099.engine.positions.Ground;
+import game.grounds.Fountain;
+import game.items.Water;
 
 public class FillBottleAction extends Action {
-    private MagicalWater magicalWater;
+    private Water water;
+    private Fountain fountain;
 
-    public FillBottleAction(MagicalWater magicalWater) {
-        this.magicalWater = magicalWater;
+    public FillBottleAction(Fountain fountain) {
+        this.fountain = fountain;
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return magicalWater.fills(actor);
+        Ground ground = map.locationOf(actor).getGround();
+
+
+        return actor + " fills bottle with ";
     }
 
     @Override

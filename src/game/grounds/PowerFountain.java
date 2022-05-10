@@ -1,8 +1,12 @@
 package game.grounds;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.actors.Player;
+import game.items.Bottle;
 
-public class PowerFountain extends Fountains{
+public class PowerFountain extends Fountain {
+
+    Bottle bottle;
     /**
      * Constructor.
      *
@@ -12,15 +16,16 @@ public class PowerFountain extends Fountains{
     }
 
     @Override
-    public String getWater() {
+    public void getWater(Player player) {
+         = player.getBottle()
         super.getWater();
-        return "Power Water";
+
+
     }
 
     @Override
     public void buff(Actor actor) {
         super.buff(actor);
-        actor.getIntr
     }
 
 }
