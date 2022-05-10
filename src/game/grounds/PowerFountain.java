@@ -1,5 +1,7 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.actors.Actor;
+
 public class PowerFountain extends Fountains{
     /**
      * Constructor.
@@ -9,6 +11,16 @@ public class PowerFountain extends Fountains{
         super('H');
     }
 
-    
+    @Override
+    public String getWater() {
+        super.getWater();
+        return "Power Water";
+    }
+
+    @Override
+    public void buff(Actor actor) {
+        super.buff(actor);
+        actor.getIntr
+    }
 
 }

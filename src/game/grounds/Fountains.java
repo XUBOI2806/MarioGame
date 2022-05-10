@@ -1,8 +1,9 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 
-public class Fountains extends Ground {
+public abstract class Fountains extends Ground {
 
     /**
      * Constructor.
@@ -13,6 +14,10 @@ public class Fountains extends Ground {
         super(displayChar);
     }
 
+    public String getWater(){
+        return null;
+    }
 
-
+    public void buff(Actor actor) {
+    }
 }

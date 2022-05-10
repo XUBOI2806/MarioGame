@@ -1,11 +1,26 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.grounds.Fountains;
 
-public abstract class MagicalWater implements ConsumeAble{
+public class MagicalWater implements ConsumeAble{
+
+    private Bottle bottle;
+
+    public MagicalWater() {
+    }
+
+    public String fills(Actor actor) {
+        bottle.addWater(actor, this);
+        return actor + " fills ";
+    }
+
     @Override
     public String consumedBy(Actor actor) {
-        actor.heal(Utils.HEALTH_FOUNTAIN_WATER_HP);
         return actor + " drinks ";
+    }
+
+    public String capability(Fountains fountain) {
+        fountain.
     }
 }
