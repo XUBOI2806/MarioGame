@@ -39,7 +39,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     @Override
     public String consumedBy(Actor actor) {
         actor.heal(Utils.POWER_STAR_HP_INCREASE);
-        actor.addCapability(Status.INVINCIBLE);
+        this.addCapability(Status.INVINCIBLE);
         this.removeAction(consume);
         this.togglePortability();
         return actor + " ate the power star";
@@ -64,7 +64,6 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
 
         if(turns_left == 0){
             actor.removeItemFromInventory(this);
-            actor.removeCapability(Status.INVINCIBLE);
         }
 
     }
@@ -96,4 +95,5 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         return super.toString();
     }
 }
+
 
