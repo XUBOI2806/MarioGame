@@ -14,5 +14,6 @@ public enum Status {
     FLOOR, // use this status to tell that current instance can walk on floors
     RESET, // use this status to tell what can be soft reset by the ResetManager
     FIRE, // use this status to tell if an actor can set ground on fire after attack
-    FLY, HASBOTTLE, // use this status to tell if an actor can fly over high grounds
+    FLY, // use this status to tell if an actor can fly over high grounds
+    PEACH, // use this status to tell if an actor has a PeachKey
 }

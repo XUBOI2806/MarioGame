@@ -6,12 +6,14 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
+import game.grounds.BowserFireGround;
 import game.items.PeachKey;
 import game.items.SuperMushroom;
 import game.reset.ResetManager;
@@ -29,6 +31,7 @@ public class Bowser extends Actor implements Resettable {
         super("Bowser",'B',500);
         this.addCapability(Status.FIRE);
         this.addItemToInventory(new PeachKey());
+        registerInstance();
     }
 
     @Override
@@ -37,6 +40,8 @@ public class Bowser extends Actor implements Resettable {
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this,direction));
+            Ground previousGround = map.locationOf(otherActor).getGround();
+            map.locationOf(otherActor).setGround(new BowserFireGround(previousGround));
             if(!behaviours.containsKey(8) && !behaviours.containsKey(9)) {
                 this.behaviours.put(8, new AttackBehaviour(otherActor));
                 this.behaviours.put(9, new FollowBehaviour(otherActor));
@@ -72,12 +77,8 @@ public class Bowser extends Actor implements Resettable {
 
     // Reset is TODO
     @Override
-    public void resetInstance() {
-
+    public void resetInstance(){
+        this.addCapability(Status.RESET);
     }
 
-    @Override
-    public void registerInstance() {
-        Resettable.super.registerInstance();
-    }
 }

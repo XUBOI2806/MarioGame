@@ -9,7 +9,7 @@ import game.items.Purchasable;
 /**
  * Action to allow trading
  */
-public class TradeAction extends Action {
+public class    TradeAction extends Action {
 
     /**
      * The item that will be purchased
