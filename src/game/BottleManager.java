@@ -85,10 +85,10 @@ public class BottleManager {
      */
     public Water useWater(Actor actor) {
         this.check(actor);
-        Stack waterStack = this.waterStack.get(actor);
+        Stack<Water> waterStack = this.waterStack.get(actor);
         Water water = null;
         if (!waterStack.isEmpty()) {
-            water = (Water) waterStack.pop();
+            water = waterStack.pop();
             this.waterStack.put(actor, waterStack);
         }
         return water;

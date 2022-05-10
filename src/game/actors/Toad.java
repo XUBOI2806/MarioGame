@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * Class representing Toad.
  */
-public class Toad extends Actor {
+public class Toad extends Actor implements Speakable{
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
@@ -72,6 +72,18 @@ public class Toad extends Actor {
         list.add(new SpeakAction(this));
         return list;
     }
+
+    /**
+     * Returns a random statement that the target will return
+     * depending on the actor's conditions
+     *
+     * @param actor the Actor to talk
+     */
+
+    @Override
+    public String spokenBy(Actor actor) {}
+
 }
+
 
 
