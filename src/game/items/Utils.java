@@ -15,6 +15,8 @@ public class Utils {
     public static final int INVICIBLE_TURNS_LEFT = 11; // use this util for the amount of turns until power star runs out
                                                         //(an addition of one is added  to make up for the iterated turn
                                                         //from the player consumes the power star)
-    public static final int FIRE_DAMAGE = 15; // use this util for implementing the Fire Ground damage
-    public static final int BOWSER_FIRE_DAMAGE = 20; // use this util for implementing the Fire Ground damage made by Bowser
+    public static final int LAVA_DAMAGE = 15; // use this util for implementing the Fire Ground damage
+    public static final int FIRE_DAMAGE = 20; // use this util for implementing the Fire Ground damage made by Bowser
+    public static final int FIRE_TURNS_LEFT = 20; // use this util for implementing the turns left until fire flower runs out
+
 }
