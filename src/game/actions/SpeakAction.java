@@ -3,11 +3,14 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.Monologue;
+import game.actors.Speakable;
 import game.actors.Status;
+import java.util.Random;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 /**
  * Action to allow speaking
@@ -17,20 +20,22 @@ public class SpeakAction extends Action {
     /**
      * The Actor that will talk
      */
-    protected Actor target;
+    protected Speakable speaker;
 
     /**
      * Random number generator
      */
     protected Random rand = new Random();
 
+    protected Monologue monologue;
+
     /**
      * Constructor.
      *
-     * @param target The Actor to talk
+     * @param speaker The Actor to talk
      */
-    public SpeakAction(Actor target) {
-        this.target = target;
+    public SpeakAction(Speakable speaker) {
+        this.speaker = speaker;
     }
 
     /**
@@ -43,20 +48,15 @@ public class SpeakAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        String statement;
-        statement = getStatement(actor);
-        return "Toad: \"" + statement + "\"";
-    }
+        List<String> list = speaker.sentences();
 
-    /**
-     * Returns a random statement that the target will return
-     * depending on the actor's conditions
-     *
-     * @param actor the Actor to talk
-     */
-    public String getStatement(Actor actor, ArrayList<String> monologues){
-        int i = rand.nextInt(monologues.size());
-        return monologues.get(i);
+        int i = rand.nextInt(list.size());
+
+        String statement = list.get(i);
+
+        if Monologue
+
+        return speaker + ": \"" + statement + "\"";
     }
 
     /**
@@ -68,6 +68,6 @@ public class SpeakAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " talks with " + target;
+        return actor + " talks with " + speaker;
     }
 }

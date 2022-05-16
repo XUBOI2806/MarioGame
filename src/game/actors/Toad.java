@@ -15,7 +15,9 @@ import game.items.SuperMushroom;
 import game.items.Utils;
 import game.items.Wrench;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -81,7 +83,21 @@ public class Toad extends Actor implements Speakable{
      */
 
     @Override
-    public String spokenBy(Actor actor) {}
+    public String spokenBy(Actor actor) {
+        if (Monologue.check(actor) == true){
+            return
+        }
+    }
+
+    @Override
+    public List sentences() {
+        ArrayList<String> sentenceList = new ArrayList<>();
+        sentenceList.add("You might need a wrench to smash Koopa's hard shells.");
+        sentenceList.add("You better get back to finding the Power Stars.");
+        sentenceList.add("The Princess is depending on you! You are our only hope.");
+        sentenceList.add("Being imprisoned in these walls can drive a fungus crazy :(");
+        return sentenceList;
+    }
 
 }
 
