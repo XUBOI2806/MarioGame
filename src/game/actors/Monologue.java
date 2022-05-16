@@ -2,30 +2,43 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 public class Monologue {
-
     private Actor actor;
-
-
 
     public Monologue(Actor actor) {
         this.actor = actor;
     }
 
-    /**
-     * Returns a random statement that the target will return
-     * depending on the actor's conditions
-     *
-     * @param speaker the Actor to talk
-     */
-    public String getStatement(Speakable speaker) {
+    public void getStatement() {
 
-        return v;
+
     }
+
+
+
+            if (actor.hasCapability(Status.WRENCH)){
+                statement = this.spokenBy(actor);
+            }
+            else{
+                statement = "You might need a wrench to smash Koopa's hard shells.";
+            }
+            break;
+        case 1:
+            if (actor.hasCapability(Status.INVINCIBLE)){
+                statement = this.spokenBy(actor);
+            }
+            else{
+                statement ="You better get back to finding the Power Stars.";
+            }
+            break;
+        case 2:
+            statement = "The Princess is depending on you! You are our only hope.";
+            break;
+        case 3:
+            statement = "Being imprisoned in these walls can drive a fungus crazy :(";
+            break;
+    }
+            return statement;
+}
 
 }
