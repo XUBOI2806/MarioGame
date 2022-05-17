@@ -10,8 +10,9 @@ public class Water{
     public Water() {
     }
 
-    public String addBuff(Fountain fountain) {
-        fountain.buff();
+    public String addBuff(Actor actor, Fountain fountain) {
+        fountain.buff(actor);
+        return null;
     }
 }
 

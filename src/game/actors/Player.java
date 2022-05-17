@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.wallet.WalletManager;
 import game.actions.AttackAction;
 import game.actions.ResetAction;
@@ -19,7 +20,7 @@ import game.wallet.WalletManager;
 /**
  * Class representing the Player.
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Actor implements Resettable, Drinker {
 
 	private final Menu menu = new Menu();
 	private GameMap map;
@@ -84,5 +85,11 @@ public class Player extends Actor implements Resettable {
 		this.resetMaxHp(this.getMaxHp());
 		this.removeCapability(Status.TALL);
 		this.removeCapability(Status.INVINCIBLE);
+	}
+
+	@Override
+	public void increaseAttack(int attack) {
+		int damage = this.getIntrinsicWeapon().damage();
+
 	}
 }

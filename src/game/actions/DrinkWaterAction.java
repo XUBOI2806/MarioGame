@@ -19,12 +19,12 @@ public class DrinkWaterAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-
-        water.buff(actor);
+        fountain.buff(actor);
+        return this.menuDescription(actor);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+        return actor + fountain.getDescription();
     }
 }

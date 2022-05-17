@@ -1,6 +1,7 @@
 package game.grounds;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.actors.Drinker;
 import game.actors.Player;
 import game.items.Bottle;
 
@@ -25,7 +26,12 @@ public class PowerFountain extends Fountain {
 
     @Override
     public void buff(Actor actor) {
-        super.buff(actor);
-    }
 
+
+        }
+
+    @Override
+    public String getDescription() {
+        return "drinks water to power up damage by 50";
+    }
 }

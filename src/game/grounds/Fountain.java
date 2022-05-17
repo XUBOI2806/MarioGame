@@ -20,4 +20,7 @@ public abstract class Fountain extends Ground {
     public void buff(Actor actor) {
 
     }
+
+
+    public abstract String getDescription();
 }

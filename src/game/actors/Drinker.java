@@ -5,6 +5,5 @@ import game.items.Water;
 
 public interface Drinker {
 
-    String consumedBy(Actor actor);
-
+    void increaseAttack(int attack);
 }

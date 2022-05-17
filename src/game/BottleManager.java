@@ -21,13 +21,13 @@ public class BottleManager {
     /**
      * A HashMap of the actor and it's respective balance as an integer
      */
-    private Map<Actor, Stack<Water>> waterStack;
+    private Map<Actor, Stack<Water>> waterStackMap;
 
     /**
      * Constructor
      */
     private BottleManager() {
-        this.waterStack = new HashMap<>();
+        this.waterStackMap = new HashMap<>();
     }
 
     /**
@@ -48,9 +48,9 @@ public class BottleManager {
     * @param actor The balance of the Actor
      */
     public void check(Actor actor){
-        if (!this.waterStack.containsKey(actor)){
+        if (!this.waterStackMap.containsKey(actor)){
             actor.hasCapability(Status.HAS_BOTTLE);
-            this.waterStack.put(actor,new Stack<>());
+            this.waterStackMap.put(actor,new Stack<>());
         }
     }
 
@@ -62,9 +62,9 @@ public class BottleManager {
      */
     public void addWater(Actor actor, Water water){
         this.check(actor);
-        Stack waterStack = this.waterStack.get(actor);
+        Stack waterStack = this.waterStackMap.get(actor);
         waterStack.push(water);
-        this.waterStack.put(actor, waterStack);
+        this.waterStackMap.put(actor, waterStack);
     }
 
     /**
@@ -74,7 +74,7 @@ public class BottleManager {
      */
     public Stack getWaterStack(Actor actor) {
         this.check(actor);
-        return this.waterStack.get(actor);
+        return this.waterStackMap.get(actor);
     }
 
     /**
@@ -85,11 +85,11 @@ public class BottleManager {
      */
     public Water useWater(Actor actor) {
         this.check(actor);
-        Stack<Water> waterStack = this.waterStack.get(actor);
+        Stack<Water> waterStack = this.waterStackMap.get(actor);
         Water water = null;
         if (!waterStack.isEmpty()) {
             water = waterStack.pop();
-            this.waterStack.put(actor, waterStack);
+            this.waterStackMap.put(actor, waterStack);
         }
         return water;
     }
