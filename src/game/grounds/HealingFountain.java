@@ -23,4 +23,9 @@ public class HealingFountain extends Fountain {
         super.buff(actor);
         actor.heal(50);
     }
+
+    @Override
+    public String getDescription() {
+        return null;
+    }
 }

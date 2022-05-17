@@ -53,6 +53,7 @@ public class Application {
         world.addPlayer(mario, gameMap.at(44, 10));
 
         gameMap.at(44, 11).addActor(new Toad());
+        gameMap.at(1,1).addActor(new PrincessPeach());
 
         gameMap.at(44,14).setGround(new HealingFountain());
 
