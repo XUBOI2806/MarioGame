@@ -11,10 +11,12 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class PiranhaPlant extends Actor {
+public class PiranhaPlant extends Actor implements Speakable {
 
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
@@ -48,6 +50,14 @@ public class PiranhaPlant extends Actor {
         }
 
         return new DoNothingAction();
+    }
+
+    @Override
+    public List<Monologue> sentences(Actor target) {
+        ArrayList<Monologue> sentenceList = new ArrayList<>();
+        sentenceList.add(new Monologue(this, "Slsstssthshs~! (Never gonna say goodbye~)"));
+        sentenceList.add(new Monologue(this, "Ohmnom nom nom nom."));
+        return sentenceList;
     }
 }
 

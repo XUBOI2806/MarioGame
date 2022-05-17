@@ -17,10 +17,12 @@ import game.items.PeachKey;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Bowser extends Actor implements Resettable {
+public class Bowser extends Actor implements Resettable, Speakable {
     // Attributes
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
@@ -77,6 +79,16 @@ public class Bowser extends Actor implements Resettable {
     @Override
     public void resetInstance(){
         this.addCapability(Status.RESET);
+    }
+
+    @Override
+    public List<Monologue> sentences(Actor target) {
+        ArrayList<Monologue> sentenceList = new ArrayList<>();
+        sentenceList.add(new Monologue(this, "What was that sound? Oh, just a fire."));
+        sentenceList.add(new Monologue(this, "Princess Peach! You are formally invited... to the creation of my new kingdom!"));
+        sentenceList.add(new Monologue(this, "Never gonna let you down!"));
+        sentenceList.add(new Monologue(this, "Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!"));
+        return sentenceList;
     }
 
 }

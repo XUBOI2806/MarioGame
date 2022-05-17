@@ -17,13 +17,15 @@ import game.items.SuperMushroom;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Koopa actor
  */
-public class Koopa extends Actor implements Resettable {
+public class Koopa extends Actor implements Resettable, Speakable{
     // Attributes
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
@@ -117,6 +119,14 @@ public class Koopa extends Actor implements Resettable {
     @Override
     public void resetInstance() {
         this.addCapability(Status.RESET);
+    }
+
+    @Override
+    public List<Monologue> sentences(Actor target) {
+        ArrayList<Monologue> sentenceList = new ArrayList<>();
+        sentenceList.add(new Monologue(this, "Never gonna make you cry!"));
+        sentenceList.add(new Monologue(this, "Koopi koopi koopii~!"));
+        return sentenceList;
     }
 
 }

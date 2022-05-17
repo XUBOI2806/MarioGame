@@ -36,7 +36,7 @@ public class PrincessPeach extends Actor implements Speakable{
         sentenceList.add(new Monologue(this, "Dear Mario, I'll be waiting for you..."));
         sentenceList.add(new Monologue(this, "Never gonna give you up!"));
         sentenceList.add(new Monologue(this, "Release me, or I will kick you!"));
-        sentenceList.add(new Monologue(this, "You saved me!", false));
+        sentenceList.add(new Monologue(this, "You saved me!", !target.hasCapability(Status.HAS_PEACH_KEY)));
         return sentenceList;
     }
 }

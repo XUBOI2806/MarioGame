@@ -16,14 +16,12 @@ import game.behaviours.Behaviour;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor implements Resettable {
+public class Goomba extends Actor implements Resettable, Speakable {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 	private final Random random = new Random();
 	/**
@@ -104,5 +102,14 @@ public class Goomba extends Actor implements Resettable {
 	@Override
 	public void resetInstance() {
 		this.addCapability(Status.RESET);
+	}
+
+	@Override
+	public List<Monologue> sentences(Actor target) {
+		ArrayList<Monologue> sentenceList = new ArrayList<>();
+		sentenceList.add(new Monologue(this, "Mugga mugga!"));
+		sentenceList.add(new Monologue(this, "Ugha ugha... (Never gonna run around and desert you...)"));
+		sentenceList.add(new Monologue(this, "Ooga-Chaka Ooga-Ooga!"));
+		return sentenceList;
 	}
 }
