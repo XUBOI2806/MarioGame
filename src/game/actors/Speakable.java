@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface Speakable {
 
-    String spokenBy(Actor actor);
-
-    List sentences();
+    List<Monologue> sentences(Actor target);
 
 }
 

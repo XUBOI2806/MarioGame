@@ -46,7 +46,7 @@ public class WalletManager {
      */
     public void check(Actor actor){
         if (!this.balances.containsKey(actor)){
-            this.balances.put(actor,0);
+            this.balances.put(actor,1000);
         }
     }
 

@@ -27,8 +27,6 @@ public class SpeakAction extends Action {
      */
     protected Random rand = new Random();
 
-    protected Monologue monologue;
-
     /**
      * Constructor.
      *
@@ -48,13 +46,15 @@ public class SpeakAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        List<String> list = speaker.sentences();
+        List<Monologue> list = speaker.sentences(actor);
 
         int i = rand.nextInt(list.size());
 
-        String statement = list.get(i);
+        while (!list.get(i).isCanSpeak()) {
+            i = rand.nextInt(list.size());
+        }
 
-        if Monologue
+        String statement = list.get(i).getSentence();
 
         return speaker + ": \"" + statement + "\"";
     }

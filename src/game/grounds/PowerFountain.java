@@ -16,13 +16,7 @@ public class PowerFountain extends Fountain {
         super('H');
     }
 
-    @Override
-    public void getWater(Player player) {
-         = player.getBottle()
-        super.getWater();
 
-
-    }
 
     @Override
     public void buff(Actor actor) {

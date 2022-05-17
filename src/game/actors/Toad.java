@@ -75,30 +75,15 @@ public class Toad extends Actor implements Speakable{
         return list;
     }
 
-    /**
-     * Returns a random statement that the target will return
-     * depending on the actor's conditions
-     *
-     * @param actor the Actor to talk
-     */
-
     @Override
-    public String spokenBy(Actor actor) {
-        if (Monologue.check(actor) == true){
-            return
-        }
-    }
-
-    @Override
-    public List sentences() {
-        ArrayList<String> sentenceList = new ArrayList<>();
-        sentenceList.add("You might need a wrench to smash Koopa's hard shells.");
-        sentenceList.add("You better get back to finding the Power Stars.");
-        sentenceList.add("The Princess is depending on you! You are our only hope.");
-        sentenceList.add("Being imprisoned in these walls can drive a fungus crazy :(");
+    public List sentences(Actor target) {
+        ArrayList<Monologue> sentenceList = new ArrayList<>();
+        sentenceList.add(new Monologue(this, "You might need a wrench to smash Koopa's hard shells.", !target.hasCapability(Status.WRENCH)));
+        sentenceList.add(new Monologue(this, "You better get back to finding the Power Stars.", !target.hasCapability(Status.INVINCIBLE)));
+        sentenceList.add(new Monologue(this, "The Princess is depending on you! You are our only hope."));
+        sentenceList.add(new Monologue(this, "Being imprisoned in these walls can drive a fungus crazy :("));
         return sentenceList;
     }
-
 }
 
 

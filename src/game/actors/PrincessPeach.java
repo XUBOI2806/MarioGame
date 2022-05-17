@@ -7,7 +7,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.SpeakAction;
 
-public class PrincessPeach extends Actor{
+import java.util.ArrayList;
+import java.util.List;
+
+public class PrincessPeach extends Actor implements Speakable{
 
     public PrincessPeach(){
         super("Princess Peach",'P', 1);
@@ -25,5 +28,15 @@ public class PrincessPeach extends Actor{
             actions.add(new SpeakAction(this));
         }
         return actions;
+    }
+
+    @Override
+    public List<Monologue> sentences(Actor target) {
+        ArrayList<Monologue> sentenceList = new ArrayList<>();
+        sentenceList.add(new Monologue(this, "Dear Mario, I'll be waiting for you..."));
+        sentenceList.add(new Monologue(this, "Never gonna give you up!"));
+        sentenceList.add(new Monologue(this, "Release me, or I will kick you!"));
+        sentenceList.add(new Monologue(this, "You saved me!", false));
+        return sentenceList;
     }
 }

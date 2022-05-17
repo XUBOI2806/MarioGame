@@ -42,7 +42,6 @@ public class ObtainAction extends Action{
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        this.item.add_item(actor);
         return actor + " successfully obtains " + item;
     }
 
