@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
+import game.actions.SpeakAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -75,6 +76,13 @@ public class Goomba extends Actor implements Resettable, Speakable {
 			if (action != null)
 				return action;
 		}
+		if (this.hasCapability(Status.EVEN)){
+			this.removeCapability(Status.EVEN);
+			this.addCapability(Status.ODD);
+			return new SpeakAction(this);
+		}
+		this.removeCapability(Status.ODD);
+		this.addCapability(Status.EVEN);
 
 
 		return new DoNothingAction();

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
+import game.actions.SpeakAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
@@ -48,8 +49,15 @@ public class PiranhaPlant extends Actor implements Speakable {
             if (action != null)
                 return action;
         }
-
+        if (this.hasCapability(Status.EVEN)){
+            this.removeCapability(Status.EVEN);
+            this.addCapability(Status.ODD);
+            return new SpeakAction(this);
+        }
+        this.removeCapability(Status.ODD);
+        this.addCapability(Status.EVEN);
         return new DoNothingAction();
+
     }
 
     @Override
