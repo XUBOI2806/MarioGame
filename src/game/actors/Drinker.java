@@ -1,9 +1,12 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import game.items.Water;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
 public interface Drinker {
 
-    void increaseAttack(int attack);
+    void fountainIncreaseAttack(int attack);
+
+    void fountainHeal(int health);
+
+
 }

@@ -49,15 +49,15 @@ public class Application {
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
 
-        Actor mario = new Player("Player", 'm', 100, gameMap);
-        world.addPlayer(mario, gameMap.at(44, 10));
+        Actor mario = new Player("Player", 'm', 1000, gameMap);
+        world.addPlayer(mario, gameMap.at(44, 12));
 
         gameMap.at(44, 11).addActor(new Toad());
         gameMap.at(1,1).addActor(new PrincessPeach());
 
-        gameMap.at(44,14).setGround(new HealingFountain());
+        gameMap.at(44,13).setGround(new HealingFountain());
 
-        gameMap.at(44,13).addActor(new FlyingKoopa());
+        gameMap.at(45,13).addActor(new Koopa());
         mario.addItemToInventory(new PowerStar());
         world.run();
 

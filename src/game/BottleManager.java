@@ -1,9 +1,12 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.actors.Drinker;
 import game.actors.Status;
+import game.grounds.Fountain;
 import game.items.Water;
 
+import javax.swing.plaf.ActionMapUIResource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -58,12 +61,11 @@ public class BottleManager {
      * Adds a value on top of the Actor's current balance
      *
      * @param actor The balance of the Actor
-     * @param value The value being added
      */
-    public void addWater(Actor actor, Water water){
+    public void addWater(Actor actor, Fountain fountain){
         this.check(actor);
         Stack waterStack = this.waterStackMap.get(actor);
-        waterStack.push(water);
+        waterStack.push(new Water(fountain));
         this.waterStackMap.put(actor, waterStack);
     }
 
@@ -72,16 +74,19 @@ public class BottleManager {
      *
      * @param actor The balance of the Actor
      */
-    public Stack getWaterStack(Actor actor) {
+    public Stack returnWaterStack(Actor actor) {
         this.check(actor);
-        return this.waterStackMap.get(actor);
+        Stack waterStack = new Stack<Water>();
+        for (Water water : this.waterStackMap.get(actor)){
+            waterStack.push(water.string());
+        }
+        return waterStack;
     }
 
     /**
      * Deducts a value on top of the Actor's current balance
      *
      * @param actor The balance of the Actor
-     * @param value The value being deducted
      */
     public Water useWater(Actor actor) {
         this.check(actor);
@@ -89,9 +94,16 @@ public class BottleManager {
         Water water = null;
         if (!waterStack.isEmpty()) {
             water = waterStack.pop();
+            water.useBuff((Drinker) actor);
             this.waterStackMap.put(actor, waterStack);
         }
         return water;
+    }
+
+    public int length(Actor actor){
+        this.check(actor);
+        Stack<Water> waterStack = this.waterStackMap.get(actor);
+        return waterStack.size();
     }
 }
 

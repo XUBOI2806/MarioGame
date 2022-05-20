@@ -4,18 +4,14 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.DrinkWaterAction;
+import game.items.*;
 import game.wallet.WalletManager;
-import game.actions.AttackAction;
 import game.actions.ResetAction;
-import game.items.Coin;
-import game.items.PowerStar;
-import game.items.Wrench;
 import game.reset.Resettable;
-import game.wallet.WalletManager;
 
 /**
  * Class representing the Player.
@@ -38,6 +34,7 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
 		this.addCapability(Status.RESET);
+		this.addItemToInventory(new Bottle());
 		this.map = map;
 		registerInstance();
 	}
@@ -57,6 +54,9 @@ public class Player extends Actor implements Resettable, Drinker {
 			return lastAction.getNextAction();
 		if (this.hasCapability(Status.RESET)) {
 			actions.add(new ResetAction());
+		}
+		if (this.hasCapability(Status.HAS_BOTTLE)){
+			actions.add(new DrinkWaterAction());
 		}
 
 		// return/print the console menu
@@ -88,8 +88,14 @@ public class Player extends Actor implements Resettable, Drinker {
 	}
 
 	@Override
-	public void increaseAttack(int attack) {
+	public void fountainIncreaseAttack(int attack) {
 		int damage = this.getIntrinsicWeapon().damage();
+		damage += attack;
+	}
 
+
+	@Override
+	public void fountainHeal(int health) {
+		this.heal(health);
 	}
 }
