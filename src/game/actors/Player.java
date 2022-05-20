@@ -25,6 +25,7 @@ public class Player extends Actor implements Resettable, Drinker {
 	private final Menu menu = new Menu();
 	private GameMap map;
 	private WalletManager walletManager;
+	private int damage;
 
 	/**
 	 * Constructor.
@@ -89,7 +90,11 @@ public class Player extends Actor implements Resettable, Drinker {
 
 	@Override
 	public void increaseAttack(int attack) {
-		int damage = this.getIntrinsicWeapon().damage();
+		 this.damage = this.getIntrinsicWeapon().damage() + attack;
+	}
 
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(this.damage, "punch");
 	}
 }

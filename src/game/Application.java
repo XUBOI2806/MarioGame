@@ -49,7 +49,7 @@ public class Application {
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
 
-        Actor mario = new Player("Player", 'm', 100, gameMap);
+        Actor mario = new Player("Player", 'm', 10000, gameMap);
         world.addPlayer(mario, gameMap.at(44, 10));
 
         gameMap.at(44, 11).addActor(new Toad());
@@ -58,7 +58,9 @@ public class Application {
         gameMap.at(44,14).setGround(new HealingFountain());
 
         gameMap.at(44,13).addActor(new FlyingKoopa());
-        mario.addItemToInventory(new PowerStar());
+
+        gameMap.at(44,5).addActor(new Bowser());
+
         world.run();
 
     }

@@ -41,8 +41,6 @@ public class Bowser extends Actor implements Resettable, Speakable {
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this,direction));
-            Ground previousGround = map.locationOf(otherActor).getGround();
-            map.locationOf(otherActor).setGround(new FireGround(previousGround));
             if(!behaviours.containsKey(8) && !behaviours.containsKey(9)) {
                 this.behaviours.put(8, new AttackBehaviour(otherActor));
                 this.behaviours.put(9, new FollowBehaviour(otherActor));
@@ -79,7 +77,6 @@ public class Bowser extends Actor implements Resettable, Speakable {
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(80,"punch");
     }
-
 
 
     // Reset is TODO
