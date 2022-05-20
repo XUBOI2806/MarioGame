@@ -21,6 +21,7 @@ public class Player extends Actor implements Resettable, Drinker {
 	private final Menu menu = new Menu();
 	private GameMap map;
 	private WalletManager walletManager;
+	private int damage;
 
 	/**
 	 * Constructor.
@@ -35,6 +36,7 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.addCapability(Status.FLOOR);
 		this.addCapability(Status.RESET);
 		this.addItemToInventory(new Bottle());
+		this.damage = 5; // initial base damage
 		this.map = map;
 		registerInstance();
 	}
@@ -87,16 +89,13 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.removeCapability(Status.INVINCIBLE);
 	}
 
-	public IntrinsicWeapon fountainIncreaseAttack() {
-		int damage = this.getIntrinsicWeapon().damage();
-		String verb = this.getIntrinsicWeapon().verb();
-		damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
-		return new IntrinsicWeapon(damage, verb);
+	public void fountainIncreaseAttack() {
+		this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
 	}
 
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return fountainIncreaseAttack();
+		return new IntrinsicWeapon(this.damage, "punches");
 	}
 
 	@Override
