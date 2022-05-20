@@ -1,7 +1,11 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actions.FillBottleAction;
+import game.actors.Drinker;
 
 public abstract class Fountain extends Ground {
 
@@ -14,13 +18,19 @@ public abstract class Fountain extends Ground {
         super(displayChar);
     }
 
-    public void getWater(){
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        if(location.containsAnActor()){
+            return new ActionList(new FillBottleAction(this));
+        }
+        return super.allowableActions(actor, location, direction);
     }
 
-    public void buff(Actor actor) {
-
+    public void getWater(Actor actor){
     }
 
+    public void buff(Drinker actor) {
+    }
 
-    public abstract String getDescription();
+    public abstract String getWaterDescription();
 }

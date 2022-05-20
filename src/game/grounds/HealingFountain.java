@@ -1,8 +1,15 @@
 package game.grounds;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.BottleManager;
+import game.actors.Drinker;
+import game.items.Utils;
+import game.items.Water;
 
 public class HealingFountain extends Fountain {
+
+    private Water water;
+
     /**
      * Constructor.
      *
@@ -10,22 +17,22 @@ public class HealingFountain extends Fountain {
 
     public HealingFountain() {
         super('H');
+        this.water = new Water(this);
     }
 
     @Override
-    public void getWater() {
-        super.getWater();
-
+    public void getWater(Actor actor) {
+        BottleManager.getInstance().addWater(actor, this);
     }
 
     @Override
-    public void buff(Actor actor) {
+    public void buff(Drinker actor) {
         super.buff(actor);
-        actor.heal(50);
+        actor.fountainHeal(Utils.HEALTH_FOUNTAIN_WATER_HP);
     }
 
     @Override
-    public String getDescription() {
-        return null;
+    public String getWaterDescription() {
+        return "Healing Water";
     }
 }

@@ -20,7 +20,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         super("Power Star", '*', Boolean.parseBoolean("True"));
         this.consume = new ConsumeAction(this);
         this.addAction(consume);
-        this.turns_left = Utils.INVICIBLE_TURNS_LEFT;
+        this.turns_left = Utils.INVINCIBLE_TURNS_LEFT;
     }
 
     /**

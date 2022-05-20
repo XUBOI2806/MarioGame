@@ -32,7 +32,6 @@ public class Toad extends Actor implements Speakable{
      */
     public Toad() {
         super("Toad", 'O', 0);
-        this.behaviours.put(10, new WanderBehaviour());
         this.addItemToInventory(new PowerStar());
         this.addItemToInventory(new SuperMushroom());
         this.addItemToInventory(new Wrench());
