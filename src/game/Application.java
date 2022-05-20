@@ -55,7 +55,7 @@ public class Application {
         gameMap.at(44, 11).addActor(new Toad());
         gameMap.at(1,1).addActor(new PrincessPeach());
 
-        gameMap.at(44,13).setGround(new HealingFountain());
+        gameMap.at(44,13).setGround(new PowerFountain());
 
         gameMap.at(45,13).addActor(new Koopa());
         mario.addItemToInventory(new PowerStar());

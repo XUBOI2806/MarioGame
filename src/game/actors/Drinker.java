@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
 public interface Drinker {
 
-    void fountainIncreaseAttack(int attack);
+    IntrinsicWeapon fountainIncreaseAttack();
 
     void fountainHeal(int health);
 

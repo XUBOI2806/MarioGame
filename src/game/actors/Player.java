@@ -87,12 +87,17 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.removeCapability(Status.INVINCIBLE);
 	}
 
-	@Override
-	public void fountainIncreaseAttack(int attack) {
+	public IntrinsicWeapon fountainIncreaseAttack() {
 		int damage = this.getIntrinsicWeapon().damage();
-		damage += attack;
+		String verb = this.getIntrinsicWeapon().verb();
+		damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
+		return new IntrinsicWeapon(damage, verb);
 	}
 
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return fountainIncreaseAttack();
+	}
 
 	@Override
 	public void fountainHeal(int health) {
