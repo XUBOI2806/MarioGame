@@ -22,6 +22,7 @@ public abstract class Fountain extends Ground {
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         if(location.containsAnActor()){
             return new ActionList(new FillBottleAction(this));
+
         }
         return super.allowableActions(actor, location, direction);
     }

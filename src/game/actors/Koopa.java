@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
+import game.actions.DrinkWaterFromFountainAction;
 import game.actions.RemoveDormantActorAction;
 import game.actions.SpeakAction;
 import game.behaviours.AttackBehaviour;
@@ -15,6 +16,7 @@ import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.behaviours.Behaviour;
 import game.items.SuperMushroom;
+import game.items.Utils;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
@@ -26,7 +28,7 @@ import java.util.Map;
 /**
  * Koopa actor
  */
-public class Koopa extends Actor implements Resettable, Speakable{
+public class Koopa extends Actor implements Resettable, Speakable, Drinker{
     // Attributes
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
@@ -40,6 +42,7 @@ public class Koopa extends Actor implements Resettable, Speakable{
         this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.DORMANT_ABLE);
         registerInstance();
+        int damage = Utils.KOOPA_BASE_DMG;
     }
 
 
@@ -59,11 +62,12 @@ public class Koopa extends Actor implements Resettable, Speakable{
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && this.isConscious()) {
             actions.add(new AttackAction(this, direction));
-            if(!behaviours.containsKey(8) && !behaviours.containsKey(9)){
-                this.behaviours.put(8, new AttackBehaviour(otherActor));
-                this.behaviours.put(9, new FollowBehaviour(otherActor));
+            if(!behaviours.containsKey(7) && !behaviours.containsKey(8)){
+                this.behaviours.put(7, new AttackBehaviour(otherActor));
+                this.behaviours.put(8, new FollowBehaviour(otherActor));
             }
-        } else if (otherActor.hasCapability(Status.WRENCH)) {
+        }
+        else if (otherActor.hasCapability(Status.WRENCH)) {
             actions.add(new RemoveDormantActorAction(this, direction));
         }
         return actions;
@@ -116,10 +120,6 @@ public class Koopa extends Actor implements Resettable, Speakable{
         return super.getDisplayChar();
     }
 
-    @Override
-    protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(30, "punches");
-    }
 
     /**
      * Allows any classes that use this interface to reset abilities, attributes, and/or items.
@@ -137,4 +137,17 @@ public class Koopa extends Actor implements Resettable, Speakable{
         return sentenceList;
     }
 
+    @Override
+    public void fountainIncreaseAttack() {
+    }
+
+    @Override
+    public void fountainHeal(int health) {
+        this.heal(health);
+    }
+
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(damage,"punches");
+    }
 }

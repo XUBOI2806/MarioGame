@@ -6,10 +6,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.BottleManager;
 import game.items.Water;
 
-public class DrinkWaterAction extends Action {
+public class DrinkWaterFromBottleAction extends Action {
 
 
-    public DrinkWaterAction() {
+    public DrinkWaterFromBottleAction() {
     }
 
     @Override

@@ -21,4 +21,5 @@ public class Utils {
 
     public static final int POWER_FOUNTAIN_ATTACK_INCREASE = 15;
     public static final int BOTTLE_AMOUNT = 10;
+    public static final int KOOPA_BASE_DMG = 30;
 }
