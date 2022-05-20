@@ -24,6 +24,6 @@ public class DrinkWaterFromFountainAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " consumes" + fountain.getWaterDescription();
+        return actor + " consumes " + fountain.getWaterDescription();
     }
 }

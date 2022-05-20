@@ -69,10 +69,6 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         else if (otherActor.hasCapability(Status.WRENCH)) {
             actions.add(new RemoveDormantActorAction(this, direction));
         }
-        if (map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
-            map.removeActor(this);
-            this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
-        }
         return actions;
     }
 
@@ -90,6 +86,10 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
             this.behaviours.clear();
             map.removeActor(this);
             ResetManager.getInstance().cleanUp(this);
+        }
+
+        if (map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
+            this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
         }
 
         if (!this.hasCapability(Status.DORMANT)) {
