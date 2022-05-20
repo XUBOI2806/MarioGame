@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.DrinkWaterAction;
+import game.actions.DrinkWaterFromBottleAction;
 import game.items.*;
 import game.wallet.WalletManager;
 import game.actions.ResetAction;
@@ -58,7 +58,7 @@ public class Player extends Actor implements Resettable, Drinker {
 			actions.add(new ResetAction());
 		}
 		if (this.hasCapability(Status.HAS_BOTTLE)){
-			actions.add(new DrinkWaterAction());
+			actions.add(new DrinkWaterFromBottleAction());
 		}
 
 		// return/print the console menu

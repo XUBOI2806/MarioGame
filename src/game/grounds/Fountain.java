@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.FillBottleAction;
 import game.actors.Drinker;
+import game.actors.Status;
 
 public abstract class Fountain extends Ground {
 
@@ -16,6 +17,7 @@ public abstract class Fountain extends Ground {
      */
     public Fountain(char displayChar) {
         super(displayChar);
+        this.addCapability(Status.FOUNTAIN);
     }
 
     @Override

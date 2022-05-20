@@ -11,10 +11,8 @@ import game.actions.AttackAction;
 import game.actions.DrinkWaterFromFountainAction;
 import game.actions.RemoveDormantActorAction;
 import game.actions.SpeakAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
-import game.behaviours.Behaviour;
+import game.behaviours.*;
+import game.grounds.Fountain;
 import game.items.SuperMushroom;
 import game.items.Utils;
 import game.reset.ResetManager;
@@ -32,6 +30,7 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
     // Attributes
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
+    private int damage;
 
     /**
      * Constructor for Koopa.
@@ -42,7 +41,7 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.DORMANT_ABLE);
         registerInstance();
-        int damage = Utils.KOOPA_BASE_DMG;
+        damage = Utils.KOOPA_BASE_DMG;
     }
 
 
@@ -69,6 +68,10 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         }
         else if (otherActor.hasCapability(Status.WRENCH)) {
             actions.add(new RemoveDormantActorAction(this, direction));
+        }
+        if (map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
+            map.removeActor(this);
+            this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
         }
         return actions;
     }
@@ -139,6 +142,7 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
 
     @Override
     public void fountainIncreaseAttack() {
+        this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
     }
 
     @Override
@@ -148,6 +152,6 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(damage,"punches");
+        return new IntrinsicWeapon(this.damage,"punches");
     }
 }
