@@ -21,7 +21,7 @@ public class PowerFountain extends Fountain {
     @Override
     public void buff(Drinker actor) {
         super.buff(actor);
-        actor.fountainIncreaseAttack(Utils.POWER_FOUNTAIN_ATTACK_INCREASE);
+        actor.fountainIncreaseAttack();
     }
 
     @Override
