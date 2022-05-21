@@ -52,8 +52,9 @@ public class BottleManager {
      */
     public void check(Actor actor){
         if (!this.waterStackMap.containsKey(actor)){
-            actor.hasCapability(Status.HAS_BOTTLE);
-            this.waterStackMap.put(actor,new Stack<>());
+            if (actor.hasCapability(Status.HAS_BOTTLE)){
+                this.waterStackMap.put(actor,new Stack<>());
+            }
         }
     }
 
