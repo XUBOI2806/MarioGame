@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
+import game.actions.DestructAction;
 import game.actions.SpeakAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
@@ -69,7 +70,10 @@ public class Goomba extends Actor implements Resettable, Speakable {
 			ResetManager.getInstance().cleanUp(this);
 		}
 
-		this.remove(map);	// 10% chance of removing the actor
+		// 10% chance of removing the actor
+		if(random.nextInt(9) < 1){
+			return new DestructAction();
+		}
 
 		for(Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
