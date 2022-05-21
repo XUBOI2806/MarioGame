@@ -34,7 +34,7 @@ public class PiranhaPlant extends Actor implements Speakable {
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this,direction));
-            if(!behaviours.containsKey(8) && !behaviours.containsKey(9)) {
+            if(!behaviours.containsKey(8)) {
                 this.behaviours.put(8, new AttackBehaviour(otherActor));
             }
         }
