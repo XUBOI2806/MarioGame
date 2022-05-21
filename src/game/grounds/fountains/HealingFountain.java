@@ -1,8 +1,7 @@
-package game.grounds;
+package game.grounds.fountains;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import game.BottleManager;
 import game.actors.Drinker;
+import game.grounds.fountains.Fountain;
 import game.items.Utils;
 import game.items.Water;
 

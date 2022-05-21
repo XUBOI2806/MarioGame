@@ -3,8 +3,8 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.BottleManager;
-import game.grounds.Fountain;
+import game.BottleManager.BottleManager;
+import game.grounds.fountains.Fountain;
 import game.items.Utils;
 
 public class FillBottleAction extends Action {

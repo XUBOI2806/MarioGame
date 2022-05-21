@@ -9,7 +9,5 @@ import java.util.List;
 public interface Speakable {
 
     List<Monologue> sentences(Actor target);
-
-    Action nextAction();
 }
 

@@ -1,12 +1,11 @@
-package game;
+package game.BottleManager;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.actors.Drinker;
 import game.actors.Status;
-import game.grounds.Fountain;
+import game.grounds.fountains.Fountain;
 import game.items.Water;
 
-import javax.swing.plaf.ActionMapUIResource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;

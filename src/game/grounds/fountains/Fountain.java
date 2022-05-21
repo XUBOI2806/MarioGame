@@ -1,10 +1,10 @@
-package game.grounds;
+package game.grounds.fountains;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.BottleManager;
+import game.BottleManager.BottleManager;
 import game.actions.FillBottleAction;
 import game.actors.Drinker;
 import game.actors.Status;
@@ -24,7 +24,7 @@ public abstract class Fountain extends Ground {
     public Fountain(char displayChar) {
         super(displayChar);
         this.addCapability(Status.FOUNTAIN);
-        this.capacity = Utils.POWER_FOUNTAIN_FULL_AMOUNT;
+        this.capacity = Utils.FOUNTAIN_FULL_AMOUNT;
         this.replenish_age = Utils.FOUNTAIN_REFILL_AGE;
     }
 
@@ -57,7 +57,7 @@ public abstract class Fountain extends Ground {
         super.tick(location);
         if (this.capacity == 0){
             if (this.replenish_age == 0){
-                this.capacity = Utils.POWER_FOUNTAIN_FULL_AMOUNT;
+                this.capacity = Utils.FOUNTAIN_FULL_AMOUNT;
                 this.replenish_age = Utils.FOUNTAIN_REFILL_AGE;
             }
             else{
@@ -67,6 +67,6 @@ public abstract class Fountain extends Ground {
     }
 
     public String getCapacity(){
-        return "(" + this.capacity + "/" + Utils.POWER_FOUNTAIN_FULL_AMOUNT + ")";
+        return "(" + this.capacity + "/" + Utils.FOUNTAIN_FULL_AMOUNT + ")";
     }
 }
