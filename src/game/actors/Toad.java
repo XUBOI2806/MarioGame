@@ -6,14 +6,11 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.ObtainAction;
 import game.actions.SpeakAction;
 import game.actions.TradeAction;
-import game.behaviours.WanderBehaviour;
 import game.behaviours.Behaviour;
-import game.items.PowerStar;
-import game.items.SuperMushroom;
-import game.items.Utils;
-import game.items.Wrench;
+import game.items.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +32,8 @@ public class Toad extends Actor implements Speakable{
         this.addItemToInventory(new PowerStar());
         this.addItemToInventory(new SuperMushroom());
         this.addItemToInventory(new Wrench());
+        this.addItemToInventory(new Bottle());
+        this.addCapability(Status.HAS_BOTTLE);
     }
 
     /**
@@ -53,13 +52,11 @@ public class Toad extends Actor implements Speakable{
             if (action != null)
                 return action;
         }
-        if (this.hasCapability(Status.EVEN)){
-            this.removeCapability(Status.EVEN);
-            this.addCapability(Status.ODD);
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
             return new SpeakAction(this);
         }
-        this.removeCapability(Status.ODD);
-        this.addCapability(Status.EVEN);
+        this.addCapability(Status.TALK);
         return new DoNothingAction();
     }
 
@@ -78,6 +75,9 @@ public class Toad extends Actor implements Speakable{
         list.add(new TradeAction(new SuperMushroom(), Utils.SUPER_MUSHROOM_PRICE));
         list.add(new TradeAction(new Wrench(), Utils.WRENCH_PRICE));
         list.add(new SpeakAction(this));
+        if (this.hasCapability(Status.HAS_BOTTLE)){
+            list.add(new ObtainAction(new Bottle(),this));
+        }
         return list;
     }
 
@@ -90,6 +90,12 @@ public class Toad extends Actor implements Speakable{
         sentenceList.add(new Monologue(this, "Being imprisoned in these walls can drive a fungus crazy :("));
         return sentenceList;
     }
+
+    @Override
+    public Action nextAction() {
+        return null;
+    }
+
 }
 
 
