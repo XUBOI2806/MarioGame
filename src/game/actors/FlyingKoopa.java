@@ -20,26 +20,16 @@ public class FlyingKoopa extends Koopa implements Speakable{
         this.addCapability(Status.FLY);
     }
 
-
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (this.hasCapability(Status.EVEN)){
-            this.removeCapability(Status.EVEN);
-            this.addCapability(Status.ODD);
-            return new SpeakAction(this);
-        }
-        this.removeCapability(Status.ODD);
-        this.addCapability(Status.EVEN);
-        return new DoNothingAction();
-    }
-
-
-
     @Override
     public List<Monologue> sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();
         sentenceList.add(new Monologue(this, "Pam pam pam!"));
         return sentenceList;
+    }
+
+    @Override
+    public Action nextAction() {
+        return null;
     }
 
 

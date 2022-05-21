@@ -6,14 +6,12 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.SpeakAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
-import game.grounds.FireGround;
 import game.items.PeachKey;
 import game.reset.ResetManager;
 import game.reset.Resettable;
@@ -56,20 +54,17 @@ public class Bowser extends Actor implements Resettable, Speakable {
             map.removeActor(this);
             ResetManager.getInstance().cleanUp(this);
         }
-
         for(Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;
         }
 
-        if (this.hasCapability(Status.EVEN)){
-            this.removeCapability(Status.EVEN);
-            this.addCapability(Status.ODD);
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
             return new SpeakAction(this);
         }
-        this.removeCapability(Status.ODD);
-        this.addCapability(Status.EVEN);
+        this.addCapability(Status.TALK);
         return new DoNothingAction();
     }
 
@@ -93,6 +88,11 @@ public class Bowser extends Actor implements Resettable, Speakable {
         sentenceList.add(new Monologue(this, "Never gonna let you down!"));
         sentenceList.add(new Monologue(this, "Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!"));
         return sentenceList;
+    }
+
+    @Override
+    public Action nextAction() {
+        return null;
     }
 
 }

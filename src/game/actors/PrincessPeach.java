@@ -15,18 +15,15 @@ public class PrincessPeach extends Actor implements Speakable{
 
     public PrincessPeach(){
         super("Princess Peach",'P', 1);
-        this.addCapability(Status.ODD);
     }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (this.hasCapability(Status.EVEN)){
-            this.removeCapability(Status.EVEN);
-            this.addCapability(Status.ODD);
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
             return new SpeakAction(this);
         }
-        this.removeCapability(Status.ODD);
-        this.addCapability(Status.EVEN);
+        this.addCapability(Status.TALK);
         return new DoNothingAction();
     }
 
@@ -46,6 +43,11 @@ public class PrincessPeach extends Actor implements Speakable{
         sentenceList.add(new Monologue(this, "Never gonna give you up!"));
         sentenceList.add(new Monologue(this, "Release me, or I will kick you!"));
         return sentenceList;
+    }
+
+    @Override
+    public Action nextAction() {
+        return null;
     }
 
 }

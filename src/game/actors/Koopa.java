@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
-import game.actions.DrinkWaterFromFountainAction;
 import game.actions.RemoveDormantActorAction;
 import game.actions.SpeakAction;
 import game.behaviours.*;
@@ -88,6 +87,15 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
             ResetManager.getInstance().cleanUp(this);
         }
 
+        if (lastAction.getNextAction() != null)
+            return lastAction.getNextAction();
+
+        for(Behaviour Behaviour : behaviours.values()) {
+            Action action = Behaviour.getAction(this, map);
+            if (action != null)
+                return action;
+        }
+
         if (map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
             this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
         }
@@ -100,13 +108,6 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
             }
         }
 
-        if (this.hasCapability(Status.EVEN)){
-            this.removeCapability(Status.EVEN);
-            this.addCapability(Status.ODD);
-            return new SpeakAction(this);
-        }
-        this.removeCapability(Status.ODD);
-        this.addCapability(Status.EVEN);
         return new DoNothingAction();
     }
 
@@ -138,6 +139,16 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         sentenceList.add(new Monologue(this, "Never gonna make you cry!"));
         sentenceList.add(new Monologue(this, "Koopi koopi koopii~!"));
         return sentenceList;
+    }
+
+    @Override
+    public Action nextAction() {
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
+            return new SpeakAction(this);
+        }
+        this.addCapability(Status.TALK);
+        return new DoNothingAction();
     }
 
     @Override

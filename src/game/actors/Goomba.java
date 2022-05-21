@@ -76,13 +76,11 @@ public class Goomba extends Actor implements Resettable, Speakable {
 			if (action != null)
 				return action;
 		}
-		if (this.hasCapability(Status.EVEN)){
-			this.removeCapability(Status.EVEN);
-			this.addCapability(Status.ODD);
+		if (this.hasCapability(Status.TALK)){
+			this.removeCapability(Status.TALK);
 			return new SpeakAction(this);
 		}
-		this.removeCapability(Status.ODD);
-		this.addCapability(Status.EVEN);
+		this.addCapability(Status.TALK);
 
 
 		return new DoNothingAction();
@@ -120,4 +118,10 @@ public class Goomba extends Actor implements Resettable, Speakable {
 		sentenceList.add(new Monologue(this, "Ooga-Chaka Ooga-Ooga!"));
 		return sentenceList;
 	}
+
+	@Override
+	public Action nextAction() {
+		return null;
+	}
+
 }
