@@ -70,4 +70,9 @@ public class SpeakAction extends Action {
     public String menuDescription(Actor actor) {
         return actor + " talks with " + speaker;
     }
+
+    @Override
+    public Action getNextAction() {
+        return super.getNextAction();
+    }
 }

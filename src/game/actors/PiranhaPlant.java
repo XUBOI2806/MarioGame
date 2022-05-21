@@ -10,7 +10,6 @@ import game.actions.AttackAction;
 import game.actions.SpeakAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,13 +48,11 @@ public class PiranhaPlant extends Actor implements Speakable {
             if (action != null)
                 return action;
         }
-        if (this.hasCapability(Status.EVEN)){
-            this.removeCapability(Status.EVEN);
-            this.addCapability(Status.ODD);
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
             return new SpeakAction(this);
         }
-        this.removeCapability(Status.ODD);
-        this.addCapability(Status.EVEN);
+        this.addCapability(Status.TALK);
         return new DoNothingAction();
 
     }
@@ -67,5 +64,11 @@ public class PiranhaPlant extends Actor implements Speakable {
         sentenceList.add(new Monologue(this, "Ohmnom nom nom nom."));
         return sentenceList;
     }
+
+    @Override
+    public Action nextAction() {
+        return null;
+    }
+
 }
 

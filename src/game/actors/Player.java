@@ -20,7 +20,6 @@ public class Player extends Actor implements Resettable, Drinker {
 
 	private final Menu menu = new Menu();
 	private GameMap map;
-	private WalletManager walletManager;
 	private int damage;
 
 	/**
@@ -35,7 +34,6 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
 		this.addCapability(Status.RESET);
-		this.addItemToInventory(new Bottle());
 		this.damage = 5; // initial base damage
 		this.map = map;
 		registerInstance();
