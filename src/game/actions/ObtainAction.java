@@ -3,9 +3,8 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.Status;
 import game.items.ObtainAble;
-import game.items.Purchasable;
-import game.wallet.WalletManager;
 
 public class ObtainAction extends Action{
 
@@ -14,20 +13,16 @@ public class ObtainAction extends Action{
      */
     ObtainAble item;
 
-    /**
-     * The price of the item that will be purchased
-     */
-    int price;
+    Actor target;
 
     /**
      * Constructor.
+     *  @param item The item to be bought
      *
-     * @param item The item to be bought
-     * @param price The price of the item to be bought
      */
-    public ObtainAction(ObtainAble item, int price) {
+    public ObtainAction(ObtainAble item, Actor target) {
         this.item = item;
-        this.price = price;
+        this.target = target;
     }
 
     /**
@@ -42,6 +37,7 @@ public class ObtainAction extends Action{
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        item.obtainedBy(actor, target);
         return actor + " successfully obtains " + item;
     }
 
