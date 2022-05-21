@@ -21,11 +21,6 @@ public class HealingFountain extends Fountain {
     }
 
     @Override
-    public void getWater(Actor actor) {
-        BottleManager.getInstance().addWater(actor, this);
-    }
-
-    @Override
     public void buff(Drinker actor) {
         super.buff(actor);
         actor.fountainHeal(Utils.HEALTH_FOUNTAIN_WATER_HP);
@@ -34,5 +29,10 @@ public class HealingFountain extends Fountain {
     @Override
     public String getWaterDescription() {
         return "Healing Water";
+    }
+
+    @Override
+    public String getFountainDescription(){
+        return "Healing Fountain";
     }
 }

@@ -25,12 +25,12 @@ public class PowerFountain extends Fountain {
     }
 
     @Override
-    public void getWater(Actor actor) {
-        BottleManager.getInstance().addWater(actor, this);
+    public String getWaterDescription() {
+        return "Power Water";
     }
 
     @Override
-    public String getWaterDescription() {
-        return "Power Water";
+    public String getFountainDescription(){
+        return "Power Fountain";
     }
 }
