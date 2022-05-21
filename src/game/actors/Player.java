@@ -34,7 +34,7 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
 		this.addCapability(Status.RESET);
-		this.damage = 5; // initial base damage
+		this.damage = Utils.PLAYER_BASE_DMG;
 		this.map = map;
 		registerInstance();
 	}
@@ -87,6 +87,7 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.removeCapability(Status.INVINCIBLE);
 	}
 
+	@Override
 	public void fountainIncreaseAttack() {
 		this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
 	}

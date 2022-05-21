@@ -11,10 +11,9 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.DestructAction;
 import game.actions.SpeakAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
-import game.behaviours.Behaviour;
+import game.behaviours.*;
+import game.grounds.fountains.Fountain;
+import game.items.Utils;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
@@ -23,9 +22,11 @@ import java.util.*;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor implements Resettable, Speakable {
+public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 	private final Random random = new Random();
+
+	private int damage;
 	/**
 	 * Constructor.
 	 */
@@ -33,6 +34,7 @@ public class Goomba extends Actor implements Resettable, Speakable {
 		super("Goomba", 'g', 20);
 		this.behaviours.put(10, new WanderBehaviour());
 		registerInstance();
+		this.damage = Utils.GOOMBA_BASE_DAMAGE;
 	}
 
 	/**
@@ -70,22 +72,27 @@ public class Goomba extends Actor implements Resettable, Speakable {
 			ResetManager.getInstance().cleanUp(this);
 		}
 
+		if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
+			this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
+		}
+
 		// 10% chance of removing the actor
 		if(random.nextInt(9) < 1){
 			return new DestructAction();
 		}
+
+		if (this.hasCapability(Status.TALK)){
+			this.removeCapability(Status.TALK);
+			String monologue = new SpeakAction(this).execute(this, map);
+			display.println(monologue);
+		}
+		this.addCapability(Status.TALK);
 
 		for(Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
 		}
-		if (this.hasCapability(Status.TALK)){
-			this.removeCapability(Status.TALK);
-			return new SpeakAction(this);
-		}
-		this.addCapability(Status.TALK);
-
 
 		return new DoNothingAction();
 	}
@@ -96,14 +103,7 @@ public class Goomba extends Actor implements Resettable, Speakable {
 	 */
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(10,"kicks");
-	}
-
-	private void remove(GameMap map){
-		if(random.nextInt(9) < 1){
-			this.behaviours.clear();
-			map.removeActor(this);
-		}
+		return new IntrinsicWeapon(this.damage,"kicks");
 	}
 
 	/**
@@ -124,8 +124,12 @@ public class Goomba extends Actor implements Resettable, Speakable {
 	}
 
 	@Override
-	public Action nextAction() {
-		return null;
+	public void fountainIncreaseAttack() {
+		this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
 	}
 
+	@Override
+	public void fountainHeal(int health) {
+		this.heal(health);
+	}
 }

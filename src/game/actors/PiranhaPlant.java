@@ -43,16 +43,20 @@ public class PiranhaPlant extends Actor implements Speakable {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
+            String monologue = new SpeakAction(this).execute(this, map);
+            display.println(monologue);
+        }
+        this.addCapability(Status.TALK);
+
         for (game.behaviours.Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;
         }
-        if (this.hasCapability(Status.TALK)){
-            this.removeCapability(Status.TALK);
-            return new SpeakAction(this);
-        }
-        this.addCapability(Status.TALK);
+
         return new DoNothingAction();
 
     }
@@ -63,11 +67,6 @@ public class PiranhaPlant extends Actor implements Speakable {
         sentenceList.add(new Monologue(this, "Slsstssthshs~! (Never gonna say goodbye~)"));
         sentenceList.add(new Monologue(this, "Ohmnom nom nom nom."));
         return sentenceList;
-    }
-
-    @Override
-    public Action nextAction() {
-        return null;
     }
 
 }

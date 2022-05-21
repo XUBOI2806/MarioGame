@@ -11,7 +11,7 @@ import game.actions.AttackAction;
 import game.actions.RemoveDormantActorAction;
 import game.actions.SpeakAction;
 import game.behaviours.*;
-import game.grounds.Fountain;
+import game.grounds.fountains.Fountain;
 import game.items.SuperMushroom;
 import game.items.Utils;
 import game.reset.ResetManager;
@@ -87,16 +87,16 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
             ResetManager.getInstance().cleanUp(this);
         }
 
+        if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
+            this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
+        }
+
         if (this.hasCapability(Status.TALK)){
             this.removeCapability(Status.TALK);
             String monologue = new SpeakAction(this).execute(this, map);
             display.println(monologue);
         }
         this.addCapability(Status.TALK);
-
-        if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
-            this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
-        }
 
         if (!this.hasCapability(Status.DORMANT)) {
             for (Behaviour Behaviour : behaviours.values()) {
@@ -137,16 +137,6 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         sentenceList.add(new Monologue(this, "Never gonna make you cry!"));
         sentenceList.add(new Monologue(this, "Koopi koopi koopii~!"));
         return sentenceList;
-    }
-
-    @Override
-    public Action nextAction() {
-        if (this.hasCapability(Status.TALK)){
-            this.removeCapability(Status.TALK);
-            return new SpeakAction(this);
-        }
-        this.addCapability(Status.TALK);
-        return new DoNothingAction();
     }
 
     @Override
