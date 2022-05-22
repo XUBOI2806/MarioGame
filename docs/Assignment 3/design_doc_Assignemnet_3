@@ -1,3 +1,17 @@
+#Req 1
+It is crucial that there is no actors other then players that can enter the Lava ground other then the player, we want
+to ensure this as we only want the player to take damage and not have damaged enemy from the lava as the game design is
+to maximise a fun playing opportunity meaning not killing enemies when they are almost dead.
+
+Warp pipe is to ensure that Piranha plant is spawned after one round to give players lee way on the first turn of not
+being attacked by a warp plant after 1 round, allows for Players to teleport on Warp pipe from the original game map
+onto a hard game map governed by burning grounds such as lava mentioned above, the severe reduction in the dimension of
+the game map is to raise the difficulty for players who want a challenge by having the players have more interactions with
+the enemies.
+
+Teleport action additionally allows for teleportation back to the previous warp pipe as there might be a desired location
+near the warp pipe, this option allows for instant kill on the piranha plant that is stationed on the warp pipe.
+
 ##Req 3
 ###Magical Fountain
 Magical Fountain will have child classes of Health Fountain and Power Fountain. Magical Fountain will also extend from
@@ -25,6 +39,11 @@ A drinker interface has been implemented so that people that drink from the foun
 from the fountain it came from. To prevent overlapping, a parameter will be added in the method for buffing so that if the
 buff value of the fountain changed, it can be changed immediately, instead of going through all actors that utilise the
 method, which adheres to the open-closed principle.
+
+#Req 4
+The fire flower allows for growth of fire flower through each stage of cycle, without the restriction of having only one
+per location. This means maximal of 2 fire flower per location and such that there always have to be a 50% chance of
+spawning so.
 
 
 ##Req 5
