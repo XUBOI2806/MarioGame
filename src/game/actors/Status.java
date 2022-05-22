@@ -17,4 +17,7 @@ public enum Status {
     FLY, // use this status to tell if an actor can fly over high grounds
     HAS_PEACH_KEY, // use this status to tell if an actor has a PeachKey
     HAS_BOTTLE, TALK, FOUNTAIN, // use this status to tell if an actor has a bottle or not
+    PLAYER, // use this status to determine whether the actor is a human
+    PIRANHAPLANT,// use this to determine whether the plant is a piranha plant
+    WARPPIPE
 }

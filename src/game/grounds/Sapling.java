@@ -7,12 +7,6 @@ public class Sapling extends Tree {
      * Counter to keep track of each turn
      */
     private int counter;
-
-    public final int fallDamage = 20;
-
-    public final int successRate = 80;
-
-
     /**
      * Constructor
      */
