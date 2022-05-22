@@ -8,12 +8,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Goomba;
-import game.actors.Koopa;
-import game.actors.Player;
-import game.actors.Toad;
+import game.actors.*;
 import game.grounds.*;
 import game.items.Coin;
+import game.items.PeachKey;
 import game.items.PowerStar;
 
 /**
@@ -63,8 +61,9 @@ public class Application {
 			world.addPlayer(mario, gameMap.at(44, 10));
 
 			gameMap.at(44, 11).addActor(new Toad());
-
+			gameMap.at(44,5).addActor(new PrincessPeach(world));
+			mario.addItemToInventory(new PowerStar());
+			mario.addItemToInventory(new PeachKey());
 			world.run();
-
 	}
 }

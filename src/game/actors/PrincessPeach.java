@@ -6,17 +6,23 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.World;
+import game.actions.EndGameAction;
 import game.actions.SpeakAction;
 import game.actors.monologue.Monologue;
 import game.actors.monologue.Speakable;
+import game.items.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PrincessPeach extends Actor implements Speakable {
 
-    public PrincessPeach(){
+    private World world;
+
+    public PrincessPeach(World world){
         super("Princess Peach",'P', 1);
+        this.world = world;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class PrincessPeach extends Actor implements Speakable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
         if(otherActor.hasCapability(Status.HAS_PEACH_KEY)){
-            actions.add(new SpeakAction(this));
+            actions.add(new EndGameAction(otherActor));
         }
         return actions;
     }
