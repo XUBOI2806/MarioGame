@@ -51,7 +51,9 @@ public class PiranhaPlant extends Actor implements Speakable {
             String monologue = new SpeakAction(this).execute(this, map);
             display.println(monologue);
         }
-        this.addCapability(Status.TALK);
+        else{
+            this.addCapability(Status.TALK);
+        }
 
         for (game.behaviours.Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);

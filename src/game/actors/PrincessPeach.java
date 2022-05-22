@@ -27,7 +27,9 @@ public class PrincessPeach extends Actor implements Speakable {
             String monologue = new SpeakAction(this).execute(this, map);
             display.println(monologue);
         }
-        this.addCapability(Status.TALK);
+        else{
+            this.addCapability(Status.TALK);
+        }
 
         return new DoNothingAction();
     }
