@@ -28,6 +28,7 @@ public class PiranhaPlant extends Actor implements Speakable {
      */
     public PiranhaPlant() {
         super("Piranha Plant",'Y',150);
+        this.addCapability(Status.PIRANHAPLANT);
     }
 
     @Override

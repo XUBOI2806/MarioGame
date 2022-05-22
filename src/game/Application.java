@@ -51,10 +51,23 @@ public class Application {
 				"......................................................#.........................",
 				".......................................................##.......................");
 
+		List<String> map1 = Arrays.asList(
+				"c.....L.............",
+				".................L..",
+				"....................",
+				"....................",
+				".....L..............",
+				"....................",
+				"...........L........",
+				".....L..............",
+				"....................",
+				"L..................."
+			);
+
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
-			GameMap gameMap1 = new GameMap(lavaGround, map);
+			GameMap gameMap1 = new GameMap(lavaGround, map1);
 			world.addGameMap(gameMap1);
 
 
