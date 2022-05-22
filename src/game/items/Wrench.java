@@ -13,16 +13,6 @@ public class Wrench extends WeaponItem implements Purchasable{
         this.addCapability(Status.WRENCH);
     }
 
-    public PickUpItemAction getPickUpAction(Actor actor) {
-        actor.addCapability(Status.WRENCH);
-        return super.getPickUpAction(actor);
-    }
-
-    public DropItemAction getDropAction(Actor actor) {
-        actor.removeCapability(Status.WRENCH);
-        return super.getDropAction(actor);
-    }
-
     @Override
     public void add_item(Actor actor) {
         actor.addItemToInventory(this);

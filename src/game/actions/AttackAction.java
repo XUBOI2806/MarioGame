@@ -7,8 +7,10 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actors.Status;
+import game.grounds.FireGround;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
@@ -74,6 +76,12 @@ public class AttackAction extends Action {
 		if(actor.hasCapability(Status.INVINCIBLE)){
 			damage = 10000; // if actor has consumed super star then actor can one hit kill
 			result = actor + " one hit kills " + target;
+		}
+
+		// If the attacker has a fire making status
+		if(actor.hasCapability(Status.FIRE)){
+			Ground previousGround = map.locationOf(target).getGround();
+			map.locationOf(target).setGround(new FireGround(previousGround));
 		}
 
 		target.hurt(damage);

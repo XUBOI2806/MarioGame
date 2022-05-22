@@ -3,7 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.ConsumeItemAction;
+import game.actions.ConsumeAction;
 import game.actors.Status;
 
 import java.util.ArrayList;
@@ -43,12 +43,15 @@ public class SuperMushroom extends Item implements Purchasable, ConsumeAble{
 
     /**
      * Allowable actions of super mushroom
-     * @return An ActionList of ConsumeItemAction
+     * @return An ActionList of ConsumeAction
      */
     @Override
     public List<Action> getAllowableActions() {
         ArrayList<Action> actions = new ArrayList<>();
-        actions.add(new ConsumeItemAction(this));
+        actions.add(new ConsumeAction(this));
         return actions;
     }
 }
+
+
+

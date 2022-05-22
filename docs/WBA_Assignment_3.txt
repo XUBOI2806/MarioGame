@@ -1,0 +1,25 @@
+Work Breakdown Agreement:
+
+REQ 1 & Half of 4 & Sequence Diagram:
+Samuel Rath
+
+REQ 3 & Half of 4 & Assisting Felix:
+Daniel Ding
+
+REQ 3 & 5:
+Felix Xu
+
+Finish Date:
+Sunday Night (around 9pm)
+
+Meeting on:
+Sunday Evening (around 8pm)
+
+Reviewing:
+Daniel Ding, Felix Xu
+
+
+WBA Acceptance:
+Daniel Ding: I accept this WBA
+Felix Xu: I accept this WBA
+Samuel Rath:

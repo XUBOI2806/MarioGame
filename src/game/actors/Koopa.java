@@ -9,24 +9,27 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.RemoveDormantActorAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
-import game.behaviours.Behaviour;
+import game.actions.SpeakAction;
+import game.behaviours.*;
+import game.grounds.Fountain;
 import game.items.SuperMushroom;
+import game.items.Utils;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Koopa actor
  */
-public class Koopa extends Actor implements Resettable {
+public class Koopa extends Actor implements Resettable, Speakable, Drinker{
     // Attributes
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
+    private int damage;
 
     /**
      * Constructor for Koopa.
@@ -37,6 +40,7 @@ public class Koopa extends Actor implements Resettable {
         this.addItemToInventory(new SuperMushroom());
         this.addCapability(Status.DORMANT_ABLE);
         registerInstance();
+        damage = Utils.KOOPA_BASE_DMG;
     }
 
 
@@ -56,11 +60,12 @@ public class Koopa extends Actor implements Resettable {
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && this.isConscious()) {
             actions.add(new AttackAction(this, direction));
-            if(!behaviours.containsKey(8) && !behaviours.containsKey(9)){
-                this.behaviours.put(8, new AttackBehaviour(otherActor));
-                this.behaviours.put(9, new FollowBehaviour(otherActor));
+            if(!behaviours.containsKey(7) && !behaviours.containsKey(8)){
+                this.behaviours.put(7, new AttackBehaviour(otherActor));
+                this.behaviours.put(8, new FollowBehaviour(otherActor));
             }
-        } else if (otherActor.hasCapability(Status.WRENCH)) {
+        }
+        else if (otherActor.hasCapability(Status.WRENCH)) {
             actions.add(new RemoveDormantActorAction(this, direction));
         }
         return actions;
@@ -80,6 +85,17 @@ public class Koopa extends Actor implements Resettable {
             this.behaviours.clear();
             map.removeActor(this);
             ResetManager.getInstance().cleanUp(this);
+        }
+
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
+            String monologue = new SpeakAction(this).execute(this, map);
+            display.println(monologue);
+        }
+        this.addCapability(Status.TALK);
+
+        if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
+            this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
         }
 
         if (!this.hasCapability(Status.DORMANT)) {
@@ -106,10 +122,6 @@ public class Koopa extends Actor implements Resettable {
         return super.getDisplayChar();
     }
 
-    @Override
-    protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(30, "punches");
-    }
 
     /**
      * Allows any classes that use this interface to reset abilities, attributes, and/or items.
@@ -119,4 +131,36 @@ public class Koopa extends Actor implements Resettable {
         this.addCapability(Status.RESET);
     }
 
+    @Override
+    public List<Monologue> sentences(Actor target) {
+        ArrayList<Monologue> sentenceList = new ArrayList<>();
+        sentenceList.add(new Monologue(this, "Never gonna make you cry!"));
+        sentenceList.add(new Monologue(this, "Koopi koopi koopii~!"));
+        return sentenceList;
+    }
+
+    @Override
+    public Action nextAction() {
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
+            return new SpeakAction(this);
+        }
+        this.addCapability(Status.TALK);
+        return new DoNothingAction();
+    }
+
+    @Override
+    public void fountainIncreaseAttack() {
+        this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
+    }
+
+    @Override
+    public void fountainHeal(int health) {
+        this.heal(health);
+    }
+
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(this.damage,"punches");
+    }
 }

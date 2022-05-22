@@ -1,21 +1,16 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.ConsumeItemAction;
+import game.actions.ConsumeAction;
 import game.actors.Status;
-import edu.monash.fit2099.engine.displays.Display;
 import game.grounds.Dirt;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PowerStar extends Item implements Purchasable, ConsumeAble {
     private int age = 0;
     private int turns_left;
-    private ConsumeItemAction consume;
+    private ConsumeAction consume;
     private boolean displayExpiry;
 
     /**
@@ -23,9 +18,9 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
      */
     public PowerStar() {
         super("Power Star", '*', Boolean.parseBoolean("True"));
-        this.consume = new ConsumeItemAction(this);
+        this.consume = new ConsumeAction(this);
         this.addAction(consume);
-        this.turns_left = Utils.INVICIBLE_TURNS_LEFT;
+        this.turns_left = Utils.INVINCIBLE_TURNS_LEFT;
     }
 
     /**
@@ -44,7 +39,7 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     @Override
     public String consumedBy(Actor actor) {
         actor.heal(Utils.POWER_STAR_HP_INCREASE);
-        actor.addCapability(Status.INVINCIBLE);
+        this.addCapability(Status.INVINCIBLE);
         this.removeAction(consume);
         this.togglePortability();
         return actor + " ate the power star";
@@ -61,10 +56,6 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         super.tick(currentLocation, actor);
         age++;
         if(actor.hasCapability(Status.INVINCIBLE)){
-            if(currentLocation.getGround().getDisplayChar() == '+' || currentLocation.getGround().getDisplayChar() == '#'){
-                currentLocation.setGround(new Dirt());
-                currentLocation.addItem(new Coin(Utils.DESTROYED_GROUND_VALUE));
-            }
             this.turns_left--;
         }
         if (age == Utils.POWER_STAR_EXPIRY_AGE & !actor.hasCapability(Status.INVINCIBLE)) {
@@ -73,7 +64,6 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
 
         if(turns_left == 0){
             actor.removeItemFromInventory(this);
-            actor.removeCapability(Status.INVINCIBLE);
         }
 
     }
@@ -105,4 +95,5 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
         return super.toString();
     }
 }
+
 

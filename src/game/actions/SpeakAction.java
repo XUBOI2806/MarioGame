@@ -3,9 +3,14 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.Monologue;
+import game.actors.Speakable;
 import game.actors.Status;
-
 import java.util.Random;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Action to allow speaking
@@ -15,7 +20,7 @@ public class SpeakAction extends Action {
     /**
      * The Actor that will talk
      */
-    protected Actor target;
+    protected Speakable speaker;
 
     /**
      * Random number generator
@@ -25,10 +30,10 @@ public class SpeakAction extends Action {
     /**
      * Constructor.
      *
-     * @param target The Actor to talk
+     * @param speaker The Actor to talk
      */
-    public SpeakAction(Actor target) {
-        this.target = target;
+    public SpeakAction(Speakable speaker) {
+        this.speaker = speaker;
     }
 
     /**
@@ -41,46 +46,17 @@ public class SpeakAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        String statement;
-        statement = getStatement(actor);
-        return "Toad: \"" + statement + "\"";
-    }
+        List<Monologue> list = speaker.sentences(actor);
 
-    /**
-     * Returns a random statement that the target will return
-     * depending on the actor's conditions
-     *
-     * @param actor the Actor to talk
-     */
-    public String getStatement(Actor actor){
-        int i = rand.nextInt(4);
-        i+=1;
-        String statement = "";
-        switch(i) {
-            case 1:
-                if (actor.hasCapability(Status.WRENCH)){
-                    statement = this.getStatement(actor);
-                }
-                else{
-                    statement = "You might need a wrench to smash Koopa's hard shells.";
-                }
-                break;
-            case 2:
-                if (actor.hasCapability(Status.INVINCIBLE)){
-                    statement = this.getStatement(actor);
-                }
-                else{
-                    statement ="You better get back to finding the Power Stars.";
-                }
-                break;
-            case 3:
-                statement = "The Princess is depending on you! You are our only hope.";
-                break;
-            case 4:
-                statement = "Being imprisoned in these walls can drive a fungus crazy :(";
-                break;
+        int i = rand.nextInt(list.size());
+
+        while (!list.get(i).isCanSpeak()) {
+            i = rand.nextInt(list.size());
         }
-        return statement;
+
+        String statement = list.get(i).getSentence();
+
+        return speaker + ": \"" + statement + "\"";
     }
 
     /**
@@ -92,6 +68,11 @@ public class SpeakAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " talks with " + target;
+        return actor + " talks with " + speaker;
+    }
+
+    @Override
+    public Action getNextAction() {
+        return super.getNextAction();
     }
 }

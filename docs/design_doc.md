@@ -99,3 +99,20 @@ to be open for extension without modifications.
 The actions to erase the items and enemies will be instead done in the specific classes itself. An enum will check if the
 class will be effected by the reset by adding the enum as soon as the reset manager has been run. The cleanup function
 will also ensure that any actors or items that have been already removed from the map won't be effected by the reset.
+
+
+#Assignment 3
+##Req 1
+
+##Req 2
+Princess Peach should be an actor that can speak with the Player
+once they have a Peach Key. Therefore, Peach has a dependency with
+Speak Action. 
+
+Bowser is a hostile mob so it has AttackBehaviour and FollowBehaviour.
+Since Bowser can create floors with fire, it can create a BowserFireGround.
+Perhaps also add in an interface (FireCapable). Bowser also just has
+a PeachKey in the inventory so when Bowser faints, it should drop a PeachKey.
+
+FlyingKoopa is a subclass of Koopa and it has a Status.FLY so that it can
+enter any HighGround.

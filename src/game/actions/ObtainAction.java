@@ -3,33 +3,26 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.wallet.WalletManager;
-import game.items.Purchasable;
+import game.actors.Status;
+import game.items.ObtainAble;
 
-/**
- * Action to allow trading
- */
-public class    TradeAction extends Action {
+public class ObtainAction extends Action{
 
     /**
-     * The item that will be purchased
+     * The item that will be obtained
      */
-    Purchasable item;
+    ObtainAble item;
 
-    /**
-     * The price of the item that will be purchased
-     */
-    int price;
+    Actor target;
 
     /**
      * Constructor.
+     *  @param item The item to be bought
      *
-     * @param item The item to be bought
-     * @param price The price of the item to be bought
      */
-    public TradeAction(Purchasable item, int price) {
+    public ObtainAction(ObtainAble item, Actor target) {
         this.item = item;
-        this.price = price;
+        this.target = target;
     }
 
     /**
@@ -44,14 +37,8 @@ public class    TradeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (WalletManager.getInstance().getBalance(actor)>=this.price){
-            WalletManager.getInstance().deductBalance(actor, this.price);
-            this.item.add_item(actor);
-            return actor + " obtained " + item;
-        }
-        else{
-            return "Insufficient balance";
-        }
+        item.obtainedBy(actor, target);
+        return actor + " successfully obtains " + item;
     }
 
     /**
@@ -63,7 +50,6 @@ public class    TradeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + item + " ($" + price + ")";
+        return actor + " obtains " + item;
     }
 }
-

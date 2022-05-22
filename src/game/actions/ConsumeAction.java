@@ -2,21 +2,20 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.ConsumeAble;
 
 /**
  * Special action for consuming an item
  */
-public class ConsumeItemAction extends Action {
+public class ConsumeAction extends Action {
     private ConsumeAble consumeAble;
 
     /**
      * Constructor.
      * @param consumeAble A consumable item.
      */
-    public ConsumeItemAction(ConsumeAble consumeAble) {
+    public ConsumeAction(ConsumeAble consumeAble) {
         this.consumeAble = consumeAble;
     }
 

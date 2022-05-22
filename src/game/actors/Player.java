@@ -4,28 +4,23 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.PickUpItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.DrinkWaterFromBottleAction;
+import game.items.*;
 import game.wallet.WalletManager;
-import game.actions.AttackAction;
 import game.actions.ResetAction;
-import game.items.Coin;
-import game.items.PowerStar;
-import game.items.Wrench;
 import game.reset.Resettable;
-import game.actions.JumpAction;
-import game.wallet.WalletManager;
-
 
 /**
  * Class representing the Player.
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Actor implements Resettable, Drinker {
 
 	private final Menu menu = new Menu();
 	private GameMap map;
-	private WalletManager walletManager;
+	private int damage;
 
 	/**
 	 * Constructor.
@@ -39,6 +34,7 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
 		this.addCapability(Status.RESET);
+		this.damage = 5; // initial base damage
 		this.map = map;
 		registerInstance();
 	}
@@ -58,6 +54,9 @@ public class Player extends Actor implements Resettable {
 			return lastAction.getNextAction();
 		if (this.hasCapability(Status.RESET)) {
 			actions.add(new ResetAction());
+		}
+		if (this.hasCapability(Status.HAS_BOTTLE)){
+			actions.add(new DrinkWaterFromBottleAction());
 		}
 
 		// return/print the console menu
@@ -86,5 +85,19 @@ public class Player extends Actor implements Resettable {
 		this.resetMaxHp(this.getMaxHp());
 		this.removeCapability(Status.TALL);
 		this.removeCapability(Status.INVINCIBLE);
+	}
+
+	public void fountainIncreaseAttack() {
+		this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
+	}
+
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(this.damage, "punches");
+	}
+
+	@Override
+	public void fountainHeal(int health) {
+		this.heal(health);
 	}
 }

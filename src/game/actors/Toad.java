@@ -6,22 +6,21 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.ObtainAction;
 import game.actions.SpeakAction;
 import game.actions.TradeAction;
-import game.behaviours.WanderBehaviour;
 import game.behaviours.Behaviour;
-import game.items.PowerStar;
-import game.items.SuperMushroom;
-import game.items.Utils;
-import game.items.Wrench;
+import game.items.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Class representing Toad.
  */
-public class Toad extends Actor {
+public class Toad extends Actor implements Speakable{
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
@@ -30,10 +29,11 @@ public class Toad extends Actor {
      */
     public Toad() {
         super("Toad", 'O', 0);
-        this.behaviours.put(10, new WanderBehaviour());
         this.addItemToInventory(new PowerStar());
         this.addItemToInventory(new SuperMushroom());
         this.addItemToInventory(new Wrench());
+        this.addItemToInventory(new Bottle());
+        this.addCapability(Status.HAS_BOTTLE);
     }
 
     /**
@@ -52,6 +52,11 @@ public class Toad extends Actor {
             if (action != null)
                 return action;
         }
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
+            return new SpeakAction(this);
+        }
+        this.addCapability(Status.TALK);
         return new DoNothingAction();
     }
 
@@ -70,8 +75,28 @@ public class Toad extends Actor {
         list.add(new TradeAction(new SuperMushroom(), Utils.SUPER_MUSHROOM_PRICE));
         list.add(new TradeAction(new Wrench(), Utils.WRENCH_PRICE));
         list.add(new SpeakAction(this));
+        if (this.hasCapability(Status.HAS_BOTTLE)){
+            list.add(new ObtainAction(new Bottle(),this));
+        }
         return list;
     }
+
+    @Override
+    public List sentences(Actor target) {
+        ArrayList<Monologue> sentenceList = new ArrayList<>();
+        sentenceList.add(new Monologue(this, "You might need a wrench to smash Koopa's hard shells.", !target.hasCapability(Status.WRENCH)));
+        sentenceList.add(new Monologue(this, "You better get back to finding the Power Stars.", !target.hasCapability(Status.INVINCIBLE)));
+        sentenceList.add(new Monologue(this, "The Princess is depending on you! You are our only hope."));
+        sentenceList.add(new Monologue(this, "Being imprisoned in these walls can drive a fungus crazy :("));
+        return sentenceList;
+    }
+
+    @Override
+    public Action nextAction() {
+        return null;
+    }
+
 }
+
 
 

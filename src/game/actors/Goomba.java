@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
+import game.actions.DestructAction;
+import game.actions.SpeakAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -16,14 +18,12 @@ import game.behaviours.Behaviour;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor implements Resettable {
+public class Goomba extends Actor implements Resettable, Speakable {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 	private final Random random = new Random();
 	/**
@@ -70,13 +70,21 @@ public class Goomba extends Actor implements Resettable {
 			ResetManager.getInstance().cleanUp(this);
 		}
 
-		this.remove(map);	// 10% chance of removing the actor
+		// 10% chance of removing the actor
+		if(random.nextInt(9) < 1){
+			return new DestructAction();
+		}
 
 		for(Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
 		}
+		if (this.hasCapability(Status.TALK)){
+			this.removeCapability(Status.TALK);
+			return new SpeakAction(this);
+		}
+		this.addCapability(Status.TALK);
 
 
 		return new DoNothingAction();
@@ -105,4 +113,19 @@ public class Goomba extends Actor implements Resettable {
 	public void resetInstance() {
 		this.addCapability(Status.RESET);
 	}
+
+	@Override
+	public List<Monologue> sentences(Actor target) {
+		ArrayList<Monologue> sentenceList = new ArrayList<>();
+		sentenceList.add(new Monologue(this, "Mugga mugga!"));
+		sentenceList.add(new Monologue(this, "Ugha ugha... (Never gonna run around and desert you...)"));
+		sentenceList.add(new Monologue(this, "Ooga-Chaka Ooga-Ooga!"));
+		return sentenceList;
+	}
+
+	@Override
+	public Action nextAction() {
+		return null;
+	}
+
 }
