@@ -26,6 +26,7 @@ public class JumpAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+
        String result = actor + " is attempting to jump onto " + location;
 
        if(map.locationOf(actor).getGround().hasCapability(State.FERTILE)) //checks current terrain of the actor
