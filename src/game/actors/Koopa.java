@@ -95,7 +95,9 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
             String monologue = new SpeakAction(this).execute(this, map);
             display.println(monologue);
         }
-        this.addCapability(Status.TALK);
+        else{
+            this.addCapability(Status.TALK);
+        }
 
         if (!this.hasCapability(Status.DORMANT)) {
             for (Behaviour Behaviour : behaviours.values()) {

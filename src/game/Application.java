@@ -10,8 +10,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
 import game.grounds.*;
+import game.grounds.fountains.HealingFountain;
+import game.grounds.fountains.PowerFountain;
 import game.items.Coin;
-import game.items.PeachKey;
 import game.items.PowerStar;
 
 /**
@@ -61,9 +62,23 @@ public class Application {
 			world.addPlayer(mario, gameMap.at(44, 10));
 
 			gameMap.at(44, 11).addActor(new Toad());
-			gameMap.at(44,5).addActor(new PrincessPeach(world));
-			mario.addItemToInventory(new PowerStar());
-			mario.addItemToInventory(new PeachKey());
+
+			gameMap.at(1,1).addActor(new PrincessPeach());
+			gameMap.at(44,8).addActor(new Bowser());
+
+			gameMap.at(44,13).setGround(new PowerFountain());
+			gameMap.at(43,13).setGround(new HealingFountain());
+
+			gameMap.at(45,13).addActor(new Koopa());
+			gameMap.at(3,3).addActor(new Goomba());
+			gameMap.at(5,5).addActor(new Goomba());
+			gameMap.at(7,7).addActor(new Goomba());
+			gameMap.at(2,2).addActor(new FlyingKoopa());
+
+
+
+
 			world.run();
+
 	}
 }

@@ -55,7 +55,9 @@ public class Toad extends Actor implements Speakable {
             String monologue = new SpeakAction(this).execute(this, map);
             display.println(monologue);
         }
-        this.addCapability(Status.TALK);
+        else{
+            this.addCapability(Status.TALK);
+        }
 
         for (Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);
