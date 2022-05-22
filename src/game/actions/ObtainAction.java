@@ -3,22 +3,17 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.Status;
 import game.items.ObtainAble;
 
 public class ObtainAction extends Action{
 
-    /**
-     * The item that will be obtained
-     */
     ObtainAble item;
-
     Actor target;
 
     /**
      * Constructor.
-     *  @param item The item to be bought
-     *
+     * @param item The item to be obtained
+     * @param target The actor holding the obtainable item
      */
     public ObtainAction(ObtainAble item, Actor target) {
         this.item = item;
@@ -26,9 +21,8 @@ public class ObtainAction extends Action{
     }
 
     /**
-     * Checks whether the Actor has enough balance to buy the item and if they do,
-     * then the actor will receive the item in there inventory. If not, a string
-     * will be displayed of the failed transaction.
+     * Executes the transition of obtaining the item.
+     * The target will have the item also removed from its inventory.
      *
      * @see Action#execute(Actor, GameMap)
      * @param actor The actor performing the action.
@@ -46,7 +40,7 @@ public class ObtainAction extends Action{
      *
      * @see Action#menuDescription(Actor)
      * @param actor The actor performing the action.
-     * @return a string, e.g. "Player picks up the rock"
+     * @return a string of the actor obtaining the item
      */
     @Override
     public String menuDescription(Actor actor) {

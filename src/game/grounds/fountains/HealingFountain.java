@@ -1,36 +1,41 @@
-package game.grounds;
+package game.grounds.fountains;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import game.BottleManager;
 import game.actors.Drinker;
 import game.items.Utils;
-import game.items.Water;
 
 public class HealingFountain extends Fountain {
-
-    private Water water;
 
     /**
      * Constructor.
      *
      */
-
     public HealingFountain() {
         super('H');
-        this.water = new Water(this);
     }
 
+    /**
+     * Buffs the actor by healing the actor
+     * @param actor The actor to be healed
+     */
     @Override
     public void buff(Drinker actor) {
         super.buff(actor);
         actor.fountainHeal(Utils.HEALTH_FOUNTAIN_WATER_HP);
     }
 
+    /**
+     * Water Name
+     * @return A string of the water name
+     */
     @Override
     public String getWaterDescription() {
         return "Healing Water";
     }
 
+    /**
+     * Fountain Name
+     * @return A string of the fountain name
+     */
     @Override
     public String getFountainDescription(){
         return "Healing Fountain";

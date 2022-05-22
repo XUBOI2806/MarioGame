@@ -9,10 +9,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.SpeakAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.items.PeachKey;
+import game.items.Utils;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
@@ -24,6 +27,7 @@ import java.util.Map;
 public class Bowser extends Actor implements Resettable, Speakable {
     // Attributes
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+    private int damage;
 
     // Constructor
     public Bowser(){
@@ -31,6 +35,7 @@ public class Bowser extends Actor implements Resettable, Speakable {
         this.addCapability(Status.FIRE);
         this.addItemToInventory(new PeachKey());
         registerInstance();
+        this.damage = Utils.BOWSER_BASE_DMG;
     }
 
     @Override
@@ -54,23 +59,33 @@ public class Bowser extends Actor implements Resettable, Speakable {
             map.removeActor(this);
             ResetManager.getInstance().cleanUp(this);
         }
+
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
+            String monologue = new SpeakAction(this).execute(this, map);
+            display.println(monologue);
+        }
+        this.addCapability(Status.TALK);
+
         for(Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;
         }
 
-        if (this.hasCapability(Status.TALK)){
-            this.removeCapability(Status.TALK);
-            return new SpeakAction(this);
-        }
-        this.addCapability(Status.TALK);
         return new DoNothingAction();
     }
 
+    /**
+     * Creates and returns an intrinsic weapon.
+     *
+     * The Actor 'punches' for damage that might be changed.
+     *
+     * @return an IntrinsicWeapon
+     */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(80,"punch");
+        return new IntrinsicWeapon(this.damage,"punch");
     }
 
 
@@ -80,6 +95,13 @@ public class Bowser extends Actor implements Resettable, Speakable {
         this.addCapability(Status.RESET);
     }
 
+
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List<Monologue> sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();
@@ -88,11 +110,6 @@ public class Bowser extends Actor implements Resettable, Speakable {
         sentenceList.add(new Monologue(this, "Never gonna let you down!"));
         sentenceList.add(new Monologue(this, "Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!"));
         return sentenceList;
-    }
-
-    @Override
-    public Action nextAction() {
-        return null;
     }
 
 }

@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.ObtainAction;
 import game.actions.SpeakAction;
 import game.actions.TradeAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 import game.behaviours.Behaviour;
 import game.items.*;
 
@@ -20,7 +22,7 @@ import java.util.Map;
 /**
  * Class representing Toad.
  */
-public class Toad extends Actor implements Speakable{
+public class Toad extends Actor implements Speakable {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
@@ -47,16 +49,20 @@ public class Toad extends Actor implements Speakable{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+        if (this.hasCapability(Status.TALK)){
+            this.removeCapability(Status.TALK);
+            String monologue = new SpeakAction(this).execute(this, map);
+            display.println(monologue);
+        }
+        this.addCapability(Status.TALK);
+
         for (Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;
         }
-        if (this.hasCapability(Status.TALK)){
-            this.removeCapability(Status.TALK);
-            return new SpeakAction(this);
-        }
-        this.addCapability(Status.TALK);
+
         return new DoNothingAction();
     }
 
@@ -81,6 +87,13 @@ public class Toad extends Actor implements Speakable{
         return list;
     }
 
+
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();
@@ -89,11 +102,6 @@ public class Toad extends Actor implements Speakable{
         sentenceList.add(new Monologue(this, "The Princess is depending on you! You are our only hope."));
         sentenceList.add(new Monologue(this, "Being imprisoned in these walls can drive a fungus crazy :("));
         return sentenceList;
-    }
-
-    @Override
-    public Action nextAction() {
-        return null;
     }
 
 }

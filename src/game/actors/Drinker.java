@@ -1,12 +1,17 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-
 public interface Drinker {
 
+    /**
+     * Applies a buff to anyone that drinks from the Power Fountain
+     *
+     */
+    void fountainIncreaseAttack(int attack);
 
-    void fountainIncreaseAttack(); // still needs change
-
+    /**
+     * Applies healing to anyone that drinks from the Healing Fountain
+     *
+     */
     void fountainHeal(int health);
 
 }

@@ -7,11 +7,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.SpeakAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrincessPeach extends Actor implements Speakable{
+public class PrincessPeach extends Actor implements Speakable {
 
     public PrincessPeach(){
         super("Princess Peach",'P', 1);
@@ -19,11 +21,14 @@ public class PrincessPeach extends Actor implements Speakable{
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
         if (this.hasCapability(Status.TALK)){
             this.removeCapability(Status.TALK);
-            return new SpeakAction(this);
+            String monologue = new SpeakAction(this).execute(this, map);
+            display.println(monologue);
         }
         this.addCapability(Status.TALK);
+
         return new DoNothingAction();
     }
 
@@ -36,6 +41,12 @@ public class PrincessPeach extends Actor implements Speakable{
         return actions;
     }
 
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List<Monologue> sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();
@@ -43,11 +54,6 @@ public class PrincessPeach extends Actor implements Speakable{
         sentenceList.add(new Monologue(this, "Never gonna give you up!"));
         sentenceList.add(new Monologue(this, "Release me, or I will kick you!"));
         return sentenceList;
-    }
-
-    @Override
-    public Action nextAction() {
-        return null;
     }
 
 }

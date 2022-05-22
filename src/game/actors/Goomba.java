@@ -11,10 +11,11 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.DestructAction;
 import game.actions.SpeakAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
-import game.behaviours.Behaviour;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
+import game.behaviours.*;
+import game.grounds.fountains.Fountain;
+import game.items.Utils;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
@@ -23,9 +24,11 @@ import java.util.*;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor implements Resettable, Speakable {
+public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 	private final Random random = new Random();
+
+	private int damage;
 	/**
 	 * Constructor.
 	 */
@@ -33,6 +36,7 @@ public class Goomba extends Actor implements Resettable, Speakable {
 		super("Goomba", 'g', 20);
 		this.behaviours.put(10, new WanderBehaviour());
 		registerInstance();
+		this.damage = Utils.GOOMBA_BASE_DAMAGE;
 	}
 
 	/**
@@ -41,7 +45,7 @@ public class Goomba extends Actor implements Resettable, Speakable {
 	 * @param otherActor the Actor that might perform an action.
 	 * @param direction  String representing the direction of the other Actor
 	 * @param map        current GameMap
-	 * @return list of actions
+	 * @return A collection of Actions.
 	 * @see Status#HOSTILE_TO_ENEMY
 	 */
 	@Override
@@ -70,40 +74,41 @@ public class Goomba extends Actor implements Resettable, Speakable {
 			ResetManager.getInstance().cleanUp(this);
 		}
 
+		if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
+			this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
+		}
+
 		// 10% chance of removing the actor
 		if(random.nextInt(9) < 1){
 			return new DestructAction();
 		}
+
+		if (this.hasCapability(Status.TALK)){
+			this.removeCapability(Status.TALK);
+			String monologue = new SpeakAction(this).execute(this, map);
+			display.println(monologue);
+		}
+		this.addCapability(Status.TALK);
 
 		for(Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
 		}
-		if (this.hasCapability(Status.TALK)){
-			this.removeCapability(Status.TALK);
-			return new SpeakAction(this);
-		}
-		this.addCapability(Status.TALK);
-
 
 		return new DoNothingAction();
 	}
 
 	/**
-	 * Intrinsic weapon of damage 10 and the verb "kicks"
-	 * @return
+	 * Creates and returns an intrinsic weapon.
+	 *
+	 * The Actor 'kicks' for damage that might be changed.
+	 *
+	 * @return an IntrinsicWeapon
 	 */
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(10,"kicks");
-	}
-
-	private void remove(GameMap map){
-		if(random.nextInt(9) < 1){
-			this.behaviours.clear();
-			map.removeActor(this);
-		}
+		return new IntrinsicWeapon(this.damage,"kicks");
 	}
 
 	/**
@@ -114,6 +119,12 @@ public class Goomba extends Actor implements Resettable, Speakable {
 		this.addCapability(Status.RESET);
 	}
 
+	/**
+	 * Returns a collection of the statements that the current Actor can say from the target's conditions.
+	 *
+	 * @param target the Actor's conditions that need to be checked
+	 * @return A collection of sentences.
+	 */
 	@Override
 	public List<Monologue> sentences(Actor target) {
 		ArrayList<Monologue> sentenceList = new ArrayList<>();
@@ -123,9 +134,21 @@ public class Goomba extends Actor implements Resettable, Speakable {
 		return sentenceList;
 	}
 
+	/**
+	 * Applies a buff to anyone that drinks from the Power Fountain
+	 *
+	 */
 	@Override
-	public Action nextAction() {
-		return null;
+	public void fountainIncreaseAttack(int attack) {
+		this.damage += attack;
 	}
 
+	/**
+	 * Applies healing to anyone that drinks from the Healing Fountain
+	 *
+	 */
+	@Override
+	public void fountainHeal(int health) {
+		this.heal(health);
+	}
 }

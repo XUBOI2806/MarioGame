@@ -36,6 +36,7 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.addCapability(Status.RESET);
 		this.damage = 5; // initial base damage
 		this.addCapability(Status.PLAYER);
+		this.damage = Utils.PLAYER_BASE_DMG;
 		this.map = map;
 		registerInstance();
 	}
@@ -88,15 +89,31 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.removeCapability(Status.INVINCIBLE);
 	}
 
-	public void fountainIncreaseAttack() {
-		this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
-	}
-
+	/**
+	 * Creates and returns an intrinsic weapon.
+	 *
+	 * The Actor 'punches' for damage that might be changed.
+	 *
+	 * @return an IntrinsicWeapon
+	 */
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(this.damage, "punches");
 	}
 
+	/**
+	 * Applies a buff to anyone that drinks from the Power Fountain
+	 *
+	 */
+	@Override
+	public void fountainIncreaseAttack(int attack) {
+		this.damage += attack;
+	}
+
+	/**
+	 * Applies healing to anyone that drinks from the Healing Fountain
+	 *
+	 */
 	@Override
 	public void fountainHeal(int health) {
 		this.heal(health);
