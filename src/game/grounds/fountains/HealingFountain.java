@@ -5,17 +5,12 @@ import game.items.Utils;
 
 public class HealingFountain extends Fountain {
 
-    private String waterName;
-    private String name;
-
     /**
      * Constructor.
      *
      */
     public HealingFountain() {
         super('H');
-        this.name = "Healing Fountain";
-        this.waterName = "Healing Water";
     }
 
     /**
@@ -34,7 +29,7 @@ public class HealingFountain extends Fountain {
      */
     @Override
     public String getWaterDescription() {
-        return this.waterName;
+        return "Healing Water";
     }
 
     /**
@@ -43,6 +38,6 @@ public class HealingFountain extends Fountain {
      */
     @Override
     public String getFountainDescription(){
-        return this.name;
+        return "Healing Fountain";
     }
 }
