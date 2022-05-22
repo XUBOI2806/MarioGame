@@ -10,6 +10,8 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.RemoveDormantActorAction;
 import game.actions.SpeakAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 import game.behaviours.*;
 import game.grounds.fountains.Fountain;
 import game.items.SuperMushroom;
@@ -42,9 +44,6 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         registerInstance();
         damage = Utils.KOOPA_BASE_DMG;
     }
-
-
-    // Action List
 
     /**
      * Decides the actions that another actor can perform. Also decides to put in specific behaviours when the other
@@ -131,6 +130,12 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         this.addCapability(Status.RESET);
     }
 
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List<Monologue> sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();
@@ -139,16 +144,32 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         return sentenceList;
     }
 
+    /**
+     * Applies a buff to anyone that drinks from the Power Fountain
+     *
+     */
     @Override
-    public void fountainIncreaseAttack() {
-        this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
+    public void fountainIncreaseAttack(int attack) {
+        this.damage += attack;
     }
 
+
+    /**
+     * Applies healing to anyone that drinks from the Healing Fountain
+     *
+     */
     @Override
     public void fountainHeal(int health) {
         this.heal(health);
     }
 
+    /**
+     * Creates and returns an intrinsic weapon.
+     *
+     * The Actor 'punches' for damage that might be changed.
+     *
+     * @return an IntrinsicWeapon
+     */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(this.damage,"punches");

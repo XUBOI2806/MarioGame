@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.SpeakAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
@@ -74,6 +76,13 @@ public class Bowser extends Actor implements Resettable, Speakable {
         return new DoNothingAction();
     }
 
+    /**
+     * Creates and returns an intrinsic weapon.
+     *
+     * The Actor 'punches' for damage that might be changed.
+     *
+     * @return an IntrinsicWeapon
+     */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(this.damage,"punch");
@@ -86,6 +95,13 @@ public class Bowser extends Actor implements Resettable, Speakable {
         this.addCapability(Status.RESET);
     }
 
+
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List<Monologue> sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();

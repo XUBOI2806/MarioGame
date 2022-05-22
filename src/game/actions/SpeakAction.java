@@ -3,12 +3,11 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.Monologue;
-import game.actors.Speakable;
-import game.actors.Status;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
+
 import java.util.Random;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -64,15 +63,10 @@ public class SpeakAction extends Action {
      *
      * @see Action#menuDescription(Actor)
      * @param actor The actor performing the action.
-     * @return a string, e.g. "Player picks up the rock"
+     * @return a string describing the action that can be taken
      */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " talks with " + speaker;
-    }
-
-    @Override
-    public Action getNextAction() {
-        return super.getNextAction();
     }
 }

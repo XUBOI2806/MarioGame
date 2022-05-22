@@ -1,11 +1,10 @@
 package game.grounds.fountains;
 
 import game.actors.Drinker;
-import game.items.Bottle;
+import game.items.Utils;
 
 public class PowerFountain extends Fountain {
 
-    Bottle bottle;
     /**
      * Constructor.
      *
@@ -14,17 +13,29 @@ public class PowerFountain extends Fountain {
         super('A');
     }
 
+    /**
+     * Buffs the actor depending on the water
+     * @param actor The actor to be buffed
+     */
     @Override
     public void buff(Drinker actor) {
         super.buff(actor);
-        actor.fountainIncreaseAttack();
+        actor.fountainIncreaseAttack(Utils.POWER_FOUNTAIN_ATTACK_INCREASE);
     }
 
+    /**
+     * Water Name
+     * @return A string of the water name
+     */
     @Override
     public String getWaterDescription() {
         return "Power Water";
     }
 
+    /**
+     * Fountain Name
+     * @return A string of the fountain name
+     */
     @Override
     public String getFountainDescription(){
         return "Power Fountain";

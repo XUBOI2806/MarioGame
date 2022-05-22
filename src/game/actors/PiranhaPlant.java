@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.actions.SpeakAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 
@@ -61,6 +63,12 @@ public class PiranhaPlant extends Actor implements Speakable {
 
     }
 
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List<Monologue> sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();

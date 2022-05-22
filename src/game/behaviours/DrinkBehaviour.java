@@ -7,14 +7,14 @@ import game.actions.DrinkWaterFromFountainAction;
 import game.grounds.fountains.Fountain;
 
 /**
- * A behaviour that decides an AttackAction for a hostile player when within the range of the exits
+ * A behaviour that decides when to drink
  */
 public class DrinkBehaviour implements Behaviour {
 
     private Fountain fountain;
 
     /**
-     * Constructor for AttackBehaviour
+     * Constructor for DrinkBehaviour
      */
     public DrinkBehaviour(Fountain fountain) {
         this.fountain = fountain;
@@ -24,7 +24,7 @@ public class DrinkBehaviour implements Behaviour {
      *
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
-     * @return AttackAction if it finds a target, null if not
+     * @return DrinkWaterFromFountainAction
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {

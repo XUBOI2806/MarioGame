@@ -16,5 +16,7 @@ public enum Status {
     FIRE, // use this status to tell if an actor can set ground on fire after attack
     FLY, // use this status to tell if an actor can fly over high grounds
     HAS_PEACH_KEY, // use this status to tell if an actor has a PeachKey
-    HAS_BOTTLE, TALK, FOUNTAIN, // use this status to tell if an actor has a bottle or not
+    HAS_BOTTLE, // use this status to tell is an actor has a bottle
+    TALK, // use this status to tell when the actor can talk
+    FOUNTAIN, // use this status to tell if the ground is a fountain or not
 }

@@ -1,11 +1,13 @@
 package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlyingKoopa extends Koopa implements Speakable{
+public class FlyingKoopa extends Koopa implements Speakable {
 
     public FlyingKoopa(){
         super();
@@ -14,6 +16,12 @@ public class FlyingKoopa extends Koopa implements Speakable{
         this.addCapability(Status.FLY);
     }
 
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List<Monologue> sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();

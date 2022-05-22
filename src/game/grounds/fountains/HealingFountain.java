@@ -1,37 +1,48 @@
 package game.grounds.fountains;
 
 import game.actors.Drinker;
-import game.grounds.fountains.Fountain;
 import game.items.Utils;
-import game.items.Water;
 
 public class HealingFountain extends Fountain {
 
-    private Water water;
+    private String waterName;
+    private String name;
 
     /**
      * Constructor.
      *
      */
-
     public HealingFountain() {
         super('H');
-        this.water = new Water(this);
+        this.name = "Healing Fountain";
+        this.waterName = "Healing Water";
     }
 
+    /**
+     * Buffs the actor by healing the actor
+     * @param actor The actor to be healed
+     */
     @Override
     public void buff(Drinker actor) {
         super.buff(actor);
         actor.fountainHeal(Utils.HEALTH_FOUNTAIN_WATER_HP);
     }
 
+    /**
+     * Water Name
+     * @return A string of the water name
+     */
     @Override
     public String getWaterDescription() {
-        return "Healing Water";
+        return this.waterName;
     }
 
+    /**
+     * Fountain Name
+     * @return A string of the fountain name
+     */
     @Override
     public String getFountainDescription(){
-        return "Healing Fountain";
+        return this.name;
     }
 }

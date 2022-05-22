@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actors.Status;
-import game.grounds.Dirt;
 
 public class PowerStar extends Item implements Purchasable, ConsumeAble {
     private int age = 0;
@@ -24,8 +23,8 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     }
 
     /**
-     * Adds the power star to an actor's inventory
-     * @param actor the actor to add to
+     * Adds item to the actor after purchasable item
+     * @param actor The actor receiving the purchasable item
      */
     public void add_item(Actor actor){
         actor.addItemToInventory(this);

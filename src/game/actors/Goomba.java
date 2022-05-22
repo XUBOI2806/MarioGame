@@ -11,6 +11,8 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.DestructAction;
 import game.actions.SpeakAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 import game.behaviours.*;
 import game.grounds.fountains.Fountain;
 import game.items.Utils;
@@ -43,7 +45,7 @@ public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 	 * @param otherActor the Actor that might perform an action.
 	 * @param direction  String representing the direction of the other Actor
 	 * @param map        current GameMap
-	 * @return list of actions
+	 * @return A collection of Actions.
 	 * @see Status#HOSTILE_TO_ENEMY
 	 */
 	@Override
@@ -98,8 +100,11 @@ public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 	}
 
 	/**
-	 * Intrinsic weapon of damage 10 and the verb "kicks"
-	 * @return
+	 * Creates and returns an intrinsic weapon.
+	 *
+	 * The Actor 'kicks' for damage that might be changed.
+	 *
+	 * @return an IntrinsicWeapon
 	 */
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
@@ -114,6 +119,12 @@ public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 		this.addCapability(Status.RESET);
 	}
 
+	/**
+	 * Returns a collection of the statements that the current Actor can say from the target's conditions.
+	 *
+	 * @param target the Actor's conditions that need to be checked
+	 * @return A collection of sentences.
+	 */
 	@Override
 	public List<Monologue> sentences(Actor target) {
 		ArrayList<Monologue> sentenceList = new ArrayList<>();
@@ -123,11 +134,19 @@ public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 		return sentenceList;
 	}
 
+	/**
+	 * Applies a buff to anyone that drinks from the Power Fountain
+	 *
+	 */
 	@Override
-	public void fountainIncreaseAttack() {
-		this.damage += Utils.POWER_FOUNTAIN_ATTACK_INCREASE;
+	public void fountainIncreaseAttack(int attack) {
+		this.damage += attack;
 	}
 
+	/**
+	 * Applies healing to anyone that drinks from the Healing Fountain
+	 *
+	 */
 	@Override
 	public void fountainHeal(int health) {
 		this.heal(health);

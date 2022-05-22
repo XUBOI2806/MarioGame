@@ -11,17 +11,17 @@ import java.util.Map;
 import java.util.Stack;
 
 /**
- * A global Singleton manager that holds balances of Actors
+ * A global Singleton manager that holds bottles of Actors
  */
 public class BottleManager {
 
     /**
-     * A singleton reset manager instance
+     * A singleton Bottle manager instance
      */
     private static BottleManager instance;
 
     /**
-     * A HashMap of the actor and it's respective balance as an integer
+     * A HashMap of the actor and it's respective Stack of Water
      */
     private Map<Actor, Stack<Water>> waterStackMap;
 
@@ -33,8 +33,8 @@ public class BottleManager {
     }
 
     /**
-     * Get the singleton instance of reset manager
-     * @return ResetManager singleton instance
+     * Get the singleton instance of bottle manager
+     * @return BottleManager singleton instance
      */
     public static BottleManager getInstance() {
         if (instance == null) {
@@ -44,10 +44,10 @@ public class BottleManager {
     }
 
     /**
-     * Checks if the actor is a part of the Hashmap yet. If not, it adds the actor and
-     * sets a value of 0 as the balance for the actor.
+     * Checks if the actor is a part of the Hashmap yet. If not, it checks the actor of its capabilities
+     * and sets a new Stack for the actor if true.
      *
-    * @param actor The balance of the Actor
+     * @param actor The Stack of the Actor
      */
     public void check(Actor actor){
         if (!this.waterStackMap.containsKey(actor)){
@@ -58,7 +58,7 @@ public class BottleManager {
     }
 
     /**
-     * Adds a value on top of the Actor's current balance
+     * Adds Water to the Actor's current Stack
      *
      * @param actor The balance of the Actor
      */
@@ -70,9 +70,10 @@ public class BottleManager {
     }
 
     /**
-     * Gets the current value of the Actor's balance
+     * Gets the current Actor's current Stack of Water
      *
-     * @param actor The balance of the Actor
+     * @param actor The Stack of the Actor
+     * @return A stack of the Water
      */
     public Stack returnWaterStack(Actor actor) {
         this.check(actor);
@@ -84,9 +85,10 @@ public class BottleManager {
     }
 
     /**
-     * Deducts a value on top of the Actor's current balance
+     * Returns the Water from the Actor's current Stack
      *
-     * @param actor The balance of the Actor
+     * @param actor The Stack of the Actor
+     * @return the Water that will be used
      */
     public Water useWater(Actor actor) {
         this.check(actor);
@@ -100,6 +102,12 @@ public class BottleManager {
         return water;
     }
 
+    /**
+     * Returns length of the Actor's current Stack
+     *
+     * @param actor The Stack of the Actor
+     * @return the length of the Stack
+     */
     public int length(Actor actor){
         this.check(actor);
         Stack<Water> waterStack = this.waterStackMap.get(actor);

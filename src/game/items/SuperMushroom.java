@@ -20,8 +20,8 @@ public class SuperMushroom extends Item implements Purchasable, ConsumeAble{
     }
 
     /**
-     * Adds item to an actor
-     * @param actor Actor to be added to
+     * Adds item to the actor after purchasable item
+     * @param actor The actor receiving the purchasable item
      */
     @Override
     public void add_item(Actor actor) {

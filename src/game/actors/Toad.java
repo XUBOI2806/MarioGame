@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.ObtainAction;
 import game.actions.SpeakAction;
 import game.actions.TradeAction;
+import game.actors.monologue.Monologue;
+import game.actors.monologue.Speakable;
 import game.behaviours.Behaviour;
 import game.items.*;
 
@@ -20,7 +22,7 @@ import java.util.Map;
 /**
  * Class representing Toad.
  */
-public class Toad extends Actor implements Speakable{
+public class Toad extends Actor implements Speakable {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
     /**
@@ -85,6 +87,13 @@ public class Toad extends Actor implements Speakable{
         return list;
     }
 
+
+    /**
+     * Returns a collection of the statements that the current Actor can say from the target's conditions.
+     *
+     * @param target the Actor's conditions that need to be checked
+     * @return A collection of sentences.
+     */
     @Override
     public List sentences(Actor target) {
         ArrayList<Monologue> sentenceList = new ArrayList<>();
