@@ -16,6 +16,7 @@ import game.grounds.Dirt;
 import game.grounds.Floor;
 import game.grounds.Tree;
 import game.grounds.Wall;
+import game.grounds.Lava;
 import game.items.Coin;
 import game.items.PowerStar;
 
@@ -30,6 +31,7 @@ public class Application {
 			World world = new World(new Display());
 
 			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
+
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -54,6 +56,8 @@ public class Application {
 
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
+
+			GameMap gameMap1 = new GameMap(groundFactory, map);
 
 			Actor mario = new Player("Player", 'm', 100, gameMap);
 			world.addPlayer(mario, gameMap.at(44, 10));

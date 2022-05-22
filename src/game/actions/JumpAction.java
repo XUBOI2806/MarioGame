@@ -19,10 +19,10 @@ public class JumpAction extends Action {
     }
 
     /**
-     * execute determines whether or not the actor has jumped to a particular terrain and if damage is taken
+     * execute determines whether the actor has jumped to a particular terrain and if damage is taken
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return a string that describes whether or not jump is a success
+     * @return a string that describes whether the jump is a success
      */
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -33,6 +33,7 @@ public class JumpAction extends Action {
            if(actor.hasCapability(Status.TALL)&& location.canActorEnter(actor)){//consumed super mushroom
                map.moveActor(actor,location); //move instantly
                result += System.lineSeparator() + actor + "has jumped to " + location;
+               return result;
 
            }
            else {
@@ -44,12 +45,14 @@ public class JumpAction extends Action {
                        result += System.lineSeparator() + actor + "has jumped to " + location;
 
                    }
+                   actor.hurt(10);
                    if (!actor.isConscious()){
                        result += System.lineSeparator() + actor + "has died from jumping to" + location;
                    }
                    else{
                        result += System.lineSeparator() + actor + "has failed to jump to " + location;
                    }
+                   return result;
                }
 
                if (location.getGround().hasCapability(State.SAPLING) || location.getGround().hasCapability(State.WALL) && location.canActorEnter(actor)) {
@@ -64,7 +67,7 @@ public class JumpAction extends Action {
                    else{
                        result += System.lineSeparator() + actor + "has failed to jump to " + location;
                    }
-
+                   return result;
                }
 
                if (location.getGround().hasCapability(State.MATURE) && location.canActorEnter(actor)) {
@@ -79,6 +82,7 @@ public class JumpAction extends Action {
                    else{
                        result += System.lineSeparator() + actor + "has failed to jump to " + location;
                    }
+                   return result;
                }
            }
        }
@@ -101,6 +105,7 @@ public class JumpAction extends Action {
                     else{
                         result += System.lineSeparator() + actor + "has failed to jump to " + location;
                     }
+                    return result;
                 }
 
                 if (location.getGround().hasCapability(State.MATURE) && location.canActorEnter(actor)) {
@@ -115,6 +120,7 @@ public class JumpAction extends Action {
                     else{
                         result += System.lineSeparator() + actor + "has failed to jump to " + location;
                     }
+                    return result;
                 }
             }
         }
@@ -137,6 +143,7 @@ public class JumpAction extends Action {
                     else{
                         result += System.lineSeparator() + actor + "has failed to jump to " + location;
                     }
+                    return result;
                 }
 
                 if (location.getGround().hasCapability(State.MATURE) && location.canActorEnter(actor)) {
@@ -151,6 +158,7 @@ public class JumpAction extends Action {
                     else{
                         result += System.lineSeparator() + actor + "has failed to jump to " + location;
                     }
+                    return result;
                 }
             }
         }
@@ -182,7 +190,6 @@ public class JumpAction extends Action {
         if(map.locationOf(actor).getGround().hasCapability(State.WALL)){
             result += System.lineSeparator() + actor + "can not jump anywhere higher!!! " + location;
         }
-
 
         return result;
     }

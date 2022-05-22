@@ -27,7 +27,7 @@ public class Tree extends Ground implements Resettable{
     /**
      * Inform the ground of the passage of time.
      * This method is called once per turn.
-     * This method also randomly spawns sprout given that the ground if floor every turn
+     * This method also randomly spawns sprout given that the ground is dirt every turn
      * @param location The location of the tree.
      */
     @Override

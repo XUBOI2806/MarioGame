@@ -13,4 +13,5 @@ public enum Status {
     DORMANT_ABLE, // use this status to tell that when instance goes unconscious, change into DORMANT
     FLOOR, // use this status to tell that current instance can walk on floors
     RESET, // use this status to tell what can be soft reset by the ResetManager
+    PLAYER // use his status to determine whether the actor is a human
 }

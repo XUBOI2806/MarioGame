@@ -39,6 +39,7 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
 		this.addCapability(Status.RESET);
+		this.addCapability(Status.PLAYER);
 		this.map = map;
 		registerInstance();
 	}
