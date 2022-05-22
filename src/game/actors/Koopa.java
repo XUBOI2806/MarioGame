@@ -89,6 +89,11 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
             this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
         }
+        else{
+            this.behaviours.remove(9);
+        }
+
+
 
         if (this.hasCapability(Status.TALK)){
             this.removeCapability(Status.TALK);

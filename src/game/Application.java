@@ -66,17 +66,14 @@ public class Application {
 			gameMap.at(1,1).addActor(new PrincessPeach());
 			gameMap.at(44,8).addActor(new Bowser());
 
-			gameMap.at(44,13).setGround(new PowerFountain());
-			gameMap.at(43,13).setGround(new HealingFountain());
+			gameMap.at(44,13).setGround(new HealingFountain());
+			gameMap.at(43,13).setGround(new PowerFountain());
 
-			gameMap.at(45,13).addActor(new Koopa());
+			gameMap.at(46,14).addActor(new Koopa());
 			gameMap.at(3,3).addActor(new Goomba());
 			gameMap.at(5,5).addActor(new Goomba());
 			gameMap.at(7,7).addActor(new Goomba());
 			gameMap.at(2,2).addActor(new FlyingKoopa());
-
-
-
 
 			world.run();
 
