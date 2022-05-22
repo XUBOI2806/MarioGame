@@ -82,6 +82,7 @@ public class AttackAction extends Action {
 		if(actor.hasCapability(Status.FIRE)){
 			Ground previousGround = map.locationOf(target).getGround();
 			map.locationOf(target).setGround(new FireGround(previousGround));
+			result = actor + " attacks " + target + " at " + direction + "with fire!";
 		}
 
 		target.hurt(damage);

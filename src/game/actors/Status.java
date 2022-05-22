@@ -18,7 +18,7 @@ public enum Status {
     HAS_PEACH_KEY, // use this status to tell if an actor has a PeachKey
     PLAYER, // use this status to determine whether the actor is a human
     PIRANHAPLANT,// use this to determine whether the plant is a piranha plant
-    WARPPIPE,
+    WARPPIPE, // use this status to determine warp pipe
     HAS_BOTTLE, // use this status to tell is an actor has a bottle
     TALK, // use this status to tell when the actor can talk
     FOUNTAIN, // use this status to tell if the ground is a fountain or not

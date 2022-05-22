@@ -1,6 +1,7 @@
 package game.grounds;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Goomba;
+import game.items.FireFlower;
 
 public class Sprout extends Tree {
     /**
@@ -24,6 +25,9 @@ public class Sprout extends Tree {
         counter += 1; //Each turn the counter goes up by one
         if (counter % 10 == 0 && !location.containsAnActor()){ //Every 10 turns and actor isn't on location
             location.setGround(new Sapling()); //Sapling is spawned
+            if(Math.random()<= 0.5){ // 50% chance of
+                location.addItem(new FireFlower()); // Fireflower is added to the location
+            }
         }
 
         if (!location.containsAnActor()){ //Every turn
