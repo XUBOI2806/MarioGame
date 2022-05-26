@@ -91,7 +91,6 @@ public class Bowser extends Actor implements Resettable, Speakable {
     }
 
 
-    // Reset is TODO
     @Override
     public void resetInstance(){
         this.addCapability(Status.RESET);

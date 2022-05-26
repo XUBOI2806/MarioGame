@@ -52,7 +52,7 @@ public class Application {
 				".......................................................##.......................");
 
 		List<String> map1 = Arrays.asList(
-				"c.....L.............",
+				"C.....L.............",
 				".................L..",
 				"....................",
 				"....................",
@@ -87,6 +87,7 @@ public class Application {
 			gameMap.at(5,5).addActor(new Goomba());
 			gameMap.at(7,7).addActor(new Goomba());
 			gameMap.at(2,2).addActor(new FlyingKoopa());
+			gameMap.at(25,6).setGround(new WarpPipe());
 
 			world.run();
 

@@ -80,12 +80,6 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (this.hasCapability(Status.RESET)) {
-            this.behaviours.clear();
-            map.removeActor(this);
-            ResetManager.getInstance().cleanUp(this);
-        }
-
         if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
             this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
         }
@@ -93,6 +87,12 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
             this.behaviours.remove(9);
         }
 
+
+        if (this.hasCapability(Status.RESET)) {
+            this.behaviours.clear();
+            map.removeActor(this);
+            ResetManager.getInstance().cleanUp(this);
+        }
 
 
         if (this.hasCapability(Status.TALK)){
