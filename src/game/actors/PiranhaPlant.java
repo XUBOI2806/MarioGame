@@ -20,10 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PiranhaPlant extends Actor implements Speakable, Resettable {
-
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
+public class PiranhaPlant extends Enemy implements Speakable, Resettable {
     /**
      * Constructor.
      *
@@ -36,14 +33,8 @@ public class PiranhaPlant extends Actor implements Speakable, Resettable {
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
+        ActionList actions = super.allowableActions(otherActor, direction, map);
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            actions.add(new AttackAction(this,direction));
-            if(!behaviours.containsKey(8)) {
-                this.behaviours.put(8, new AttackBehaviour(otherActor));
-            }
-        }
         return actions;
     }
 
@@ -64,14 +55,7 @@ public class PiranhaPlant extends Actor implements Speakable, Resettable {
             this.addCapability(Status.TALK);
         }
 
-        for (game.behaviours.Behaviour Behaviour : behaviours.values()) {
-            Action action = Behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-        display.println(this.printHp());
-        return new DoNothingAction();
-
+        return super.playTurn(actions, lastAction, map, display);
     }
 
     /**

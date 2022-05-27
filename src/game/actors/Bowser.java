@@ -24,9 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Bowser extends Actor implements Resettable, Speakable {
+public class Bowser extends Enemy implements Resettable, Speakable {
     // Attributes
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private int damage;
 
     // Constructor
@@ -40,16 +39,13 @@ public class Bowser extends Actor implements Resettable, Speakable {
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            actions.add(new AttackAction(this,direction));
-            if(!behaviours.containsKey(8) && !behaviours.containsKey(9)) {
-                this.behaviours.put(8, new AttackBehaviour(otherActor));
+            if(!behaviours.containsKey(9)) {
                 this.behaviours.put(9, new FollowBehaviour(otherActor));
             }
         }
-        return actions;
+        return super.allowableActions(otherActor, direction, map);
     }
 
     @Override
@@ -69,13 +65,7 @@ public class Bowser extends Actor implements Resettable, Speakable {
             this.addCapability(Status.TALK);
         }
 
-        for(Behaviour Behaviour : behaviours.values()) {
-            Action action = Behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-
-        return new DoNothingAction();
+        return super.playTurn(actions, lastAction, map, display);
     }
 
     /**

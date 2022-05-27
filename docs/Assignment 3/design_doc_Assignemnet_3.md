@@ -12,6 +12,14 @@ the enemies.
 Teleport action additionally allows for teleportation back to the previous warp pipe as there might be a desired location
 near the warp pipe, this option allows for instant kill on the piranha plant that is stationed on the warp pipe.
 
+##Req 2
+###More Allies and enemies!
+This requirement adds Princess Peach, who is an ally and doesn't implement any of the behaviours like the enemies.
+PrincessPeach allows an EndGameAction which will remove the player from the map to end the game. Princess Peach extends
+the actor class following the Open-Closed Principle.
+
+Bowser is an enemy that inherits the Actor class. Bowser
+
 ##Req 3
 ###Magical Fountain
 Magical Fountain will have child classes of Health Fountain and Power Fountain. Magical Fountain will also extend from

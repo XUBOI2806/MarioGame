@@ -27,10 +27,8 @@ import java.util.Map;
 /**
  * Koopa actor
  */
-public class Koopa extends Actor implements Resettable, Speakable, Drinker{
+public class Koopa extends Enemy implements Resettable, Speakable, Drinker{
     // Attributes
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
     private int damage;
 
     /**
@@ -58,9 +56,8 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
         ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && this.isConscious()) {
-            actions.add(new AttackAction(this, direction));
-            if(!behaviours.containsKey(7) && !behaviours.containsKey(8)){
-                this.behaviours.put(7, new AttackBehaviour(otherActor));
+            actions = super.allowableActions(otherActor,direction,map);
+            if(!behaviours.containsKey(8)){
                 this.behaviours.put(8, new FollowBehaviour(otherActor));
             }
         }
@@ -104,15 +101,7 @@ public class Koopa extends Actor implements Resettable, Speakable, Drinker{
             this.addCapability(Status.TALK);
         }
 
-        if (!this.hasCapability(Status.DORMANT)) {
-            for (Behaviour Behaviour : behaviours.values()) {
-                Action action = Behaviour.getAction(this, map);
-                if (action != null)
-                    return action;
-            }
-        }
-
-        return new DoNothingAction();
+        return super.playTurn(actions, lastAction, map, display);
     }
 
     /**
