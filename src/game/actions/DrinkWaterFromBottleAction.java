@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.BottleManager.BottleManager;
 import game.items.Water;
 
+/**
+ * Action for drinking out of bottle
+ */
 public class DrinkWaterFromBottleAction extends Action {
 
     /**

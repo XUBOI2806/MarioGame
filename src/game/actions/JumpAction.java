@@ -7,6 +7,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Status;
 import game.grounds.State;
 
+/**
+ * Action for a jump
+ */
 public class JumpAction extends Action {
 
     protected  Location location; //location the actor is jumping to

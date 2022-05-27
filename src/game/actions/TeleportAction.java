@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Status;
 import java.util.Scanner;
 
+/**
+ * Action for a teleport
+ */
 public class TeleportAction extends Action {
     protected Actor player; //the actor that will teleport in this the player
 

@@ -2,11 +2,12 @@ package game.actors.monologue;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
+
+/**
+ * A class that can determine which sentences that speakers may return depending on whether it can return it or not
+ */
 public class Monologue {
 
-    /**
-     * A class that can determine which sentences that speakers may return depending on whether it can return it or not
-     */
     private Actor actor;
     private String sentence;
     private boolean canSpeak;
