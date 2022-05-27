@@ -19,6 +19,10 @@ public class Lava extends Ground {
     }
 
 
+    /**
+     * Ensures only player can take damage on lava and spawns lava randomly
+     * @param location ensure lava has no enemies.
+     */
     @Override
     public void tick(Location location) {
         counter += 1;

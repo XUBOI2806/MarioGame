@@ -23,9 +23,9 @@ public abstract class Fountain extends Ground {
      */
     public Fountain(char displayChar) {
         super(displayChar);
-        this.addCapability(Status.FOUNTAIN);
         this.capacity = Utils.FOUNTAIN_FULL_AMOUNT;
         this.replenish_age = Utils.FOUNTAIN_REFILL_AGE;
+        this.addCapability(Status.FOUNTAIN);
     }
 
     /**
@@ -50,12 +50,26 @@ public abstract class Fountain extends Ground {
      * @return a string of what action has been processed
      */
     public String getWater(Actor actor){
-        if (capacity > 0){
+        if (this.capacity > 0){
             BottleManager.getInstance().addWater(actor, this);
             this.capacity -= 1;
             return actor + " refills bottle with " + this.getWaterDescription();
         }
         return getFountainDescription() + " is being replenished";
+    }
+
+    /**
+     * Adds water to the actor's bottle if there is any water within the fountain
+     * @param actor The actor to receive the water
+     * @return a string of what action has been processed
+     */
+    public String drinkWater(Actor actor){
+        if (this.capacity > 0){
+            this.buff((Drinker) actor);
+            this.capacity -= 1;
+            return actor + " consumes " + this.getWaterDescription();
+        }
+        return null;
     }
 
     /**
@@ -85,9 +99,11 @@ public abstract class Fountain extends Ground {
     public void tick(Location location) {
         super.tick(location);
         if (this.capacity == 0){
+            this.removeCapability(Status.FOUNTAIN);
             if (this.replenish_age == 0){
                 this.capacity = Utils.FOUNTAIN_FULL_AMOUNT;
                 this.replenish_age = Utils.FOUNTAIN_REFILL_AGE;
+                this.addCapability(Status.FOUNTAIN);
             }
             else{
                 this.replenish_age -= 1;

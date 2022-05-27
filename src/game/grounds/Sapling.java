@@ -1,6 +1,7 @@
 package game.grounds;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.Coin;
+import game.items.FireFlower;
 
 public class Sapling extends Tree {
     /**
@@ -25,6 +26,9 @@ public class Sapling extends Tree {
         counter += 1;
         if(counter % 10 == 0 && !location.containsAnActor()) {//Every 10 rounds and no actor standing on location{
             location.setGround(new Mature()); //Mature is spawned
+            if(Math.random()<= 0.5){ // 50% chance of
+                location.addItem(new FireFlower()); // Fireflower is added to the location
+            }
         }
 
         if (!location.containsAnActor()){ //No actor standing on the coin

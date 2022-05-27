@@ -9,5 +9,5 @@ public enum State {
     SPROUT,
     SAPLING,
     MATURE,
-    PIRANHAPLANT, WALL
+    WALL
 }

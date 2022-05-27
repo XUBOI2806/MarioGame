@@ -31,8 +31,7 @@ public class DrinkWaterFromFountainAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        fountain.buff((Drinker) actor);
-        return menuDescription(actor);
+        return fountain.drinkWater(actor);
     }
 
     /**

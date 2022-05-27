@@ -68,14 +68,18 @@ public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+		if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
+			this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
+		}
+		else{
+			this.behaviours.remove(9);
+		}
+
 		if (this.hasCapability(Status.RESET)) {
 			this.behaviours.clear();
 			map.removeActor(this);
 			ResetManager.getInstance().cleanUp(this);
-		}
-
-		if(map.locationOf(this).getGround().hasCapability(Status.FOUNTAIN)){
-			this.behaviours.put(9, new DrinkBehaviour((Fountain) map.locationOf(this).getGround()));
 		}
 
 		// 10% chance of removing the actor
