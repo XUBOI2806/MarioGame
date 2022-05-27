@@ -65,6 +65,9 @@ public class Player extends Actor implements Resettable, Drinker {
 		if (this.hasCapability(Status.INVINCIBLE)){
 			display.println("Mario is INVINCIBLE");
 		}
+		if(this.hasCapability(Status.FIRE)){
+			display.println("Mario can shoot fire balls!");
+		}
 		return menu.showMenu(this, actions, display);
 	}
 

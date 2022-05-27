@@ -27,7 +27,7 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return consumeAble.consumedBy(actor);
+        return consumeAble.consumedBy(actor, map);
     }
 
     /**

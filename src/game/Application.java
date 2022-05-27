@@ -13,6 +13,7 @@ import game.grounds.*;
 import game.grounds.fountains.HealingFountain;
 import game.grounds.fountains.PowerFountain;
 import game.items.Coin;
+import game.items.FireFlower;
 import game.items.PowerStar;
 
 /**
@@ -90,6 +91,7 @@ public class Application {
 			gameMap.at(50,2).addActor(new FlyingKoopa());
 			gameMap.at(25,6).setGround(new WarpPipe());
 
+			gameMap.at(45,10).addItem(new FireFlower());
 			world.run();
 
 	}

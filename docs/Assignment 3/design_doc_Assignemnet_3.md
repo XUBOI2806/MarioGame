@@ -18,7 +18,20 @@ This requirement adds Princess Peach, who is an ally and doesn't implement any o
 PrincessPeach allows an EndGameAction which will remove the player from the map to end the game. Princess Peach extends
 the actor class following the Open-Closed Principle.
 
-Bowser is an enemy that inherits the Actor class. Bowser
+There is also a new Enemy abstract class that is inherited by Bowser, Goomba, Koopa and PiranhaPlant.
+This has been implemented to reduce repeated code.
+
+Bowser is an enemy that inherits the Enemy class. Bowser also has a Status of FIRE
+so that AttackAction will provide the Fire version of an attack.
+
+Flying Koopa directly inherits Koopa class. Since the meanings of the actions like RemoveDormantActor has not changed,
+it follows the Liskov Substitution Principle.
+
+Piranha Plant also inherits the Enemy class. The class cannot move and therefore does not implement the Follow 
+Behaviour.
+
+All the enemies are resettable and therefore implement the Resettable Interface, following the Dependency Inversion
+Principle.
 
 ##Req 3
 ###Magical Fountain
@@ -53,6 +66,10 @@ The fire flower allows for growth of fire flower through each stage of cycle, wi
 per location. This means maximal of 2 fire flower per location and such that there always have to be a 50% chance of
 spawning so.
 
+Fire Attack has been implemented by adding a Status of FIRE to any actor that can make a fire attack.
+The AttackAction class has been modified to check if an actor has the Status of FIRE.
+Any attack that creates fire will create a FireGround, which also remembers the previous ground so that it can
+return to the normal state.
 
 ##Req 5
 ###Speaking

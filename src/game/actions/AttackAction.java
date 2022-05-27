@@ -74,7 +74,7 @@ public class AttackAction extends Action {
 
 		// If the attacker has an invincible status 1 hit KO
 		if(actor.hasCapability(Status.INVINCIBLE)){
-			damage = 10000; // if actor has consumed super star then actor can one hit kill
+			damage = Integer.MAX_VALUE; // if actor has consumed super star then actor can one hit kill
 			result = actor + " one hit kills " + target;
 		}
 

@@ -3,6 +3,8 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actors.Status;
 
@@ -11,31 +13,38 @@ import java.util.List;
 
 public class FireFlower extends Item implements ConsumeAble {
 
+    private ConsumeAction consume;
+    private int age = 0;
     /***
      * Constructor.
      */
     public FireFlower() {
         super("Fire Flower", 'f', Boolean.parseBoolean("True"));
+        this.consume = new ConsumeAction(this);
+        this.addAction(consume);
+    }
+
+    @Override
+    public String consumedBy(Actor actor, GameMap map) {
         this.addCapability(Status.FIRE);
-    }
-
-    @Override
-    public String consumedBy(Actor actor) {
-        actor.heal(Utils.POWER_STAR_HP_INCREASE);
-        this.addCapability(Status.INVINCIBLE);
-        this.removeAction(new ConsumeAction(this));
+        this.removeAction(consume);
         this.togglePortability();
-        return actor + " ate the power star";
+        if(map.locationOf(actor).getItems().contains(this)) {
+            map.locationOf(actor).removeItem(this);
+            actor.addItemToInventory(this);
+        }
+        return actor + " ate the fire flower";
     }
 
-    /**
-     * Allowable actions of fire flower
-     * @return An ActionList of ConsumeAction
-     */
     @Override
-    public List<Action> getAllowableActions() {
-        ArrayList<Action> actions = new ArrayList<>();
-        actions.add(new ConsumeAction(this));
-        return actions;
+    public void tick(Location currentLocation, Actor actor) {
+        System.out.println(age);
+        if(age == Utils.FIRE_FLOWER_EXPIRY){
+            actor.removeItemFromInventory(this);
+        }
+
+        if(this.hasCapability(Status.FIRE)){
+            age++;
+        }
     }
 }

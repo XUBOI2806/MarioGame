@@ -6,25 +6,27 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.Utils;
 
-public class FireGround extends LavaGround {
+public class FireGround extends Ground {
     private int damage;
     private Ground oldGround;
     private int age;
 
     public FireGround(Ground oldGround){
-        super();
+        super('v');
         this.oldGround = oldGround;
-        this.setDisplayChar('v');
         this.damage = Utils.FIRE_DAMAGE;
     }
 
     @Override
     public boolean canActorEnter(Actor actor) {
-        return true;
+        return oldGround.canActorEnter(actor);
     }
 
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
+        if(location.containsAnActor()){
+            actor.hurt(damage);
+        }
         return super.allowableActions(actor, location, direction);
     }
 
