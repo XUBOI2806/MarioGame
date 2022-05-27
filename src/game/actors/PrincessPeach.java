@@ -18,11 +18,8 @@ import java.util.List;
 
 public class PrincessPeach extends Actor implements Speakable {
 
-    private World world;
-
-    public PrincessPeach(World world){
+    public PrincessPeach(){
         super("Princess Peach",'P', 1);
-        this.world = world;
     }
 
     @Override

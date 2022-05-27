@@ -64,6 +64,7 @@ public class Application {
 				"L..................."
 			);
 
+
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
