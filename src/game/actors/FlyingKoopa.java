@@ -7,8 +7,14 @@ import game.actors.monologue.Speakable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Flying version of Koopa.
+ */
 public class FlyingKoopa extends Koopa implements Speakable {
 
+    /**
+     * Constructor
+     */
     public FlyingKoopa(){
         super();
         this.setDisplayChar('F');
