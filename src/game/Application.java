@@ -9,12 +9,13 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
+import game.actors.koopa.FlyingKoopa;
+import game.actors.koopa.GroundKoopa;
+import game.actors.koopa.Koopa;
 import game.grounds.*;
 import game.grounds.fountains.HealingFountain;
 import game.grounds.fountains.PowerFountain;
-import game.items.Coin;
 import game.items.FireFlower;
-import game.items.PowerStar;
 
 /**
  * The main class for the Mario World game.
@@ -84,7 +85,7 @@ public class Application {
 			gameMap.at(44,13).setGround(new HealingFountain());
 			gameMap.at(43,13).setGround(new PowerFountain());
 
-			gameMap.at(46,14).addActor(new Koopa());
+			gameMap.at(46,14).addActor(new GroundKoopa());
 			gameMap.at(3,3).addActor(new Goomba());
 			gameMap.at(5,5).addActor(new Goomba());
 			gameMap.at(7,7).addActor(new Goomba());

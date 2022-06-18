@@ -1,4 +1,4 @@
-package game.actors;
+package game.actors.koopa;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -10,6 +10,9 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actions.RemoveDormantActorAction;
 import game.actions.SpeakAction;
+import game.actors.Drinker;
+import game.actors.Enemy;
+import game.actors.Status;
 import game.actors.monologue.Monologue;
 import game.actors.monologue.Speakable;
 import game.behaviours.*;
@@ -27,7 +30,7 @@ import java.util.Map;
 /**
  * Koopa actor
  */
-public class Koopa extends Enemy implements Resettable, Speakable, Drinker{
+public abstract class Koopa extends Enemy implements Resettable, Speakable, Drinker {
     // Attributes
     private int damage;
 

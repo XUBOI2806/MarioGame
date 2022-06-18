@@ -1,6 +1,7 @@
 package game.grounds;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.Koopa;
+import game.actors.koopa.GroundKoopa;
+import game.actors.koopa.Koopa;
 
 
 
@@ -43,7 +44,7 @@ public class Mature extends Tree {
         if (!location.containsAnActor()) { //Every turn as long as there isn't an actor on the location
 
             if (Math.random() <= 0.15) { // 15% chance of spawning a Koopa
-                location.addActor(new Koopa());
+                location.addActor(new GroundKoopa());
             }
             if (Math.random() <= 0.20) { // 20% chance of
                 location.setGround(new Dirt()); // Mature withers to Dirt

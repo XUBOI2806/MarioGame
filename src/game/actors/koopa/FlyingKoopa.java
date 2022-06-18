@@ -1,6 +1,7 @@
-package game.actors;
+package game.actors.koopa;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.actors.Status;
 import game.actors.monologue.Monologue;
 import game.actors.monologue.Speakable;
 
