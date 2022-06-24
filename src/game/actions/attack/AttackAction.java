@@ -1,4 +1,4 @@
-package game.actions;
+package game.actions.attack;
 
 import java.util.Random;
 
@@ -79,11 +79,11 @@ public class AttackAction extends Action {
 		}
 
 		// If the attacker has a fire making status
-		if(actor.hasCapability(Status.FIRE)){
-			Ground previousGround = map.locationOf(target).getGround();
-			map.locationOf(target).setGround(new FireGround(previousGround));
-			result = actor + " attacks " + target + " at " + direction + "with fire!";
-		}
+//		if(actor.hasCapability(Status.FIRE)){
+//			Ground previousGround = map.locationOf(target).getGround();
+//			map.locationOf(target).setGround(new FireGround(previousGround));
+//			result = actor + " attacks " + target + " at " + direction + "with fire!";
+//		}
 
 		target.hurt(damage);
 
