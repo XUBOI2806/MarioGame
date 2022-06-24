@@ -9,7 +9,7 @@ import game.reset.Resettable;
 import java.util.Random;
 
 
-public class Tree extends Ground implements Resettable{
+public class Tree extends HighGround implements Resettable{
 
     /**
      * Random number generator
@@ -57,14 +57,6 @@ public class Tree extends Ground implements Resettable{
         this.addCapability(Status.RESET);
     }
 
-
-    @Override
-    public boolean canActorEnter(Actor actor) {
-        if(actor.hasCapability(Status.INVINCIBLE)) {
-            return true;
-        }
-        return false;
-    }
 }
 
 

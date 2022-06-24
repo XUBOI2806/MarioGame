@@ -6,19 +6,36 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.World;
+import game.actions.EndGameAction;
 import game.actions.SpeakAction;
 import game.actors.monologue.Monologue;
 import game.actors.monologue.Speakable;
+import game.items.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Princess Peach actor!
+ */
 public class PrincessPeach extends Actor implements Speakable {
 
+    /**
+     * Constructor
+     */
     public PrincessPeach(){
         super("Princess Peach",'P', 1);
     }
 
+    /**
+     * Choose an action to be performed by Peach
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return an action to be performed
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
@@ -34,11 +51,18 @@ public class PrincessPeach extends Actor implements Speakable {
         return new DoNothingAction();
     }
 
+    /**
+     * Returns a collection of actions that another actor might perform on Peach
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return a collection of actions
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
         if(otherActor.hasCapability(Status.HAS_PEACH_KEY)){
-            actions.add(new SpeakAction(this));
+            actions.add(new EndGameAction(otherActor));
         }
         return actions;
     }

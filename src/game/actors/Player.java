@@ -33,7 +33,6 @@ public class Player extends Actor implements Resettable, Drinker {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FLOOR);
 		this.addCapability(Status.RESET);
-		this.damage = 5; // initial base damage
 		this.addCapability(Status.PLAYER);
 		this.damage = Utils.PLAYER_BASE_DMG;
 		this.map = map;
@@ -65,6 +64,9 @@ public class Player extends Actor implements Resettable, Drinker {
 		display.println("Wallet: $" + WalletManager.getInstance().getBalance(this));
 		if (this.hasCapability(Status.INVINCIBLE)){
 			display.println("Mario is INVINCIBLE");
+		}
+		if(this.hasCapability(Status.FIRE)){
+			display.println("Mario can shoot fire balls!");
 		}
 		return menu.showMenu(this, actions, display);
 	}

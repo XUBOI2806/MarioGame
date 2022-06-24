@@ -24,8 +24,7 @@ import java.util.*;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor implements Resettable, Speakable, Drinker {
-	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+public class Goomba extends Enemy implements Resettable, Speakable, Drinker {
 	private final Random random = new Random();
 
 	private int damage;
@@ -50,12 +49,10 @@ public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 	 */
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-		ActionList actions = new ActionList();
+		ActionList actions = super.allowableActions(otherActor, direction, map);
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-			actions.add(new AttackAction(this,direction));
-			if(!behaviours.containsKey(8) && !behaviours.containsKey(9)) {
-				this.behaviours.put(8, new AttackBehaviour(otherActor));
+			if(!behaviours.containsKey(9)) {
 				this.behaviours.put(9, new FollowBehaviour(otherActor));
 			}
 		}
@@ -96,13 +93,7 @@ public class Goomba extends Actor implements Resettable, Speakable, Drinker {
 			this.addCapability(Status.TALK);
 		}
 
-		for(Behaviour Behaviour : behaviours.values()) {
-			Action action = Behaviour.getAction(this, map);
-			if (action != null)
-				return action;
-		}
-
-		return new DoNothingAction();
+		return super.playTurn(actions, lastAction, map, display);
 	}
 
 	/**

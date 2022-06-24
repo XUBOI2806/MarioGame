@@ -12,19 +12,6 @@ public class Wall extends HighGround {
 		super('#');
 	}
 
-	/**
-	 * Checks if an actor can enter, only actors that have INVINCIBLE status should be able to enter
-	 * @param actor the Actor to check
-	 * @return true if actor is invincible, else false
-	 */
-	@Override
-	public boolean canActorEnter(Actor actor) {
-		if (actor.hasCapability(Status.INVINCIBLE)) {
-			return true;
-		}
-		return false;
-	}
-
 	@Override
 	public boolean blocksThrownObjects() {
 		return true;

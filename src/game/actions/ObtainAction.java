@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.ObtainAble;
 
+/**
+ * Action for obtaining an item
+ */
 public class ObtainAction extends Action{
 
     ObtainAble item;

@@ -10,6 +10,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.behaviours.Behaviour;
 
+/**
+ * Behaviour for wandering around.
+ */
 public class WanderBehaviour extends Action implements Behaviour {
 	
 	private final Random random = new Random();

@@ -28,4 +28,5 @@ public class Utils {
     public static final int PLAYER_BASE_DMG = 5; // use this for the player base damage
     public static final int BOWSER_BASE_DMG = 80; // use this for the bowser base damage
     public static final int GOOMBA_BASE_DAMAGE = 10 ;// use this for the goomba base damage
+    public static final int FIRE_FLOWER_EXPIRY = 20; // use this for fire flower expiry age
 }

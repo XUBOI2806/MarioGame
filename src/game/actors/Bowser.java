@@ -24,12 +24,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Bowser extends Actor implements Resettable, Speakable {
+/**
+ * Bowser actor!
+ */
+public class Bowser extends Enemy implements Resettable, Speakable {
     // Attributes
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private int damage;
 
-    // Constructor
+    /**
+     * Constructor
+     */
     public Bowser(){
         super("Bowser",'B',500);
         this.addCapability(Status.FIRE);
@@ -38,20 +42,32 @@ public class Bowser extends Actor implements Resettable, Speakable {
         this.damage = Utils.BOWSER_BASE_DMG;
     }
 
+    /**
+     * Checks the other actor and adds behaviours to Bowser.
+     * @param otherActor the other actor
+     * @param direction the direction of the other actor
+     * @param map current gameMap
+     * @return ActionList of allowable actions
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            actions.add(new AttackAction(this,direction));
-            if(!behaviours.containsKey(8) && !behaviours.containsKey(9)) {
-                this.behaviours.put(8, new AttackBehaviour(otherActor));
+            if(!behaviours.containsKey(9)) {
                 this.behaviours.put(9, new FollowBehaviour(otherActor));
             }
         }
-        return actions;
+        return super.allowableActions(otherActor, direction, map);
     }
 
+    /**
+     * Choosing an action to perform
+     * @param actions collection of possible actions for the actor
+     * @param lastAction the last action the actor performed
+     * @param map gameMap with the actor
+     * @param display I/O of the message
+     * @return an action that has been chosen to be performed
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (this.hasCapability(Status.RESET)) {
@@ -69,13 +85,7 @@ public class Bowser extends Actor implements Resettable, Speakable {
             this.addCapability(Status.TALK);
         }
 
-        for(Behaviour Behaviour : behaviours.values()) {
-            Action action = Behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-
-        return new DoNothingAction();
+        return super.playTurn(actions, lastAction, map, display);
     }
 
     /**
@@ -90,7 +100,9 @@ public class Bowser extends Actor implements Resettable, Speakable {
         return new IntrinsicWeapon(this.damage,"punch");
     }
 
-
+    /**
+     * Adding the Status Reset
+     */
     @Override
     public void resetInstance(){
         this.addCapability(Status.RESET);

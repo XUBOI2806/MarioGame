@@ -7,6 +7,9 @@ import game.BottleManager.BottleManager;
 import game.grounds.fountains.Fountain;
 import game.items.Utils;
 
+/**
+ * Action for filling up bottle.
+ */
 public class FillBottleAction extends Action {
 
     /**

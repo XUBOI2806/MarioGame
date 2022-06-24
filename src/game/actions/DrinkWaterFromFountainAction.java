@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Drinker;
 import game.grounds.fountains.Fountain;
 
+/**
+ * Action for drinking water out of fountain
+ */
 public class DrinkWaterFromFountainAction extends Action {
 
     /**

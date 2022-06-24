@@ -2,10 +2,14 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actors.Status;
 
+/**
+ * Power star item
+ */
 public class PowerStar extends Item implements Purchasable, ConsumeAble {
     private int age = 0;
     private int turns_left;
@@ -33,10 +37,11 @@ public class PowerStar extends Item implements Purchasable, ConsumeAble {
     /**
      * Execution of consuming the power star which heals the player and adds INVINCIBLE status.
      * @param actor
+     * @param map
      * @return returns the description of consuming power star
      */
     @Override
-    public String consumedBy(Actor actor) {
+    public String consumedBy(Actor actor, GameMap map) {
         actor.heal(Utils.POWER_STAR_HP_INCREASE);
         this.addCapability(Status.INVINCIBLE);
         this.removeAction(consume);

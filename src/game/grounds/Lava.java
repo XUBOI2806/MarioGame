@@ -39,9 +39,9 @@ public class Lava extends Ground {
         }
 
         //checks if lava contains a player
-        if (actor.hasCapability(Status.FLOOR)&& location.canActorEnter(actor)) { //only players cant enter onto lava
-            actor.hurt(15);
-        }
+//        if (actor.hasCapability(Status.FLOOR)&& location.canActorEnter(actor)) { //only players cant enter onto lava
+//            actor.hurt(15);
+//        }
     }
 }
 
